@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "店铺收藏",
+  "navigationStyle": "default",
+  "usingComponents": {
+    "u-image": "/node-modules/uview-ui/components/u-image/u-image",
+    "u-rate": "/node-modules/uview-ui/components/u-rate/u-rate",
+    "u-gap": "/node-modules/uview-ui/components/u-gap/u-gap"
+  }
+}

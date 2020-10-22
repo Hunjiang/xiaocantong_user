@@ -1,0 +1,13 @@
+{
+  "navigationBarTitleText": "发表评价",
+  "navigationStyle": "default",
+  "usingComponents": {
+    "u-upload": "/node-modules/uview-ui/components/u-upload/u-upload",
+    "u-radio-group": "/node-modules/uview-ui/components/u-radio-group/u-radio-group",
+    "u-radio": "/node-modules/uview-ui/components/u-radio/u-radio",
+    "u-rate": "/node-modules/uview-ui/components/u-rate/u-rate",
+    "u-field": "/node-modules/uview-ui/components/u-field/u-field",
+    "u-switch": "/node-modules/uview-ui/components/u-switch/u-switch",
+    "u-button": "/node-modules/uview-ui/components/u-button/u-button"
+  }
+}

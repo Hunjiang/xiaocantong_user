@@ -1,0 +1,15 @@
+
+.ball.data-v-6deac18d {
+	position: fixed;
+	z-index:99999;
+}
+.ball .inner.data-v-6deac18d {
+	background: #ff5722;
+	width: 15px;
+	height: 15px;
+	position: fixed;
+	-webkit-border-radius: 50%;
+	        border-radius: 50%;
+	opacity: 0;
+}
+

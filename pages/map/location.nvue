@@ -1,0 +1,342 @@
+<template>
+	<view>
+		<map :style="{width: '750rpx',height: mapHeight + 'px'}" class="map" 
+		:latitude="mapCenter.latitude" 
+		:longitude="mapCenter.longitude" 
+		:markers="markers" 
+		:polyline="polyline"></map>
+		 
+		 <view class="main">
+			<view class="main-top">
+		 		<view class="main-top-left">
+		 		 	<view class="main-top-left-txt ">
+		 		 		<text class="tit">骑手正在送货</text>
+		 		 	</view>
+		 		 	<view class="main-top-left-bottom mt8">
+		 		 		<text class="hxicon txt14 color-dark-gray">&#xe65e;</text>
+		 		 		<text class="txt14 ml6">预计送达</text>
+		 		 		<text class="txt14 ml6 color-blue">19:30</text>
+		 		 	</view>
+		 		</view>
+		 	 	<button style="width: 100px;" size="mini" class="btn" hover-class="bg-active" type="primary" @click="submit">确认收货</button>
+		 	</view>
+		 	<view class="main-bottom">
+		 		<image class="main-bottom-row1" :src="riderInfo.avatar" mode=""></image>
+		 		<view class="main-bottom-row2">
+		 			<text class="main-bottom-row2-txt1">{{riderInfo.name}}</text>
+		 			<text class="main-bottom-row2-txt2 mt2">满意度：{{praise}}%</text>
+		 		</view>
+		 		<text class="hxicon main-bottom-txt">&#xe779;</text>
+		 		<text class="hxicon main-bottom-txt" @click="call">&#xe652;</text>
+		 	</view>
+		 </view>
+		
+	</view>
+</template>
+
+<script>
+	// #ifdef APP-PLUS-NVUE
+	var domModule = weex.requireModule('dom');
+	domModule.addRule('fontFace', {
+	  'fontFamily': "iconfont",
+	  'src': "url('https://at.alicdn.com/t/font_1380649_u1j4yykb94h.ttf')"
+	})
+	// #endif
+	var sysInfo = uni.getSystemInfoSync();
+	export default {
+		data() {
+			return {
+				orderId: null,
+				markers: [],
+				polyline: [],
+				mapHeight: sysInfo.screenHeight,
+				// 用户经纬度
+				userAddress: {
+					// 经度
+					longitude: 41.173098,
+					// 纬度
+					latitude: 80.2632808
+				},
+				// 地图中心点
+				mapCenter: {
+					// 经度
+					longitude: null,
+					// 纬度
+					latitude: null
+				},
+				// 骑手经纬度
+				riderAddress: {
+					// 经度
+					longitude: 41.1730980,
+					// 纬度
+					latitude: 80.2632808
+				},
+				riderInfo: {
+					id: null,
+					name: null,
+					praise: 30,
+					dislike: 2,
+					phone: null,
+					avatar: 'https://imgs.1op.cn/i/hxshop/avatar/3.png'
+				},
+				praise: 100
+			};
+		},
+		onLoad(option) {
+			
+			if(option.id){
+				this.orderId = option.id
+			}
+			this.init()
+		},
+		mounted() {
+			
+		},
+		methods:{
+			// 获取用户收件地址
+			init(){
+				let that = this
+				new Promise((resolve, reject) =>{
+					// 你的请求逻辑
+					// ......
+					// 这里方便测试，我使用手机当前位置 代替 用户收件地址位置；上线则以用户填写的收件地址为准
+					// 假如请求成功拿到用户地址
+					uni.getLocation({
+						type: 'gcj02',
+						success: function (res) {
+							resolve(res)
+						},
+						fail:function(res) {
+							reject(res)
+						}
+					});
+				}).then((res) => {
+					//设置用户经纬度
+					that.userAddress = {
+						longitude: res.longitude,
+						latitude: res.latitude
+					}
+					// 接下来去拿取骑手信息
+					
+					// 假如通过请求拿到骑手信息
+					that.riderInfo = {
+						id: 863,
+						name: "闪电骑手",
+						praise: 81,
+						dislike: 3,
+						phone: '18299989999',
+						avatar: 'https://imgs.1op.cn/i/hxshop/avatar/3.png'
+					},
+					//计算好评
+					that.praise= parseInt(that.riderInfo.praise/(that.riderInfo.praise + that.riderInfo.dislike) * 100)
+					
+					// 接下来去拿取骑手地址去更新地图，并且每3秒获取一次
+					that.getRiderAddress()
+					setInterval(()=>{
+						that.getRiderAddress()
+					},3000)
+				},(err) => {
+					console.log("获取失败")
+				})
+			},
+			
+			getRiderAddress(){
+				let that = this
+				// 获取骑手位置
+				// ----------------------
+				// 假如通过请求获取到了骑手位置
+				// 伪造一个随机数，好像骑手在移动一样
+				var num = Math.floor(Math.random() * 25 + 3) /10000 + 0.015;
+				var num2 = Math.floor(Math.random() * 25 + 3) /10000 + 0.015;
+				that.riderAddress={
+					latitude: that.userAddress.latitude + num,
+					longitude: that.userAddress.longitude + num2
+				}
+				
+				// 地图标标记
+				that.markers = [
+					//用户标记
+					{
+						id: 1,
+						callout: {
+							content:'收件地址',
+							color:'#ff9900',
+							padding:'6',
+							borderRadius:'50',
+							textAlign:'left',
+							fontSize:'14',
+							display:'BYCLICK'
+						},
+						latitude: that.userAddress.latitude,
+						longitude: that.userAddress.longitude,
+						iconPath: '/static/img/map_home.png',
+						width: '64',
+						height: '64'
+					},
+					//骑手标记
+					{
+						id: 9999,
+						callout: {
+							content:'骑手',
+							color:'#ff9900',
+							padding:'6',
+							borderRadius:'50',
+							textAlign:'left',
+							fontSize:'14',
+							display:'ALWAYS'
+						},
+						latitude: that.riderAddress.latitude,
+						longitude: that.riderAddress.longitude,
+						iconPath: '/static/img/map_qs.png',
+						width:'64',
+						height:'64'
+					},
+				];
+				//线
+				that.polyline = [{
+					points: [that.userAddress,that.riderAddress],
+					color: "#ff9900",
+					width: 10
+				}];
+				
+					that.mapCenter={
+						latitude: that.riderAddress.latitude,
+						longitude: that.riderAddress.longitude
+					}
+				
+				
+			},
+			//打电话
+			call(){
+				if(this.riderInfo.phone){
+					uni.makePhoneCall({
+					    phoneNumber: ''+this.riderInfo.phone,
+						fail: (res)=>{
+							uni.showModal({
+								title: '提示',
+								content: "自动拨号失败！请手动拨打电话：" + this.riderInfo.phone,
+								showCancel: false,
+								cancelText: '',
+								confirmText: '确认',
+							});
+						}
+					});
+				}
+				
+			},
+			//确认收货
+			submit(){
+				//确认收货
+				
+				uni.showModal({
+					title: '提示',
+					content: '已确认收货'+this.orderId,
+					showCancel: false,
+					cancelText: '',
+					confirmText: '确认',
+					success: res => {},
+					fail: () => {},
+					complete: () => {}
+				});
+			}
+			
+		}
+	}
+</script>
+
+<style>
+
+.txt14{
+	font-size: 14px;
+}
+.mt8{
+	margin-top: 8px;
+}
+.mt2{
+	margin-top: 2px;
+}
+.ml6{
+	margin-left: 6px;
+}
+.color-blue{
+	color: #2196f3;
+}
+.color-dark-gray{
+	color: #888;
+}
+.main{
+	position: fixed;
+	z-index: 999;
+	bottom: 30px;
+	left: 15px;
+	right: 15px;
+	background-color: #fff;
+	border-radius: 10px;
+	padding: 15px 18px;
+	box-shadow: 0px 0px 10px #b7b7b7;
+	flex-direction: column;
+}
+.main-top{
+	flex-direction: row;
+	align-items: center;
+	padding-bottom: 15px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #eef1f4;
+}
+.main-top-left{
+	flex-direction: column;
+	flex: 1;
+}
+.main-top-left-txt{
+	font-size: 20px;
+	color: #333;
+}
+.main-top-left-bottom{
+	flex-direction: row;
+	align-items: center;
+}
+
+.hxicon-timefill{
+	font-size: 14px;
+}
+.main-bottom{
+	margin-top: 15px;
+	flex-direction: row;
+	align-items: center;
+}
+.main-bottom-row1{
+	width: 44px;
+	height: 44px;
+	border-radius: 50%;
+}
+.main-bottom-row2{
+	flex-direction: column;
+	flex: 1;
+	margin-left: 12px;
+}
+.main-bottom-row2-txt1{
+	font-size: 18px;
+	color: #333;
+}
+.main-bottom-row2-txt2{
+	font-size: 14px;
+	color: #333;
+}
+.main-bottom-txt{
+	font-size: 26px;
+	color: #666;
+	padding: 5px;
+	margin-left: 12px;
+}
+.bg-active{
+	background-image: linear-gradient(100deg, #e8d536, #dda809);
+}
+.btn{
+	background-image: linear-gradient(100deg, #FFEB3B, #FFC107);
+	border-width: 0;
+	padding: 6px 0;
+	color: #333333;
+}
+
+</style>

@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "u-modal": "/node-modules/uview-ui/components/u-modal/u-modal",
+    "u-field": "/node-modules/uview-ui/components/u-field/u-field"
+  }
+}
