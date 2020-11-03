@@ -904,7 +904,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -7329,7 +7329,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -7350,14 +7350,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -7442,7 +7442,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -7879,9 +7879,9 @@ module.exports = g;
 
 /***/ }),
 /* 4 */
-/*!*****************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/pages.json ***!
-  \*****************************************************/
+/*!***********************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/pages.json ***!
+  \***********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -7892,9 +7892,9 @@ module.exports = g;
 /* 6 */,
 /* 7 */,
 /* 8 */
-/*!**************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/crypto-js/index.js ***!
-  \**************************************************************************/
+/*!********************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/index.js ***!
+  \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7912,9 +7912,9 @@ module.exports = g;
 
 /***/ }),
 /* 9 */
-/*!*************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/crypto-js/core.js ***!
-  \*************************************************************************/
+/*!*******************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/core.js ***!
+  \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7984,7 +7984,7 @@ module.exports = g;
 
     /*
         * Local polyfill of Object.create
-         */
+          */
 
     var create = Object.create || function () {
       function F() {}
@@ -32066,9 +32066,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 167 */
-/*!*****************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/crypto-js/x64-core.js ***!
-  \*****************************************************************************/
+/*!***********************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/x64-core.js ***!
+  \***********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -32372,9 +32372,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 168 */
-/*!************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/crypto-js/lib-typedarrays.js ***!
-  \************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/lib-typedarrays.js ***!
+  \******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -32450,9 +32450,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 169 */
-/*!******************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/crypto-js/enc-utf16.js ***!
-  \******************************************************************************/
+/*!************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/enc-utf16.js ***!
+  \************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -32601,9 +32601,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 170 */
-/*!*******************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/crypto-js/enc-base64.js ***!
-  \*******************************************************************************/
+/*!*************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/enc-base64.js ***!
+  \*************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -32739,9 +32739,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 171 */
-/*!************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/crypto-js/md5.js ***!
-  \************************************************************************/
+/*!******************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/md5.js ***!
+  \******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -33009,9 +33009,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 172 */
-/*!*************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/crypto-js/sha1.js ***!
-  \*************************************************************************/
+/*!*******************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/sha1.js ***!
+  \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -33161,9 +33161,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 173 */
-/*!***************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/crypto-js/sha256.js ***!
-  \***************************************************************************/
+/*!*********************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/sha256.js ***!
+  \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -33362,9 +33362,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 174 */
-/*!***************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/crypto-js/sha224.js ***!
-  \***************************************************************************/
+/*!*********************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/sha224.js ***!
+  \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -33444,9 +33444,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 175 */
-/*!***************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/crypto-js/sha512.js ***!
-  \***************************************************************************/
+/*!*********************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/sha512.js ***!
+  \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -33772,9 +33772,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 176 */
-/*!***************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/crypto-js/sha384.js ***!
-  \***************************************************************************/
+/*!*********************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/sha384.js ***!
+  \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -33857,9 +33857,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 177 */
-/*!*************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/crypto-js/sha3.js ***!
-  \*************************************************************************/
+/*!*******************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/sha3.js ***!
+  \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -34185,9 +34185,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 178 */
-/*!******************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/crypto-js/ripemd160.js ***!
-  \******************************************************************************/
+/*!************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/ripemd160.js ***!
+  \************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -34201,14 +34201,14 @@ function randomFillSync (buf, offset, size) {
 
   /** @preserve
                               (c) 2012 by Cédric Mesnil. All rights reserved.
-                              	Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
-                              	    - Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+                              
+                              Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+                              
+                                  - Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
                                   - Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
-                              	THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+                              
+                              THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                               */
-
-
-
 
   (function (Math) {
     // Shortcuts
@@ -34454,9 +34454,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 179 */
-/*!*************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/crypto-js/hmac.js ***!
-  \*************************************************************************/
+/*!*******************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/hmac.js ***!
+  \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -34599,9 +34599,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 180 */
-/*!***************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/crypto-js/pbkdf2.js ***!
-  \***************************************************************************/
+/*!*********************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/pbkdf2.js ***!
+  \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -34746,9 +34746,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 181 */
-/*!***************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/crypto-js/evpkdf.js ***!
-  \***************************************************************************/
+/*!*********************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/evpkdf.js ***!
+  \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -34882,9 +34882,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 182 */
-/*!********************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/crypto-js/cipher-core.js ***!
-  \********************************************************************************/
+/*!**************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/cipher-core.js ***!
+  \**************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -35774,9 +35774,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 183 */
-/*!*****************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/crypto-js/mode-cfb.js ***!
-  \*****************************************************************************/
+/*!***********************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/mode-cfb.js ***!
+  \***********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -35856,9 +35856,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 184 */
-/*!*****************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/crypto-js/mode-ctr.js ***!
-  \*****************************************************************************/
+/*!***********************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/mode-ctr.js ***!
+  \***********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -35916,9 +35916,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 185 */
-/*!*************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/crypto-js/mode-ctr-gladman.js ***!
-  \*************************************************************************************/
+/*!*******************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/mode-ctr-gladman.js ***!
+  \*******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36034,9 +36034,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 186 */
-/*!*****************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/crypto-js/mode-ofb.js ***!
-  \*****************************************************************************/
+/*!***********************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/mode-ofb.js ***!
+  \***********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36090,9 +36090,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 187 */
-/*!*****************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/crypto-js/mode-ecb.js ***!
-  \*****************************************************************************/
+/*!***********************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/mode-ecb.js ***!
+  \***********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36132,9 +36132,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 188 */
-/*!*********************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/crypto-js/pad-ansix923.js ***!
-  \*********************************************************************************/
+/*!***************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/pad-ansix923.js ***!
+  \***************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36183,9 +36183,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 189 */
-/*!*********************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/crypto-js/pad-iso10126.js ***!
-  \*********************************************************************************/
+/*!***************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/pad-iso10126.js ***!
+  \***************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36229,9 +36229,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 190 */
-/*!*********************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/crypto-js/pad-iso97971.js ***!
-  \*********************************************************************************/
+/*!***************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/pad-iso97971.js ***!
+  \***************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36271,9 +36271,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 191 */
-/*!************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/crypto-js/pad-zeropadding.js ***!
-  \************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/pad-zeropadding.js ***!
+  \******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36320,9 +36320,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 192 */
-/*!**********************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/crypto-js/pad-nopadding.js ***!
-  \**********************************************************************************/
+/*!****************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/pad-nopadding.js ***!
+  \****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36352,9 +36352,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 193 */
-/*!*******************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/crypto-js/format-hex.js ***!
-  \*******************************************************************************/
+/*!*************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/format-hex.js ***!
+  \*************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36420,9 +36420,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 194 */
-/*!************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/crypto-js/aes.js ***!
-  \************************************************************************/
+/*!******************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/aes.js ***!
+  \******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36656,9 +36656,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 195 */
-/*!******************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/crypto-js/tripledes.js ***!
-  \******************************************************************************/
+/*!************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/tripledes.js ***!
+  \************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -37437,9 +37437,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 196 */
-/*!************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/crypto-js/rc4.js ***!
-  \************************************************************************/
+/*!******************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/rc4.js ***!
+  \******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -37578,9 +37578,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 197 */
-/*!***************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/crypto-js/rabbit.js ***!
-  \***************************************************************************/
+/*!*********************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/rabbit.js ***!
+  \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -37772,9 +37772,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 198 */
-/*!**********************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/crypto-js/rabbit-legacy.js ***!
-  \**********************************************************************************/
+/*!****************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/rabbit-legacy.js ***!
+  \****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38094,9 +38094,9 @@ function normalizeComponent (
 
 /***/ }),
 /* 202 */
-/*!*************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/uview-ui/index.js ***!
-  \*************************************************************************/
+/*!*******************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/index.js ***!
+  \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38240,9 +38240,9 @@ var install = function install(Vue) {
 
 /***/ }),
 /* 203 */
-/*!************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/uview-ui/libs/mixin/mixin.js ***!
-  \************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/mixin/mixin.js ***!
+  \******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38281,9 +38281,9 @@ var install = function install(Vue) {
 
 /***/ }),
 /* 204 */
-/*!**************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/uview-ui/libs/request/index.js ***!
-  \**************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/request/index.js ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38474,9 +38474,9 @@ new Request();exports.default = _default;
 
 /***/ }),
 /* 205 */
-/*!*******************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/uview-ui/libs/function/deepMerge.js ***!
-  \*******************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/deepMerge.js ***!
+  \*************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38514,9 +38514,9 @@ deepMerge;exports.default = _default;
 
 /***/ }),
 /* 206 */
-/*!*******************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/uview-ui/libs/function/deepClone.js ***!
-  \*******************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/deepClone.js ***!
+  \*************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38547,9 +38547,9 @@ deepClone;exports.default = _default;
 
 /***/ }),
 /* 207 */
-/*!**************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/uview-ui/libs/function/test.js ***!
-  \**************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/test.js ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38789,9 +38789,9 @@ function code(value) {var len = arguments.length > 1 && arguments[1] !== undefin
 
 /***/ }),
 /* 208 */
-/*!*********************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/uview-ui/libs/function/queryParams.js ***!
-  \*********************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/queryParams.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38857,9 +38857,9 @@ queryParams;exports.default = _default;
 
 /***/ }),
 /* 209 */
-/*!***************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/uview-ui/libs/function/route.js ***!
-  \***************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/route.js ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38953,9 +38953,9 @@ route;exports.default = _default;
 
 /***/ }),
 /* 210 */
-/*!********************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/uview-ui/libs/function/timeFormat.js ***!
-  \********************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/timeFormat.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39015,9 +39015,9 @@ timeFormat;exports.default = _default;
 
 /***/ }),
 /* 211 */
-/*!******************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/uview-ui/libs/function/timeFrom.js ***!
-  \******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/timeFrom.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39071,9 +39071,9 @@ timeFrom;exports.default = _default;
 
 /***/ }),
 /* 212 */
-/*!***********************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/uview-ui/libs/function/colorGradient.js ***!
-  \***********************************************************************************************/
+/*!*****************************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/colorGradient.js ***!
+  \*****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39180,9 +39180,9 @@ function rgbToHex(rgb) {
 
 /***/ }),
 /* 213 */
-/*!**************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/uview-ui/libs/function/guid.js ***!
-  \**************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/guid.js ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39231,9 +39231,9 @@ guid;exports.default = _default;
 
 /***/ }),
 /* 214 */
-/*!***************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/uview-ui/libs/function/color.js ***!
-  \***************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/color.js ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39278,9 +39278,9 @@ color;exports.default = _default;
 
 /***/ }),
 /* 215 */
-/*!*******************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/uview-ui/libs/function/type2icon.js ***!
-  \*******************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/type2icon.js ***!
+  \*************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39323,9 +39323,9 @@ type2icon;exports.default = _default;
 
 /***/ }),
 /* 216 */
-/*!*********************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/uview-ui/libs/function/randomArray.js ***!
-  \*********************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/randomArray.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39340,9 +39340,9 @@ randomArray;exports.default = _default;
 
 /***/ }),
 /* 217 */
-/*!*****************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/uview-ui/libs/function/addUnit.js ***!
-  \*****************************************************************************************/
+/*!***********************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/addUnit.js ***!
+  \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39358,9 +39358,9 @@ function addUnit() {var value = arguments.length > 0 && arguments[0] !== undefin
 
 /***/ }),
 /* 218 */
-/*!****************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/uview-ui/libs/function/random.js ***!
-  \****************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/random.js ***!
+  \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39378,9 +39378,9 @@ random;exports.default = _default;
 
 /***/ }),
 /* 219 */
-/*!**************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/uview-ui/libs/function/trim.js ***!
-  \**************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/trim.js ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39403,9 +39403,9 @@ trim;exports.default = _default;
 
 /***/ }),
 /* 220 */
-/*!***************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/uview-ui/libs/function/toast.js ***!
-  \***************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/toast.js ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39423,9 +39423,9 @@ toast;exports.default = _default;
 
 /***/ }),
 /* 221 */
-/*!*******************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/uview-ui/libs/function/getParent.js ***!
-  \*******************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/getParent.js ***!
+  \*************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39480,9 +39480,9 @@ function getParent(name, keys) {
 
 /***/ }),
 /* 222 */
-/*!*****************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/uview-ui/libs/function/$parent.js ***!
-  \*****************************************************************************************/
+/*!***********************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/$parent.js ***!
+  \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39508,9 +39508,9 @@ function $parent() {var name = arguments.length > 0 && arguments[0] !== undefine
 
 /***/ }),
 /* 223 */
-/*!*************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/uview-ui/libs/function/sys.js ***!
-  \*************************************************************************************/
+/*!*******************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/sys.js ***!
+  \*******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39526,9 +39526,9 @@ function sys() {
 
 /***/ }),
 /* 224 */
-/*!******************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/uview-ui/libs/function/debounce.js ***!
-  \******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/debounce.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39565,9 +39565,9 @@ debounce;exports.default = _default;
 
 /***/ }),
 /* 225 */
-/*!******************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/uview-ui/libs/function/throttle.js ***!
-  \******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/throttle.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39607,9 +39607,9 @@ throttle;exports.default = _default;
 
 /***/ }),
 /* 226 */
-/*!**************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/uview-ui/libs/config/config.js ***!
-  \**************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/config/config.js ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39630,9 +39630,9 @@ var version = '1.6.4';var _default =
 
 /***/ }),
 /* 227 */
-/*!**************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/uview-ui/libs/config/zIndex.js ***!
-  \**************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/config/zIndex.js ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39659,9 +39659,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 228 */
-/*!*********************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/store/index.js ***!
-  \*********************************************************/
+/*!***************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/store/index.js ***!
+  \***************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -40823,9 +40823,9 @@ var index = {
 
 /***/ }),
 /* 230 */
-/*!****************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/config.js ***!
-  \****************************************************/
+/*!**********************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/config.js ***!
+  \**********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -40849,9 +40849,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 231 */
-/*!************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/common/vmeitime-http/index.js ***!
-  \************************************************************************/
+/*!******************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/common/vmeitime-http/index.js ***!
+  \******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41046,9 +41046,9 @@ var _default = {
 
 /***/ }),
 /* 232 */
-/*!****************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/common/vmeitime-http/interface.js ***!
-  \****************************************************************************/
+/*!**********************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/common/vmeitime-http/interface.js ***!
+  \**********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41247,9 +41247,9 @@ function _reslog(res) {
 
 /***/ }),
 /* 233 */
-/*!**************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/common/vmeitime-http/carpool.js ***!
-  \**************************************************************************/
+/*!********************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/common/vmeitime-http/carpool.js ***!
+  \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41271,9 +41271,9 @@ var carpool = function carpool(data) {
 
 /***/ }),
 /* 234 */
-/*!***********************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/common/vmeitime-http/user.js ***!
-  \***********************************************************************/
+/*!*****************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/common/vmeitime-http/user.js ***!
+  \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41371,9 +41371,9 @@ var updatePhone = function updatePhone(data) {
 
 /***/ }),
 /* 235 */
-/*!***********************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/common/vmeitime-http/code.js ***!
-  \***********************************************************************/
+/*!*****************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/common/vmeitime-http/code.js ***!
+  \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41400,9 +41400,9 @@ var updatePhone = function updatePhone(data) {
 
 /***/ }),
 /* 236 */
-/*!**********************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/common/vmeitime-http/app.js ***!
-  \**********************************************************************/
+/*!****************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/common/vmeitime-http/app.js ***!
+  \****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41428,9 +41428,9 @@ var upgrade = function upgrade(data) {
 
 /***/ }),
 /* 237 */
-/*!***************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/common/appupgrade.js ***!
-  \***************************************************************/
+/*!*********************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/common/appupgrade.js ***!
+  \*********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41494,9 +41494,9 @@ var _config = _interopRequireDefault(__webpack_require__(/*! @/config.js */ 230)
 
 /***/ }),
 /* 238 */
-/*!*********************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/common/http.interceptor.js ***!
-  \*********************************************************************/
+/*!***************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/common/http.interceptor.js ***!
+  \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41609,9 +41609,9 @@ var install = function install(Vue, vm) {
 /* 248 */,
 /* 249 */,
 /* 250 */
-/*!**********************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/components/mescroll-uni/mescroll-uni.js ***!
-  \**********************************************************************************/
+/*!****************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/components/mescroll-uni/mescroll-uni.js ***!
+  \****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -42482,9 +42482,9 @@ MeScroll.prototype.setBounce = function (isBounce) {
 
 /***/ }),
 /* 251 */
-/*!*****************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/components/mescroll-uni/mescroll-uni-option.js ***!
-  \*****************************************************************************************/
+/*!***********************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/components/mescroll-uni/mescroll-uni-option.js ***!
+  \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -42528,9 +42528,9 @@ GlobalOption;exports.default = _default;
 /* 252 */,
 /* 253 */,
 /* 254 */
-/*!*************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/components/mescroll-uni/mescroll-mixins.js ***!
-  \*************************************************************************************/
+/*!*******************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/components/mescroll-uni/mescroll-mixins.js ***!
+  \*******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -43394,9 +43394,9 @@ if (hadRuntime) {
 
 /***/ }),
 /* 266 */
-/*!*************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/common/testdata.js ***!
-  \*************************************************************/
+/*!*******************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/common/testdata.js ***!
+  \*******************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -44060,9 +44060,9 @@ var ordersData = [
 /* 296 */,
 /* 297 */,
 /* 298 */
-/*!*********************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/common/util.js ***!
-  \*********************************************************/
+/*!***************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/common/util.js ***!
+  \***************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -44115,9 +44115,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.getUrlPara
 /* 329 */,
 /* 330 */,
 /* 331 */
-/*!*********************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/uview-ui/components/u-avatar-cropper/weCropper.js ***!
-  \*********************************************************************************************************/
+/*!***************************************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/components/u-avatar-cropper/weCropper.js ***!
+  \***************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -45435,9 +45435,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.getUrlPara
 /* 382 */,
 /* 383 */,
 /* 384 */
-/*!*******************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/common/pinyin/pinyin3.js ***!
-  \*******************************************************************/
+/*!*************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/common/pinyin/pinyin3.js ***!
+  \*************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -45501,9 +45501,9 @@ var Letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 
 
 /***/ }),
 /* 385 */
-/*!*******************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/common/pinyin/pinyin2.js ***!
-  \*******************************************************************/
+/*!*************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/common/pinyin/pinyin2.js ***!
+  \*************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -45547,9 +45547,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 386 */
-/*!******************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/common/pinyin/pinyin.js ***!
-  \******************************************************************/
+/*!************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/common/pinyin/pinyin.js ***!
+  \************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -46074,9 +46074,9 @@ var pinyin = {
 /* 499 */,
 /* 500 */,
 /* 501 */
-/*!***********************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/jweixin-module/lib/index.js ***!
-  \***********************************************************************************/
+/*!*****************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/jweixin-module/lib/index.js ***!
+  \*****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -46118,9 +46118,9 @@ var __WEBPACK_AMD_DEFINE_RESULT__;function _defineProperty(obj, key, value) {if 
 /* 533 */,
 /* 534 */,
 /* 535 */
-/*!************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/components/uni-icons/icons.js ***!
-  \************************************************************************/
+/*!******************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/components/uni-icons/icons.js ***!
+  \******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -46314,9 +46314,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /* 625 */,
 /* 626 */,
 /* 627 */
-/*!*************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/node_modules/uview-ui/libs/util/emitter.js ***!
-  \*************************************************************************************/
+/*!*******************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/util/emitter.js ***!
+  \*******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

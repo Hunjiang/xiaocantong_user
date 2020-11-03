@@ -22,7 +22,8 @@
 const install = (Vue, vm) => {
 	// 此为自定义配置参数，具体参数见上方说明
 	Vue.prototype.$u.http.setConfig({
-		baseUrl: 'https://h5.xiaocantong.net/',
+		// baseUrl: 'https://h5.xiaocantong.net/',
+		baseUrl: 'http://test.xiaocantong.net/',
 		loadingText: '努力加载中~',
 		loadingTime: 800,
 		method: 'GET',
@@ -65,7 +66,7 @@ const install = (Vue, vm) => {
 		
 		// 响应拦截，如配置，每次请求结束都会执行本方法
 		Vue.prototype.$u.http.interceptor.response = (res) => {
-			console.log('res',res)
+			// console.log('res',res)
 			if(res.code == 1) {
 				// res为服务端返回值，可能有code，result等字段
 				// 这里对res.result进行返回，将会在this.$u.post(url).then(res => {})的then回调中的res的到

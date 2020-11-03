@@ -33,6 +33,11 @@
 				</view>
 			</view>
 		</view>
+		<view class="container">
+			<view class="hot-box">
+				<text class="item" v-for="(item,i) in hos_list" :key="i">{{item}}</text>
+			</view>
+		</view>
 		<!-- 搜索 结束 -->
 		
 
@@ -168,7 +173,14 @@
 				page:1,
 				base:this.$base,
 				locList:[],
-				show:false
+				show:false,
+				hos_list:[
+					'红烧排骨',
+					'飞过肉',
+					'野生大菠萝',
+					'红烧排骨',
+					'西红柿蛋汤'
+				]
 				
 			}
 		},

@@ -1,9 +1,9 @@
 (global["webpackJsonp"] = global["webpackJsonp"] || []).push([["pages/user/login/login"],{
 
 /***/ 292:
-/*!******************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/main.js?{"page":"pages%2Fuser%2Flogin%2Flogin"} ***!
-  \******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/main.js?{"page":"pages%2Fuser%2Flogin%2Flogin"} ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17,9 +17,9 @@ createPage(_login.default);
 /***/ }),
 
 /***/ 293:
-/*!*********************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/pages/user/login/login.vue ***!
-  \*********************************************************************/
+/*!***************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/pages/user/login/login.vue ***!
+  \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -58,9 +58,9 @@ component.options.__file = "pages/user/login/login.vue"
 /***/ }),
 
 /***/ 294:
-/*!****************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/pages/user/login/login.vue?vue&type=template&id=763df410& ***!
-  \****************************************************************************************************/
+/*!**********************************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/pages/user/login/login.vue?vue&type=template&id=763df410& ***!
+  \**********************************************************************************************************************/
 /*! exports provided: render, staticRenderFns, recyclableRender, components */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -80,9 +80,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 295:
-/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--16-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-app-loader/page-meta.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!C:/Users/86158/Desktop/源码/校餐通外卖用户端/pages/user/login/login.vue?vue&type=template&id=763df410& ***!
-  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--16-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-app-loader/page-meta.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/pages/user/login/login.vue?vue&type=template&id=763df410& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns, recyclableRender, components */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -114,9 +114,9 @@ render._withStripped = true
 /***/ }),
 
 /***/ 296:
-/*!**********************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/pages/user/login/login.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/pages/user/login/login.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -130,9 +130,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 297:
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!C:/Users/86158/Desktop/源码/校餐通外卖用户端/pages/user/login/login.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/pages/user/login/login.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -282,16 +282,16 @@ var that;var wInput = function wInput() {__webpack_require__.e(/*! require.ensur
       // this.code = params.code
       uni.setStorageSync('code', params.code); // window.location.href = that.$base + '/h5/#/pages/user/login/login'
     } else {//跳转微信授权链接获取
-      var appid = 'wxad7c57f6263f6bd3';var uri = encodeURIComponent(link);console.log('uri', uri);var authURL = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=".concat(appid, "&redirect_uri=").concat(uri, "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect");console.log('authURL', authURL);window.location.href = authURL;}}, mounted: function mounted() {that = this;}, methods: { closePage: function closePage() {uni.switchTab({ url: '/pages/index/index' });}, //登录提交
+        //    let appid = 'wxad7c57f6263f6bd3';
+        //    let uri = encodeURIComponent(link);
+        // console.log('uri',uri)
+        //    let authURL = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${uri}&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect`;
+        // console.log('authURL',authURL)
+        //    window.location.href = authURL;
+      }}, mounted: function mounted() {that = this;}, methods: { closePage: function closePage() {uni.switchTab({ url: '/pages/index/index' });}, //登录提交
     startLogin: function startLogin() {//登录
       if (this.isRotate) {//判断是否加载中，避免重复点击请求
-        return false;}if (this.username.length == "") {uni.showToast({ icon: 'none', position: 'bottom', title: '用户名不能为空' });return;}if (this.passData.length < 5) {uni.showToast({ icon: 'none', position: 'bottom', title: '密码不正确' });return;}
-
-
-
-      that.isRotate = true;
-
-      // uni.request({
+        return false;}if (this.username.length == "") {uni.showToast({ icon: 'none', position: 'bottom', title: '用户名不能为空' });return;}if (this.passData.length < 5) {uni.showToast({ icon: 'none', position: 'bottom', title: '密码不正确' });return;}that.isRotate = true; // uni.request({
       // 	url:'/api/user/login',
       // 	data:{
       // 		account:this.username,
@@ -333,9 +333,9 @@ var that;var wInput = function wInput() {__webpack_require__.e(/*! require.ensur
 /***/ }),
 
 /***/ 299:
-/*!******************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/源码/校餐通外卖用户端/pages/user/login/login.vue?vue&type=style&index=0&lang=css& ***!
-  \******************************************************************************************************/
+/*!************************************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/pages/user/login/login.vue?vue&type=style&index=0&lang=css& ***!
+  \************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -349,9 +349,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 300:
-/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--6-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-2!./node_modules/postcss-loader/src??ref--6-oneOf-1-3!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!C:/Users/86158/Desktop/源码/校餐通外卖用户端/pages/user/login/login.vue?vue&type=style&index=0&lang=css& ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--6-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-2!./node_modules/postcss-loader/src??ref--6-oneOf-1-3!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/pages/user/login/login.vue?vue&type=style&index=0&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

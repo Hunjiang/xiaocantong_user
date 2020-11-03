@@ -106,12 +106,12 @@
 							 // window.location.href = that.$base + '/h5/#/pages/user/login/login'
 						}else{
 							//跳转微信授权链接获取
-							    let appid = 'wxad7c57f6263f6bd3';
-							    let uri = encodeURIComponent(link);
-								console.log('uri',uri)
-							    let authURL = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${uri}&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect`;
-								console.log('authURL',authURL)
-							    window.location.href = authURL;
+							 //    let appid = 'wxad7c57f6263f6bd3';
+							 //    let uri = encodeURIComponent(link);
+								// console.log('uri',uri)
+							 //    let authURL = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${uri}&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect`;
+								// console.log('authURL',authURL)
+							 //    window.location.href = authURL;
 						}
 			
 		},

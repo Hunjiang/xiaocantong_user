@@ -106,11 +106,18 @@
 									</view>
 									<view class="item-bottom">
 										<view class="left"></view>
+										 <!-- 申请退款：退款未发起、订单已收货 -->
 										<view class="btn bg-yellow" v-if="order.refund_status == 1  && order.order_status ==3" @click="refund(order.id)">申请退款</view>
+										<!-- 去支付：订单未付款、退款未发起 -->
 										<view class="btn bg-yellow" v-if="order.order_status == 1  && order.refund_status==1" @click="goPay(order.id)">去支付</view>
-										<view class="btn bg-yellow" v-if="order.rider_status == 1  && order.order_status !=3" @click="cancel(order.id,x,j)">取消订单</view>
+										<!-- 取消订单：骑手送单中、订单待付款-已付款-已取消-->
+										<!-- <view class="btn bg-yellow" v-if="order.rider_status == 1  && order.order_status !=3" @click="cancel(order.id,x,j)">取消订单</view> -->
+										<!-- 去评价：未评论、订单已收货 -->
 										<view class="btn bg-yellow" v-if="order.is_comment == 1 && order.order_status == 3" @click="goComment(order.id)">去评价</view>
+										<!-- 退款进度：退款进行中和已完成 -->
 										<view class="btn" v-if="order.refund_status != 1 " @click="goRefund(order.id)">退款进度</view>
+										<!-- 再来一单： -->
+										<view class="btn bg-yellow" @click="goStore(order.shop_id, order.id)">再来一单</view>
 									</view>
 								</view>
 								</block>
@@ -160,7 +167,7 @@
 				page:1,
 				base:this.$base,
 				showField:false,
-				refundId:null,
+				refundId:null, //退款ID
 				excRefund:''
 			}
 		},
@@ -187,6 +194,50 @@
 			})
 		},
 		methods: {
+			// 再来一单
+			goStore(storeId,orderId) {
+			this.$u.post('/api/order/orderAgain', {
+				order_id:orderId
+			}).then(res=>{
+				const {data} = res
+				console.log('333333',data);
+				 uni.setStorageSync('orderA', JSON.stringify(data));
+				
+			
+				if(res.code == 1) {
+					uni.redirectTo({
+					    url: '/pages/store/index?sid=' + storeId
+					});
+				}
+			})
+				
+				
+								
+				// this.$u.post('/api/order/orderAgain',{
+				// 	order_id:this.refundId,
+				// 	apply_desc:this.excRefund
+				// }).then(res=>{
+				// 	if(res.code==1){
+				// 		this.refundId = null
+				// 		this.excRefund = ''
+				// 		uni.showToast({
+				// 			title:res.msg,
+				// 			icon:'none',
+				// 			success: () => {
+				// 				this.showField = false;
+				// 				setTimeout(()=>{
+				// 					uni.switchTab({
+				// 						url:'/pages/user/center/center'
+				// 					})
+				// 				},1500)
+				// 			}
+				// 		})
+				// 	}
+				// })
+				
+				
+				
+			},
 			confirmRefund(){
 				this.$u.get('/api/order/orderRefund',{
 					order_id:this.refundId,
@@ -272,7 +323,11 @@
 					page:1,
 					limit:50
 				}).then(res=>{
+					
+				// console.log('zhes ' + JSON.stringify(res));
+					
 					this.tabs[index].data = res.data
+					
 					this.tabs[index].hide_load = true
 					uni.hideLoading()
 				})
@@ -307,11 +362,11 @@
 				});
 			},
 			//去门店
-			goStore(storeId,orderId){
-				uni.redirectTo({
-				    url: '/pages/store/index?sid=' + storeId + '&oid=' + orderId
-				});
-			},
+			// goStore(orderId){
+			// 	uni.redirectTo({
+			// 	    url: '/pages/store/index?sid=' + 6
+			// 	});
+			// },
 			//去订单详情
 			goOrderInfo(orderId){
 				uni.redirectTo({
@@ -326,8 +381,11 @@
 			},
 			//查看退款详情
 			goRefund(orderId){
+				
+			
 				this.$u.get('/api/order/refundPlan',{
-					order_id:orderId
+					order_id:orderId,
+					
 				}).then(res=>{
 					if(res.data.is_agree==1){
 						uni.showToast({

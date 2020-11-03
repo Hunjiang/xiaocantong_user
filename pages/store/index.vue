@@ -472,6 +472,7 @@
 				showFormBox: false,
 				//显示规格动画
 				formAnimationData: {},
+				ccc: 0,
 
 				//购物车位置数据
 				cartBasketRect: {},
@@ -482,56 +483,12 @@
 				page: 1
 			}
 		},
-		async onLoad(options) {
-			const that = this
-			this.sid = options.sid
-			// this.sid = options.sid
-			uni.showLoading({
-				title: '加载中'
-			});
+		onLoad(options) {
+			// 初始化数据
+			this.requestInfo(options);
 
 
-			//请求数据
-			this.$u.get('/api/shop/shopList', {
-				shop_id: this.sid
-			}).then(res => {
-				this.shopList = res.data
-				uni.hideLoading();
-			})
-			this.$u.get('/api/shop/shoppingList', {
-				shop_id: this.sid
-			}).then(res => {
-				console.log(res)
-				that.categoryList = res.data;
 
-			})
-			this.$u.get('/api/shop/comment', {
-				shop_id: this.sid,
-				page: this.page,
-				limit: 10
-			}).then(res => {
-				res.data.list.forEach((item, index) => {
-					let list
-					if (item.images) {
-						list = item.images.split(',')
-						list = list.map(item => this.base + item)
-						console.log('list', list)
-					}
-
-					that.commentList.push({
-						header_img: this.base + item.avatar,
-						user_name: item.nickname,
-						rate: item.score,
-						create_time: item.create_time_text,
-						content: item.content,
-						images: item.images && list
-					})
-					that.totalGrade = res.data.total_grade
-				})
-				console.log('imglist', that.commentList)
-				this.getCartlist()
-
-			})
 		},
 		onReady() {
 			const that = this
@@ -547,9 +504,43 @@
 			}, 100)
 
 		},
+		// 显示
 		onShow() {
-			this.getCartlist()
+			setTimeout(() => {
+				this.clearShoppingCart()
+				// console.log('77777', this.categoryList);
+				this.again()
+			}, 1500)
+			// // 加入购物车
+			// formFirstAddGoods() {
+			// 	let that = this
+			// 	let spec
+			// 	this.currentGoodsData.goods_spec.forEach((item, index) => {
+			// 		if (item.select) {
+			// 			spec = item.name
+			// 		}
+			// 	})
+			// 	if (spec) {
+			// 		this.$u.get('/api/goods/cartOperation', {
+			// 			shop_id: this.shopList.id,
+			// 			goods_id: this.currentGoodsData.id,
+			// 			goods_spec_name: spec,
+			// 			status: '',
+			// 			operate: 1
+			// 		}).then(res => {
+			// 			that.touchOnAddGoods('#ggAddBtn', that.currentGoodsData)
+			// 			this.getCartlist()
+			// 		})
+			// 	} else {
+			// 		uni.showToast({
+			// 			title: '请选择规格',
+			// 			icon: 'none',
+			// 			mask: true
+			// 		})
+			// 	}
 		},
+
+
 		mounted() {
 			let that = this
 
@@ -598,6 +589,121 @@
 			}).exec();
 		},
 		methods: {
+
+			again() {
+				// 再来一单传过来的订单								
+				const orderA = JSON.parse(uni.getStorageSync('orderA'));
+				console.log('这是', orderA);
+				// 清除缓存订单
+				uni.removeStorage({
+					key: 'orderA',
+					success: function(res) {
+						// console.log('清除了');
+					}
+				});
+
+				for (var i in orderA) {
+					var totalNum = orderA[i].total_num //购买商品数量
+					var catGoodsId = orderA[i].goods_id //购买商品Id
+					var goodsSpecId = orderA[i].goods_spec_id // 购买商品规格Id
+					var catId = orderA[i].goods_cat_id //购买的系列	
+					var batId = this.categoryList.filter(item => item.id == catId) //对比后的系列
+					console.log(batId);
+					if (batId) {
+						for (var j in batId) {
+							let catGoods = batId[j].goods;
+							let BatGoodsId = catGoods.filter(item => item.id == catGoodsId)
+							if (BatGoodsId) {
+								console.log(BatGoodsId);
+								for (var k in BatGoodsId) {
+									let catGoodsSpec = BatGoodsId[k].goods_spec //商品大小份
+									console.log(catGoodsSpec);
+									console.log(goodsSpecId);
+									let batCatGoodsSpecId = catGoodsSpec.filter(item => item.id == goodsSpecId)
+
+
+									console.log(batCatGoodsSpecId);
+									let {
+										name
+									} = batCatGoodsSpecId[0]
+									console.log(name);
+									// 调用添加购物车
+									this.cartAddgoods(catGoodsId, name)
+
+								}
+							} else {
+								uni.showToast({
+									title: '该商品已下架',
+									icon: 'none'
+								})
+							}
+						}
+
+					} else {
+						uni.showToast({
+							title: '该订单中某一商品已下架',
+							icon: 'none'
+						})
+					}
+				}
+
+				// id:rowData.goods_id, spec:srowData.goods_spec_name
+				// this.cartAddgoods(id, spec)
+
+			},
+			//请求数据
+			requestInfo(options) {
+				const that = this
+				this.sid = options.sid
+				console.log(this.sid);
+				// this.sid = options.sid
+				uni.showLoading({
+					title: '加载中'
+				});
+				this.$u.get('/api/shop/shopList', {
+					shop_id: this.sid
+				}).then(res => {
+					this.shopList = res.data
+					// console.log(this.shopList);
+					uni.hideLoading();
+				})
+				this.$u.get('/api/shop/shoppingList', {
+					shop_id: this.sid
+				}).then(res => {
+					console.log(res);
+					that.categoryList = res.data;
+					// console.log('555555',that.categoryList);
+
+				})
+				this.$u.get('/api/shop/comment', {
+					shop_id: this.sid,
+					page: this.page,
+					limit: 10
+				}).then(res => {
+					res.data.list.forEach((item, index) => {
+						let list
+						if (item.images) {
+							list = item.images.split(',')
+							list = list.map(item => this.base + item)
+							// console.log('list', list)
+						}
+						that.commentList.push({
+							header_img: this.base + item.avatar,
+							user_name: item.nickname,
+							rate: item.score,
+							create_time: item.create_time_text,
+							content: item.content,
+							images: item.images && list
+						})
+						that.totalGrade = res.data.total_grade
+					})
+					// console.log('imglist', that.commentList)
+					this.getCartlist()
+
+				})
+			},
+
+			// 收藏商家
 			star() {
 				this.$u.get('/api/shop/collect', {
 					shop_id: this.shopList.id
@@ -613,6 +719,7 @@
 					}
 				})
 			},
+			// 购物车删除商品
 			cartDelgoods(id, spec) {
 				this.$u.get('/api/goods/cartOperation', {
 					shop_id: this.shopList.id,
@@ -623,6 +730,7 @@
 					this.getCartlist()
 				})
 			},
+			// 购物车增加商品
 			cartAddgoods(id, spec) {
 				this.$u.get('/api/goods/cartOperation', {
 					shop_id: this.shopList.id,
@@ -634,6 +742,7 @@
 					this.getCartlist()
 				})
 			},
+			// 获取购物车列表
 			getCartlist() {
 				this.$u.get('/api/goods/goodsCart', {
 					shop_id: this.sid
@@ -664,12 +773,15 @@
 			showForm(goods) {
 				var that = this;
 				that.currentGoodsData = goods
+
+				console.log('888888', that.currentGoodsData);
 				that.$refs.popup.open()
 			},
 			//隐藏规格
 			hiddenForm() {
 				this.$refs.popup.close();
 			},
+			// 加入购物车
 			formFirstAddGoods() {
 				let that = this
 				let spec
@@ -677,7 +789,6 @@
 					if (item.select) {
 						spec = item.name
 					}
-
 				})
 				if (spec) {
 					this.$u.get('/api/goods/cartOperation', {
@@ -702,6 +813,8 @@
 			},
 			//选择规格
 			selectGoodsForm(formChild, indexKey) {
+
+
 				this.currentGoodsData.goods_spec.forEach((item, index) => {
 					if (indexKey == index) {
 						this.currentGoodsData.goods_spec[index].select = true
@@ -829,7 +942,7 @@
 			jiesuan() {
 
 				this.navTo("/pages/order/preview?sid=" + this.sid)
-
+				console.log('/pages/order/preview?sid=' + this.sid);
 			},
 			navTo(url) {
 				let that = this;
