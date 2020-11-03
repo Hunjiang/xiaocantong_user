@@ -84,7 +84,7 @@
 		onLoad(){
 			that = this
 						let link = window.location.href;
-						console.log('link',link)
+						// console.log('link',link)
 						let params = getUrlParams (link);
 						console.log('params',params)
 						uni.removeStorageSync('code')
@@ -105,13 +105,13 @@
 							 uni.setStorageSync('code',params.code)
 							 // window.location.href = that.$base + '/h5/#/pages/user/login/login'
 						}else{
-							//跳转微信授权链接获取
-							 //    let appid = 'wxad7c57f6263f6bd3';
-							 //    let uri = encodeURIComponent(link);
+							跳转微信授权链接获取
+							    let appid = 'wxad7c57f6263f6bd3';
+							    let uri = encodeURIComponent(link);
 								// console.log('uri',uri)
-							 //    let authURL = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${uri}&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect`;
+							    let authURL = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${uri}&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect`;
 								// console.log('authURL',authURL)
-							 //    window.location.href = authURL;
+							    window.location.href = authURL;
 						}
 			
 		},
@@ -127,8 +127,8 @@
 			//登录提交
 		    startLogin(){
 				//登录
+				//判断是否加载中，避免重复点击请求
 				if(this.isRotate){
-					//判断是否加载中，避免重复点击请求
 					return false;
 				}
 				if (this.username.length == "") {
