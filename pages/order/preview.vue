@@ -262,12 +262,13 @@
 				totalYhPrice: 0,
 				//商品数量
 				totalNumber: 0,
-				shop: null,
+				shop: [],
 				remark: "",
 				goodsList: [],
 				timeList: [],
 				time: null,
-				// goFloor: false
+				// goFloor: false,
+				t1: null
 
 			}
 		},
@@ -287,6 +288,7 @@
 				}).then(res => {
 					this.goodsList = res.data.list
 					this.shop = res.data
+					console.log(this.shop);
 
 
 					if (res.data.address) {
@@ -295,7 +297,7 @@
 				})
 			}
 			let now = new Date()
-			console.log(now.getHours())
+			// console.log(now.getHours())
 			for (let i = 0; i < 24 - now.getHours(); i++) {
 				this.timeList.push({
 					value: now.getHours() + i,
@@ -308,15 +310,11 @@
 					this.timeList[index].children.push({
 						value: item.value + x,
 						label: item.value + x + ":00"
-
 					})
-
 				}
-
-
-
-
 			})
+			// 一天中某段时间段内显示
+			this.dayShow()
 
 		},
 		onPageScroll(e) {
@@ -328,16 +326,17 @@
 			if (pages[pages.length - 1].$vm.item) {
 				this.addressData = JSON.parse(pages[pages.length - 1].$vm.item)
 			}
-		// 一天中某段时间段内显示
-			this.checkAuditTime("11:35", "13:30")
-			this.checkAuditTime("17:35", "20:30")
-
-
+		},
+		onUnload() {
+			  if(this.t1) {  
+			        clearInterval(this.t1);  
+			        this.t1 = null;  
+			    }  
 		},
 		methods: {
 			// 一天中某段时间段内显示
-			checkAuditTime: function(beginTime, endTime) {
-				setInterval(() => {
+			checkAuditTime(beginTime, endTime) {
+				// setInterval(() => {
 					var nowDate = new Date();
 					var beginDate = new Date(nowDate);
 					var endDate = new Date(nowDate);
@@ -351,15 +350,30 @@
 					var endHour = endTime.substring(0, endIndex);
 					var endMinue = endTime.substring(endIndex + 1, endTime.length);
 					endDate.setHours(endHour, endMinue, 0, 0);
-					if (nowDate.getTime() - beginDate.getTime() >= 0 && nowDate.getTime() - endDate.getTime() <= 0) {
+					if (nowDate.getTime() - beginDate.getTime() >= 0 && nowDate.getTime() - endDate.getTime() <= 0) {						
+						return true
+						// this.goFloorShow = true
+					} else {	
+						return false
+					// this.goFloorShow = false
+					}
+				// }, 1000)
+			},
+			dayShow() {
+				setInterval(() => {
+					if(this.checkAuditTime("11:00", "14:00")) {
+						this.goFloorShow = true					
+					}else if(this.checkAuditTime("15:15", "20:30")){
 						this.goFloorShow = true
-					} else {
+					}else {
 						this.goFloorShow = false
 					}
-				}, 1000)
+				},1000)
 			},
+			
 			// 是否上楼
 			goFloorStatusChange(e) {
+				console.log(e);
 				if (e.target.value) {
 					this.isUpstairs = 1
 				} else {
