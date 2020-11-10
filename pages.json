@@ -209,6 +209,18 @@
 				
 			}
         }
+        ,{
+            "path" : "pages/user/integral/myIntegral",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText":"我的积分",
+              "navigationStyle":"default",
+			 "navigationBarBackgroundColor": "#FFFFFF",
+			  "backgroundColor": "#FFFFFF"
+			  
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

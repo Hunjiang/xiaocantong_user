@@ -81,6 +81,7 @@
 			</view>
 			<!-- 浏览历史 -->
 			<view class="history-section icon">
+				<list-cell icon="hxicon-locationfill" iconColor="#5fcda2" title="积分商城" @eventClick="navTo('/pages/user/integral/myIntegral')"></list-cell>
 				<list-cell icon="hxicon-locationfill" iconColor="#5fcda2" title="地址管理" @eventClick="navTo('/pages/user/address/address')"></list-cell>
 				<list-cell icon="hxicon-round_favor_fill" iconColor="#54b4ef" title="我的收藏" @eventClick="navTo('/pages/store/starList')"></list-cell>
 				<list-cell icon="hxicon-settings" iconColor="#e07472" title="设置" border="" @eventClick="navTo('/pages/user/setting/setting')"></list-cell>
