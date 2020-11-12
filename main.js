@@ -10,7 +10,8 @@ Vue.prototype.$store = store;
 
 //配置
 import config from './config.js'
-Vue.prototype.$conf = config
+Vue.prototype.$conf = config 
+
 
 Vue.prototype.$msg = (title, duration=1500, mask=false, icon='none')=>{
 	//统一提示方便全局修改
@@ -42,4 +43,5 @@ const app = new Vue({
 import httpInterceptor from '@/common/http.interceptor.js'
 // 这里需要写在最后，是为了等Vue创建对象完成，引入"app"对象(也即页面的"this"实例)
 Vue.use(httpInterceptor, app)
+
 app.$mount()

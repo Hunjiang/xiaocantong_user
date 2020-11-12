@@ -279,8 +279,6 @@
 			let totalOldPrice = 0
 
 
-
-
 			if (option.sid) {
 				this.$u.get('/api/order/close', {
 					shop_id: option.sid,

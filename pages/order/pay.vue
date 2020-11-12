@@ -89,6 +89,7 @@
 				}
 			}
 		},
+		
 		data() {
 			return {
 				countdownStr: "00:00",

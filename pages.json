@@ -159,7 +159,14 @@
 		, {
 			"path": "pages/order/order",
 			"style": {}
-		}, {
+		},
+		{
+			"path": "pages/order/status",
+			"style": {
+				"navigationStyle": "custom"	
+			}
+		}	
+		, {
 			"path": "pages/order/preview",
 			"style": {
 				"app-plus": {
@@ -194,19 +201,13 @@
 		}, {
 			"path": "pages/user/integral/record",
 			"style": {
-				"navigationBarTitleText": "兑换记录",
-				"navigationBarTextStyle": "white",
-				"navigationStyle": "default",
-				"navigationBarBackgroundColor": "#55ff00"
+				"navigationStyle": "custom"	
 			}
 		},
 		{
 			"path": "pages/user/integral/integralShop",
 			"style": {
-				"navigationBarTitleText": "积分商城",
-				"navigationBarTextStyle": "white",
-				"navigationStyle": "default",
-				"navigationBarBackgroundColor": "#55ff00"
+				"navigationStyle": "custom"	
 			}
 		},
 		{
@@ -215,7 +216,12 @@
 				// "navigationBarTitleText": "商品详情",
 				"navigationBarTextStyle": "white",
 				"navigationStyle": "custom"
-			
+			}
+		},
+		{
+			"path": "pages/user/integral/successful",
+			"style": {
+				"navigationStyle": "custom"	
 			}
 		}
 	],
