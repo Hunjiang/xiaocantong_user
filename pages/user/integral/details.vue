@@ -23,14 +23,14 @@
 			<view class="adress">
 				<navigator url="/pages/user/address/address" style="display: flex;align-items: center;">
 					<text class="txt1">{{addressData?addressData.campus_name+' '+addressData.detail:'暂无可用地址,请新建地址'}}</text>
-					<i class="hxicon-right icon1"></i>
+					
 				</navigator>
 
 			</view>
 
 			<view class="remark">
 				<text>备注：</text>
-				<u-input v-model="remark" :type="type" :height="height" :auto-height="autoHeight" />
+				<u-input v-model="remark"/>
 			</view>
 			<view class="btn" @click="confirm">
 				确 认 兑 换
@@ -61,16 +61,18 @@
 
 		methods: {
 			// 获取详情列表
+			
 			getDetail() {
 				this.$u.post('/api/goods/goodsScoreDetails', {
 					goods_id: this.id
 				}).then(res => {
 					console.log(res);
-					let {
-						data
-					} = res
-					this.list = data
+					let {list} = res.data
+					this.list = list
 					console.log(this.list);
+					if(res.data.address) {
+						this.addressData = res.data.address
+					}
 				})
 			},
 			// 返回上一级
@@ -84,9 +86,20 @@
 			uni.showModal({
 			    title: '提示',
 			    content: '确认兑换吗?',
-			    success: function (res) {
+			    success: res => {
+					
 			        if (res.confirm) {
+						console.log(this.addressData.id)
 			            console.log('用户点击确定');
+						this.$u.post('/api/order/scoreSubmit', {
+							goods_id: this.id,
+							address_id: this.addressData.id,
+							// remark: this.remark //备注
+							count: 1
+						}).then(res => {
+							console.log(res);
+						})
+						
 			        } else if (res.cancel) {
 			            console.log('用户点击取消');
 			        }

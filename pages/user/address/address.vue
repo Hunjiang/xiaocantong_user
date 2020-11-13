@@ -33,7 +33,8 @@
 			return {
 				source: 0,
 				addressList: [
-				]
+				],
+				pageIndex: 0
 			}
 		},
 		onLoad(option){
@@ -69,16 +70,34 @@
 			checkAddress(item){
 				 let pages = getCurrentPages(); //获取页面栈
 				 console.log(pages)
+				 console.log(pages[0].route);
 				                    //获取到返回的页面下标
-				                    let pageIndex = pages.findIndex(findItem=>{
-				                        return findItem.route==='pages/order/preview' /* 需返回的页面路由:'pages/handling/handling'  */
-				                    })
+				     //                let pageIndex = pages.findIndex(findItem=>{
+				     //                    // return findItem.route==='pages/order/preview' /* 需返回的页面路由:'pages/handling/handling'  */
+									// 	return findItem.route==='pages/user/integral/details' /* 需返回的页面路由:'pages/handling/handling'  */
+				     //                })
+									// console.log(pageIndex);
+									
+									
+									if(pages[0].route == 'pages/user/integral/details') {
+										this.pageIndex = pages.findIndex(findItem=>{										   											return findItem.route==='pages/user/integral/details' /* 需返回的页面路由:'pages/handling/handling'  */
+										})
+									}else if(pages[0].route == 'pages/order/preview') {
+										 this.pageIndex = pages.findIndex(findItem=>{
+										    return findItem.route==='pages/order/preview' /* 需返回的页面路由:'pages/handling/handling'  */											
+										})
+									}else {
+										uni.showToast({
+											title: '程序出错了，请联系管理人员',
+											icon: 'none'
+										})
+									}									
 				                    //获取到返回的页面对象
-				                    let prevPage = pages[pageIndex];
+				                    let prevPage = pages[this.pageIndex];
 									console.log('item1',JSON.stringify(item))
 				                        prevPage.$vm.item = JSON.stringify(item);
 										console.log('item2',prevPage.$vm.item)
-				                    uni.navigateBack({delta:(pages.length-(pageIndex+1))})//返回到列表页面
+				                    uni.navigateBack({delta:(pages.length-(this.pageIndex+1))})//返回到列表页面
 			},
 			addAddress(type, item){
 				uni.navigateTo({

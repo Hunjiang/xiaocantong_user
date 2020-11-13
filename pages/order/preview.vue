@@ -282,12 +282,10 @@
 			if (option.sid) {
 				this.$u.get('/api/order/close', {
 					shop_id: option.sid,
-
 				}).then(res => {
 					this.goodsList = res.data.list
 					this.shop = res.data
 					console.log(this.shop);
-
 
 					if (res.data.address) {
 						this.addressData = res.data.address

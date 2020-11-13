@@ -165,8 +165,9 @@
 			"style": {
 				"navigationStyle": "custom"	
 			}
-		}	
-		, {
+		}				
+		,
+		{
 			"path": "pages/order/preview",
 			"style": {
 				"app-plus": {
