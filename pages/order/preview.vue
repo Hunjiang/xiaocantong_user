@@ -416,8 +416,8 @@
 					})
 					return
 				}
-				if (!tihs.value) {
-					tihs.gouxuan = false
+				if (!this.value) {
+					this.gouxuan = false
 				} else {
 
 				}

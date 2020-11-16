@@ -80,27 +80,39 @@
 									
 									
 									if(pages[0].route == 'pages/user/integral/details') {
+										console.log(1)
 										this.pageIndex = pages.findIndex(findItem=>{										   											return findItem.route==='pages/user/integral/details' /* 需返回的页面路由:'pages/handling/handling'  */
 										})
 									}else if(pages[0].route == 'pages/order/preview') {
+										console.log(2)
 										 this.pageIndex = pages.findIndex(findItem=>{
 										    return findItem.route==='pages/order/preview' /* 需返回的页面路由:'pages/handling/handling'  */											
 										})
 									}else {
+										console.log(3)
 										uni.showToast({
 											title: '程序出错了，请联系管理人员',
 											icon: 'none'
 										})
+										// 2020年11月16号一下代码原来是在eles 外面  现在改到了里面
+										//获取到返回的页面对象
+										let prevPage = pages[this.pageIndex];
+										console.log('item1',JSON.stringify(item))
+										    prevPage.$vm.item = JSON.stringify(item);
+											console.log('item2',item)
+											console.log({delta:(pages.length-(this.pageIndex+1))})
+											uni.setStorage({
+											    key: 'addressData',　//存下关于选取某个地址的数据
+											    data:item,　　　　　　　　　　　　　　　
+											}) 
+											// 一下这个长的2020年11月16号注释掉了选择了一下直接返回一页的
+										// uni.navigateBack({delta:(pages.length-(this.pageIndex+1))})//返回到列表页面
+										uni.navigateBack()
 									}									
-				                    //获取到返回的页面对象
-				                    let prevPage = pages[this.pageIndex];
-									console.log('item1',JSON.stringify(item))
-				                        prevPage.$vm.item = JSON.stringify(item);
-										console.log('item2',prevPage.$vm.item)
-				                    uni.navigateBack({delta:(pages.length-(this.pageIndex+1))})//返回到列表页面
+				                 
 			},
 			addAddress(type, item){
-				uni.navigateTo({
+				uni.redirectTo({
 					url: `/pages/user/address/addressManage?type=${type}&data=${JSON.stringify(item)}`
 				})
 			},

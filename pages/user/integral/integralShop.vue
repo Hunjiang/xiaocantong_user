@@ -1,7 +1,6 @@
 <template>
 	<view class="container">
-		<hx-navbar title="积分商城" :fixed="true" :backgroundColor="[[255, 235, 59, 1],[255, 193, 7, 1]]"></hx-navbar>
-
+		<hx-navbar color="#ffffff" title="积分商城" :fixed="true" :backgroundColor="[[255, 235, 59, 1],[255, 193, 7, 1]]"></hx-navbar>
 		<view class="container_main">
 			<view class="contain_box">
 				<view v-for="(item, id) in list" :key="id" class="contain">
@@ -13,9 +12,6 @@
 						</view>
 					</navigator>
 				</view>
-
-
-
 				<!-- <view class="contain">
 					<image></image>
 					<view class="contain_bottom">

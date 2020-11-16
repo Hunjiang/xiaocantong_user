@@ -45,7 +45,7 @@
 	export default {
 		data() {
 			return {
-				id: 0,
+				id:null,
 				list: [],
 				//收获地址
 				addressData: null,
@@ -56,6 +56,20 @@
 			this.id = operation.id
 			// console.log(this.id);
 			this.getDetail()
+		},
+		onShow() {
+			var that = this
+			uni.getStorage({
+			    key: 'addressData',
+			    success: function (res) {
+			      that.addressData=res.data
+				  // 移除
+				  uni.removeStorageSync({
+					   key: 'addressData'
+				  })
+			    }
+			}) 
+		
 		},
 
 
@@ -91,13 +105,24 @@
 			        if (res.confirm) {
 						console.log(this.addressData.id)
 			            console.log('用户点击确定');
+						
+						
+						
+						// 一下是请求接口
 						this.$u.post('/api/order/scoreSubmit', {
-							goods_id: this.id,
+							goods_id:Number(this.id),
 							address_id: this.addressData.id,
-							// remark: this.remark //备注
+							remark: this.remark, //备注
 							count: 1
 						}).then(res => {
-							console.log(res);
+							if(res.code==1){
+								uni.navigateTo({
+								               url: '/pages/user/integral/successful?ss=1',
+								});
+							}
+							
+					
+						
 						})
 						
 			        } else if (res.cancel) {
