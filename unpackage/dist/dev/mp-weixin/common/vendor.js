@@ -904,7 +904,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_NAME":"校餐通外卖","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -2556,11 +2556,13 @@ Dep.SharedObject.targetStack = [];
 function pushTarget (target) {
   Dep.SharedObject.targetStack.push(target);
   Dep.SharedObject.target = target;
+  Dep.target = target;
 }
 
 function popTarget () {
   Dep.SharedObject.targetStack.pop();
   Dep.SharedObject.target = Dep.SharedObject.targetStack[Dep.SharedObject.targetStack.length - 1];
+  Dep.target = Dep.SharedObject.target;
 }
 
 /*  */
@@ -7329,7 +7331,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"VUE_APP_NAME":"校餐通外卖","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -7350,14 +7352,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_NAME":"校餐通外卖","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_NAME":"校餐通外卖","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -7401,13 +7403,14 @@ function cloneWithData(vm) {
   }, ret);
 
   // vue-composition-api
-  var rawBindings = vm.__secret_vfa_state__ && vm.__secret_vfa_state__.rawBindings;
+  var compositionApiState = vm.__composition_api_state__ || vm.__secret_vfa_state__;
+  var rawBindings = compositionApiState && compositionApiState.rawBindings;
   if (rawBindings) {
     Object.keys(rawBindings).forEach(function (key) {
       ret[key] = vm[key];
     });
   }
-  
+
   //TODO 需要把无用数据处理掉，比如 list=>l0 则 list 需要移除，否则多传输一份数据
   Object.assign(ret, vm.$mp.data || {});
   if (
@@ -7442,7 +7445,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_NAME":"校餐通外卖","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -7879,9 +7882,9 @@ module.exports = g;
 
 /***/ }),
 /* 4 */
-/*!***********************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/pages.json ***!
-  \***********************************************************************/
+/*!**********************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/pages.json ***!
+  \**********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -7892,9 +7895,9 @@ module.exports = g;
 /* 6 */,
 /* 7 */,
 /* 8 */
-/*!********************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/index.js ***!
-  \********************************************************************************************/
+/*!*******************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/crypto-js/index.js ***!
+  \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7912,9 +7915,9 @@ module.exports = g;
 
 /***/ }),
 /* 9 */
-/*!*******************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/core.js ***!
-  \*******************************************************************************************/
+/*!******************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/crypto-js/core.js ***!
+  \******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8708,7 +8711,7 @@ module.exports = g;
   return CryptoJS;
 
 });
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../前端开发工具/HBuilderX/plugins/uniapp-cli/node_modules/webpack/buildin/global.js */ 3)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../qianduan/HBuilderX/plugins/uniapp-cli/node_modules/webpack/buildin/global.js */ 3)))
 
 /***/ }),
 /* 10 */
@@ -32066,9 +32069,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 167 */
-/*!***********************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/x64-core.js ***!
-  \***********************************************************************************************/
+/*!**********************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/crypto-js/x64-core.js ***!
+  \**********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -32372,9 +32375,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 168 */
-/*!******************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/lib-typedarrays.js ***!
-  \******************************************************************************************************/
+/*!*****************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/crypto-js/lib-typedarrays.js ***!
+  \*****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -32450,9 +32453,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 169 */
-/*!************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/enc-utf16.js ***!
-  \************************************************************************************************/
+/*!***********************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/crypto-js/enc-utf16.js ***!
+  \***********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -32601,9 +32604,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 170 */
-/*!*************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/enc-base64.js ***!
-  \*************************************************************************************************/
+/*!************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/crypto-js/enc-base64.js ***!
+  \************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -32739,9 +32742,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 171 */
-/*!******************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/md5.js ***!
-  \******************************************************************************************/
+/*!*****************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/crypto-js/md5.js ***!
+  \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -33009,9 +33012,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 172 */
-/*!*******************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/sha1.js ***!
-  \*******************************************************************************************/
+/*!******************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/crypto-js/sha1.js ***!
+  \******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -33161,9 +33164,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 173 */
-/*!*********************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/sha256.js ***!
-  \*********************************************************************************************/
+/*!********************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/crypto-js/sha256.js ***!
+  \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -33362,9 +33365,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 174 */
-/*!*********************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/sha224.js ***!
-  \*********************************************************************************************/
+/*!********************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/crypto-js/sha224.js ***!
+  \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -33444,9 +33447,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 175 */
-/*!*********************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/sha512.js ***!
-  \*********************************************************************************************/
+/*!********************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/crypto-js/sha512.js ***!
+  \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -33772,9 +33775,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 176 */
-/*!*********************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/sha384.js ***!
-  \*********************************************************************************************/
+/*!********************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/crypto-js/sha384.js ***!
+  \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -33857,9 +33860,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 177 */
-/*!*******************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/sha3.js ***!
-  \*******************************************************************************************/
+/*!******************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/crypto-js/sha3.js ***!
+  \******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -34185,9 +34188,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 178 */
-/*!************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/ripemd160.js ***!
-  \************************************************************************************************/
+/*!***********************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/crypto-js/ripemd160.js ***!
+  \***********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -34454,9 +34457,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 179 */
-/*!*******************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/hmac.js ***!
-  \*******************************************************************************************/
+/*!******************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/crypto-js/hmac.js ***!
+  \******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -34599,9 +34602,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 180 */
-/*!*********************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/pbkdf2.js ***!
-  \*********************************************************************************************/
+/*!********************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/crypto-js/pbkdf2.js ***!
+  \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -34746,9 +34749,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 181 */
-/*!*********************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/evpkdf.js ***!
-  \*********************************************************************************************/
+/*!********************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/crypto-js/evpkdf.js ***!
+  \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -34882,9 +34885,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 182 */
-/*!**************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/cipher-core.js ***!
-  \**************************************************************************************************/
+/*!*************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/crypto-js/cipher-core.js ***!
+  \*************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -35774,9 +35777,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 183 */
-/*!***********************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/mode-cfb.js ***!
-  \***********************************************************************************************/
+/*!**********************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/crypto-js/mode-cfb.js ***!
+  \**********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -35856,9 +35859,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 184 */
-/*!***********************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/mode-ctr.js ***!
-  \***********************************************************************************************/
+/*!**********************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/crypto-js/mode-ctr.js ***!
+  \**********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -35916,9 +35919,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 185 */
-/*!*******************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/mode-ctr-gladman.js ***!
-  \*******************************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/crypto-js/mode-ctr-gladman.js ***!
+  \******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36034,9 +36037,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 186 */
-/*!***********************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/mode-ofb.js ***!
-  \***********************************************************************************************/
+/*!**********************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/crypto-js/mode-ofb.js ***!
+  \**********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36090,9 +36093,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 187 */
-/*!***********************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/mode-ecb.js ***!
-  \***********************************************************************************************/
+/*!**********************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/crypto-js/mode-ecb.js ***!
+  \**********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36132,9 +36135,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 188 */
-/*!***************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/pad-ansix923.js ***!
-  \***************************************************************************************************/
+/*!**************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/crypto-js/pad-ansix923.js ***!
+  \**************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36183,9 +36186,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 189 */
-/*!***************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/pad-iso10126.js ***!
-  \***************************************************************************************************/
+/*!**************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/crypto-js/pad-iso10126.js ***!
+  \**************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36229,9 +36232,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 190 */
-/*!***************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/pad-iso97971.js ***!
-  \***************************************************************************************************/
+/*!**************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/crypto-js/pad-iso97971.js ***!
+  \**************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36271,9 +36274,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 191 */
-/*!******************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/pad-zeropadding.js ***!
-  \******************************************************************************************************/
+/*!*****************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/crypto-js/pad-zeropadding.js ***!
+  \*****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36320,9 +36323,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 192 */
-/*!****************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/pad-nopadding.js ***!
-  \****************************************************************************************************/
+/*!***************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/crypto-js/pad-nopadding.js ***!
+  \***************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36352,9 +36355,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 193 */
-/*!*************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/format-hex.js ***!
-  \*************************************************************************************************/
+/*!************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/crypto-js/format-hex.js ***!
+  \************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36420,9 +36423,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 194 */
-/*!******************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/aes.js ***!
-  \******************************************************************************************/
+/*!*****************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/crypto-js/aes.js ***!
+  \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36656,9 +36659,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 195 */
-/*!************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/tripledes.js ***!
-  \************************************************************************************************/
+/*!***********************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/crypto-js/tripledes.js ***!
+  \***********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -37437,9 +37440,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 196 */
-/*!******************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/rc4.js ***!
-  \******************************************************************************************/
+/*!*****************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/crypto-js/rc4.js ***!
+  \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -37578,9 +37581,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 197 */
-/*!*********************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/rabbit.js ***!
-  \*********************************************************************************************/
+/*!********************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/crypto-js/rabbit.js ***!
+  \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -37772,9 +37775,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 198 */
-/*!****************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/crypto-js/rabbit-legacy.js ***!
-  \****************************************************************************************************/
+/*!***************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/crypto-js/rabbit-legacy.js ***!
+  \***************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38094,9 +38097,9 @@ function normalizeComponent (
 
 /***/ }),
 /* 202 */
-/*!*******************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/index.js ***!
-  \*******************************************************************************************/
+/*!******************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/uview-ui/index.js ***!
+  \******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38240,9 +38243,9 @@ var install = function install(Vue) {
 
 /***/ }),
 /* 203 */
-/*!******************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/mixin/mixin.js ***!
-  \******************************************************************************************************/
+/*!*****************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/uview-ui/libs/mixin/mixin.js ***!
+  \*****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38281,9 +38284,9 @@ var install = function install(Vue) {
 
 /***/ }),
 /* 204 */
-/*!********************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/request/index.js ***!
-  \********************************************************************************************************/
+/*!*******************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/uview-ui/libs/request/index.js ***!
+  \*******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38474,9 +38477,9 @@ new Request();exports.default = _default;
 
 /***/ }),
 /* 205 */
-/*!*************************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/deepMerge.js ***!
-  \*************************************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/uview-ui/libs/function/deepMerge.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38514,9 +38517,9 @@ deepMerge;exports.default = _default;
 
 /***/ }),
 /* 206 */
-/*!*************************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/deepClone.js ***!
-  \*************************************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/uview-ui/libs/function/deepClone.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38547,9 +38550,9 @@ deepClone;exports.default = _default;
 
 /***/ }),
 /* 207 */
-/*!********************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/test.js ***!
-  \********************************************************************************************************/
+/*!*******************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/uview-ui/libs/function/test.js ***!
+  \*******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38789,9 +38792,9 @@ function code(value) {var len = arguments.length > 1 && arguments[1] !== undefin
 
 /***/ }),
 /* 208 */
-/*!***************************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/queryParams.js ***!
-  \***************************************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/uview-ui/libs/function/queryParams.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38857,9 +38860,9 @@ queryParams;exports.default = _default;
 
 /***/ }),
 /* 209 */
-/*!*********************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/route.js ***!
-  \*********************************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/uview-ui/libs/function/route.js ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38953,9 +38956,9 @@ route;exports.default = _default;
 
 /***/ }),
 /* 210 */
-/*!**************************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/timeFormat.js ***!
-  \**************************************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/uview-ui/libs/function/timeFormat.js ***!
+  \*************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39015,9 +39018,9 @@ timeFormat;exports.default = _default;
 
 /***/ }),
 /* 211 */
-/*!************************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/timeFrom.js ***!
-  \************************************************************************************************************/
+/*!***********************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/uview-ui/libs/function/timeFrom.js ***!
+  \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39071,9 +39074,9 @@ timeFrom;exports.default = _default;
 
 /***/ }),
 /* 212 */
-/*!*****************************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/colorGradient.js ***!
-  \*****************************************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/uview-ui/libs/function/colorGradient.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39180,9 +39183,9 @@ function rgbToHex(rgb) {
 
 /***/ }),
 /* 213 */
-/*!********************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/guid.js ***!
-  \********************************************************************************************************/
+/*!*******************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/uview-ui/libs/function/guid.js ***!
+  \*******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39231,9 +39234,9 @@ guid;exports.default = _default;
 
 /***/ }),
 /* 214 */
-/*!*********************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/color.js ***!
-  \*********************************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/uview-ui/libs/function/color.js ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39278,9 +39281,9 @@ color;exports.default = _default;
 
 /***/ }),
 /* 215 */
-/*!*************************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/type2icon.js ***!
-  \*************************************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/uview-ui/libs/function/type2icon.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39323,9 +39326,9 @@ type2icon;exports.default = _default;
 
 /***/ }),
 /* 216 */
-/*!***************************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/randomArray.js ***!
-  \***************************************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/uview-ui/libs/function/randomArray.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39340,9 +39343,9 @@ randomArray;exports.default = _default;
 
 /***/ }),
 /* 217 */
-/*!***********************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/addUnit.js ***!
-  \***********************************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/uview-ui/libs/function/addUnit.js ***!
+  \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39358,9 +39361,9 @@ function addUnit() {var value = arguments.length > 0 && arguments[0] !== undefin
 
 /***/ }),
 /* 218 */
-/*!**********************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/random.js ***!
-  \**********************************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/uview-ui/libs/function/random.js ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39378,9 +39381,9 @@ random;exports.default = _default;
 
 /***/ }),
 /* 219 */
-/*!********************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/trim.js ***!
-  \********************************************************************************************************/
+/*!*******************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/uview-ui/libs/function/trim.js ***!
+  \*******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39403,9 +39406,9 @@ trim;exports.default = _default;
 
 /***/ }),
 /* 220 */
-/*!*********************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/toast.js ***!
-  \*********************************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/uview-ui/libs/function/toast.js ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39423,9 +39426,9 @@ toast;exports.default = _default;
 
 /***/ }),
 /* 221 */
-/*!*************************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/getParent.js ***!
-  \*************************************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/uview-ui/libs/function/getParent.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39480,9 +39483,9 @@ function getParent(name, keys) {
 
 /***/ }),
 /* 222 */
-/*!***********************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/$parent.js ***!
-  \***********************************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/uview-ui/libs/function/$parent.js ***!
+  \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39508,9 +39511,9 @@ function $parent() {var name = arguments.length > 0 && arguments[0] !== undefine
 
 /***/ }),
 /* 223 */
-/*!*******************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/sys.js ***!
-  \*******************************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/uview-ui/libs/function/sys.js ***!
+  \******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39526,9 +39529,9 @@ function sys() {
 
 /***/ }),
 /* 224 */
-/*!************************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/debounce.js ***!
-  \************************************************************************************************************/
+/*!***********************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/uview-ui/libs/function/debounce.js ***!
+  \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39565,9 +39568,9 @@ debounce;exports.default = _default;
 
 /***/ }),
 /* 225 */
-/*!************************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/function/throttle.js ***!
-  \************************************************************************************************************/
+/*!***********************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/uview-ui/libs/function/throttle.js ***!
+  \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39607,9 +39610,9 @@ throttle;exports.default = _default;
 
 /***/ }),
 /* 226 */
-/*!********************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/config/config.js ***!
-  \********************************************************************************************************/
+/*!*******************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/uview-ui/libs/config/config.js ***!
+  \*******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39630,9 +39633,9 @@ var version = '1.6.4';var _default =
 
 /***/ }),
 /* 227 */
-/*!********************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/config/zIndex.js ***!
-  \********************************************************************************************************/
+/*!*******************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/uview-ui/libs/config/zIndex.js ***!
+  \*******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39659,9 +39662,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 228 */
-/*!***************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/store/index.js ***!
-  \***************************************************************************/
+/*!**************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/store/index.js ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -40823,9 +40826,9 @@ var index = {
 
 /***/ }),
 /* 230 */
-/*!**********************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/config.js ***!
-  \**********************************************************************/
+/*!*********************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/config.js ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -40849,9 +40852,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 231 */
-/*!******************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/common/vmeitime-http/index.js ***!
-  \******************************************************************************************/
+/*!*****************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/common/vmeitime-http/index.js ***!
+  \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41046,9 +41049,9 @@ var _default = {
 
 /***/ }),
 /* 232 */
-/*!**********************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/common/vmeitime-http/interface.js ***!
-  \**********************************************************************************************/
+/*!*********************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/common/vmeitime-http/interface.js ***!
+  \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41247,9 +41250,9 @@ function _reslog(res) {
 
 /***/ }),
 /* 233 */
-/*!********************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/common/vmeitime-http/carpool.js ***!
-  \********************************************************************************************/
+/*!*******************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/common/vmeitime-http/carpool.js ***!
+  \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41271,9 +41274,9 @@ var carpool = function carpool(data) {
 
 /***/ }),
 /* 234 */
-/*!*****************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/common/vmeitime-http/user.js ***!
-  \*****************************************************************************************/
+/*!****************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/common/vmeitime-http/user.js ***!
+  \****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41371,9 +41374,9 @@ var updatePhone = function updatePhone(data) {
 
 /***/ }),
 /* 235 */
-/*!*****************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/common/vmeitime-http/code.js ***!
-  \*****************************************************************************************/
+/*!****************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/common/vmeitime-http/code.js ***!
+  \****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41400,9 +41403,9 @@ var updatePhone = function updatePhone(data) {
 
 /***/ }),
 /* 236 */
-/*!****************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/common/vmeitime-http/app.js ***!
-  \****************************************************************************************/
+/*!***************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/common/vmeitime-http/app.js ***!
+  \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41428,9 +41431,9 @@ var upgrade = function upgrade(data) {
 
 /***/ }),
 /* 237 */
-/*!*********************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/common/appupgrade.js ***!
-  \*********************************************************************************/
+/*!********************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/common/appupgrade.js ***!
+  \********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41494,9 +41497,9 @@ var _config = _interopRequireDefault(__webpack_require__(/*! @/config.js */ 230)
 
 /***/ }),
 /* 238 */
-/*!***************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/common/http.interceptor.js ***!
-  \***************************************************************************************/
+/*!**************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/common/http.interceptor.js ***!
+  \**************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41525,7 +41528,8 @@ var _config = _interopRequireDefault(__webpack_require__(/*! @/config.js */ 230)
 var install = function install(Vue, vm) {
   // 此为自定义配置参数，具体参数见上方说明
   Vue.prototype.$u.http.setConfig({
-    baseUrl: 'https://h5.xiaocantong.net/',
+    // baseUrl: 'https://h5.xiaocantong.net/',
+    baseUrl: 'http://test.xiaocantong.net/',
     loadingText: '努力加载中~',
     loadingTime: 800,
     method: 'GET',
@@ -41568,7 +41572,7 @@ var install = function install(Vue, vm) {
 
   // 响应拦截，如配置，每次请求结束都会执行本方法
   Vue.prototype.$u.http.interceptor.response = function (res) {
-    console.log('res', res);
+    // console.log('res',res)
     if (res.code == 1) {
       // res为服务端返回值，可能有code，result等字段
       // 这里对res.result进行返回，将会在this.$u.post(url).then(res => {})的then回调中的res的到
@@ -41609,9 +41613,9 @@ var install = function install(Vue, vm) {
 /* 248 */,
 /* 249 */,
 /* 250 */
-/*!****************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/components/mescroll-uni/mescroll-uni.js ***!
-  \****************************************************************************************************/
+/*!***************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/components/mescroll-uni/mescroll-uni.js ***!
+  \***************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -42482,9 +42486,9 @@ MeScroll.prototype.setBounce = function (isBounce) {
 
 /***/ }),
 /* 251 */
-/*!***********************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/components/mescroll-uni/mescroll-uni-option.js ***!
-  \***********************************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/components/mescroll-uni/mescroll-uni-option.js ***!
+  \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -42528,9 +42532,9 @@ GlobalOption;exports.default = _default;
 /* 252 */,
 /* 253 */,
 /* 254 */
-/*!*******************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/components/mescroll-uni/mescroll-mixins.js ***!
-  \*******************************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/components/mescroll-uni/mescroll-mixins.js ***!
+  \******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -42606,16 +42610,667 @@ MescrollMixin;exports.default = _default;
 /* 261 */,
 /* 262 */,
 /* 263 */
+/*!******************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/common/testdata.js ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //商家信息
+var storeData = {
+  //商家唯一标识
+  store_id: '168',
+  //商家名称
+  store_name: '小太阳商店',
+  //头像
+  avatar: '//imgs.1op.cn/i/hxshop/avatar/3.png',
+  //横幅图片
+  banner: '//imgs.1op.cn/i/hxshop/banner/banner.jpg',
+  //详情
+  info: '店内用了本市最好的鲜肉，排骨；配料未本店祖传秘方，吃一次将永不忘。',
+  //商家住址
+  address: '新疆阿克苏是他北路2号',
+  //地标或社区
+  community: '天府名城',
+  //配送时间
+  delivery_time: '11:00~20:30',
+  //联系电话
+  telephone: '18299989916',
+  //商家购物车
+  shopping_cart: [],
+  //配送费
+  shipping_dees: 0,
+  //配送起步价
+  starting_price: 30 };
+
+
+//首页门店列表
+var storeList = [
+{
+  //商户标识
+  store_id: '852',
+  //店名
+  name: '田东日式料理',
+  //门头
+  avatar: '//imgs.1op.cn/i/hxshop/goods/14.jpg',
+  //小区
+  community: '秦阳店',
+  //评分
+  mark: '4.8',
+  //月售
+  monthly_sales: 356,
+  //门店距离，按米计算
+  distance: 500,
+  //起送价
+  starting_price: 3,
+  //配送费
+  shipping_dees: 15,
+  //商品列表
+  goods: [{
+    //id
+    id: '235',
+    //商品名称
+    name: '画画酱酱面',
+    //主图
+    main_pic: '//imgs.1op.cn/i/hxshop/goods/10.jpg',
+    //标签 【招牌，爆款，推荐】等等
+    tag: '招牌',
+    //现价
+    price: 45,
+    //原价
+    old_price: 65 },
+
+  { id: '236', name: '白色米', main_pic: '//imgs.1op.cn/i/hxshop/goods/6.jpg', tag: '招牌', price: 45, old_price: 65 },
+  { id: '237', name: '小羊肉', main_pic: '//imgs.1op.cn/i/hxshop/goods/2.jpg', tag: '爆款', price: 45, old_price: 65 },
+  { id: '238', name: '烤鸡翅', main_pic: '//imgs.1op.cn/i/hxshop/goods/3.jpg', tag: '爆款', price: 45, old_price: 65 },
+  { id: '239', name: '爆爆鱼', main_pic: '//imgs.1op.cn/i/hxshop/goods/4.jpg', tag: '推荐', price: 45, old_price: 65 },
+  { id: '240', name: '生吃肉票', main_pic: '//imgs.1op.cn/i/hxshop/goods/5.jpg', tag: '推荐', price: 45, old_price: 65 }] },
+
+
+
+
+{
+  store_id: '853',
+  name: '十里飘香烧烤',
+  avatar: '//imgs.1op.cn/i/hxshop/goods/2.jpg',
+  community: '',
+  mark: '4.8',
+  monthly_sales: 356,
+  distance: 500,
+  starting_price: 3,
+  shipping_dees: 15,
+  goods: [
+  { id: '236', name: '可乐鸡翅buibui爽', main_pic: '//imgs.1op.cn/i/hxshop/goods/7.jpg', tag: '招牌', price: 45, old_price: 65 },
+  { id: '237', name: '百富汉堡', main_pic: '//imgs.1op.cn/i/hxshop/goods/8.jpg', tag: '爆款', price: 45, old_price: 65 },
+  { id: '238', name: '百富汉堡', main_pic: '//imgs.1op.cn/i/hxshop/goods/9.jpg', tag: '爆款', price: 45, old_price: 65 },
+  { id: '239', name: '百富汉堡', main_pic: '//imgs.1op.cn/i/hxshop/goods/10.jpg', tag: '推荐', price: 45, old_price: 65 },
+  { id: '240', name: '百富汉堡', main_pic: '//imgs.1op.cn/i/hxshop/goods/11.jpg', tag: '推荐', price: 45, old_price: 65 }] },
+
+
+
+{
+  store_id: '853',
+  name: '德克士',
+  avatar: '//imgs.1op.cn/i/hxshop/goods/3.jpg',
+  community: '天府名城',
+  mark: '4.8',
+  monthly_sales: 356,
+  distance: 500,
+  starting_price: 3,
+  shipping_dees: 15,
+  goods: [
+  { id: '236', name: '可乐鸡翅buibui爽', main_pic: '//imgs.1op.cn/i/hxshop/goods/12.jpg', tag: '招牌', price: 45, old_price: 65 },
+  { id: '237', name: '百富汉堡', main_pic: '//imgs.1op.cn/i/hxshop/goods/13.jpg', tag: '爆款', price: 45, old_price: 65 },
+  { id: '238', name: '百富汉堡', main_pic: '//imgs.1op.cn/i/hxshop/goods/14.jpg', tag: '爆款', price: 45, old_price: 65 },
+  { id: '239', name: '百富汉堡', main_pic: '//imgs.1op.cn/i/hxshop/goods/15.jpg', tag: '推荐', price: 45, old_price: 65 },
+  { id: '240', name: '百富汉堡', main_pic: '//imgs.1op.cn/i/hxshop/goods/16.jpg', tag: '推荐', price: 45, old_price: 65 }] },
+
+
+
+{
+  store_id: '854',
+  name: '五点快餐',
+  avatar: '//imgs.1op.cn/i/hxshop/goods/4.jpg',
+  community: '天北花园',
+  mark: '4.8',
+  monthly_sales: 356,
+  distance: 500,
+  starting_price: 3,
+  shipping_dees: 15,
+  goods: [
+  { id: '236', name: '可乐鸡翅buibui爽', main_pic: '//imgs.1op.cn/i/hxshop/goods/17.jpg', tag: '招牌', price: 45, old_price: 65 },
+  { id: '237', name: '百富汉堡', main_pic: '//imgs.1op.cn/i/hxshop/goods/1.jpg', tag: '爆款', price: 45, old_price: 65 },
+  { id: '238', name: '百富汉堡', main_pic: '//imgs.1op.cn/i/hxshop/goods/3.jpg', tag: '爆款', price: 45, old_price: 65 },
+  { id: '239', name: '百富汉堡', main_pic: '//imgs.1op.cn/i/hxshop/goods/5.jpg', tag: '推荐', price: 45, old_price: 65 },
+  { id: '240', name: '百富汉堡', main_pic: '//imgs.1op.cn/i/hxshop/goods/7.jpg', tag: '推荐', price: 45, old_price: 65 }] }];
+
+
+
+
+//评论数据
+var commentData = [{
+  header_img: "//imgs.1op.cn/i/hxshop/avatar/3.png",
+  user_name: "测试1",
+  rate: 5,
+  create_time: "2019.04.12",
+  content: "好评",
+  imgs: [
+  '//imgs.1op.cn/i/hxshop/goods/7.jpg',
+  '//imgs.1op.cn/i/hxshop/goods/1.jpg',
+  '//imgs.1op.cn/i/hxshop/goods/9.jpg',
+  '//imgs.1op.cn/i/hxshop/goods/3.jpg'] },
+
+
+{
+  content: "中评",
+  create_time: "2019.04.12",
+  header_img: "//imgs.1op.cn/i/hxshop/avatar/2.png",
+  user_name: "测试2",
+  rate: 4
+  // imgs:[]
+},
+{
+  content: "",
+  create_time: "2019.04.12",
+  header_img: "//imgs.1op.cn/i/hxshop/avatar/2.png",
+  user_name: "测试3",
+  rate: 2
+  // imgs:[]
+}, {
+  content: "好评",
+  create_time: "2019.04.12",
+  header_img: "//imgs.1op.cn/i/hxshop/avatar/3.png",
+  user_name: "小蚂蚁",
+  rate: 5,
+  imgs: [
+  '//imgs.1op.cn/i/hxshop/goods/9.jpg',
+  '//imgs.1op.cn/i/hxshop/goods/12.jpg',
+  '//imgs.1op.cn/i/hxshop/goods/16.jpg',
+  '//imgs.1op.cn/i/hxshop/goods/7.jpg'] },
+
+
+{
+  content: "中评",
+  create_time: "2019.04.12",
+  header_img: "//imgs.1op.cn/i/hxshop/avatar/4.png",
+  user_name: "沙漠骆驼",
+  rate: 3.5
+  // imgs:[]
+},
+{
+  content: "",
+  create_time: "2019.04.12",
+  header_img: "//imgs.1op.cn/i/hxshop/avatar/5.png",
+  user_name: "莫思",
+  rate: 2.3
+  // imgs:[]
+}];
+
+//商品数据
+var goodsData = [{
+  id: 1,
+  type_id: 1,
+  name: '白果王水果沙拉',
+  descripe: "脆糯营养，口感好，健康绿色",
+  img: '//imgs.1op.cn/i/hxshop/goods/14.jpg',
+  price: "",
+  oldprice: "",
+  //规格
+  form: { id: 1, name: "尺寸" },
+  form_child: [
+  { id: 81, pid: 1, name: "8寸500g", price: "46", oldprice: "100", select: true },
+  { id: 82, pid: 1, name: "10寸600g", price: "97", oldprice: "100", select: false },
+  { id: 83, pid: 1, name: "12寸800g", price: "135", oldprice: "100", select: false },
+  { id: 84, pid: 1, name: "四川麻辣", price: "12", oldprice: "100", select: false },
+  { id: 85, pid: 1, name: "香辣", price: "20", oldprice: "100", select: false },
+  { id: 86, pid: 1, name: "卤香", price: "90", oldprice: "100", select: false },
+  { id: 87, pid: 1, name: "鲜甜广味", price: "80", oldprice: "100", select: false },
+  { id: 88, pid: 1, name: "镇店茴香味", price: "100", oldprice: "100", select: false }] },
+
+
+{
+  id: 2,
+  type_id: 2,
+  name: '精品烤山药',
+  descripe: "脆糯营养，口感好，健康绿色",
+  img: '//imgs.1op.cn/i/hxshop/goods/12.jpg',
+  price: "",
+  oldprice: "",
+  //规格
+  form: { id: 1, name: "尺寸" },
+  form_child: [
+  { id: 81, pid: 1, name: "8寸500g", price: "78", oldprice: "100", select: true },
+  { id: 82, pid: 1, name: "10寸600g", price: "97", oldprice: "100", select: false },
+  { id: 83, pid: 1, name: "12寸800g", price: "135", oldprice: "100", select: false },
+  { id: 84, pid: 1, name: "四川麻辣", price: "12", oldprice: "100", select: false },
+  { id: 85, pid: 1, name: "香辣", price: "20", oldprice: "100", select: false },
+  { id: 86, pid: 1, name: "卤香", price: "90", oldprice: "100", select: false },
+  { id: 87, pid: 1, name: "鲜甜广味", price: "80", oldprice: "100", select: false },
+  { id: 88, pid: 1, name: "镇店茴香味", price: "100", oldprice: "100", select: false }] },
+
+
+{
+  id: 3,
+  type_id: 2,
+  name: '川味毛血旺',
+  descripe: "脆糯营养，口感好，健康绿色",
+  img: '//imgs.1op.cn/i/hxshop/goods/11.jpg',
+  price: "4",
+  oldprice: "" },
+
+
+{
+  id: 4,
+  type_id: 3,
+  name: '吐鲁番烤全羊',
+  descripe: "脆糯营养，口感好，健康绿色",
+  img: '//imgs.1op.cn/i/hxshop/goods/10.jpg',
+  price: "4",
+  oldprice: "" },
+
+{
+  id: 5,
+  type_id: 3,
+  name: '红烧肉',
+  descripe: "脆糯营养，口感好，健康绿色",
+  img: '//imgs.1op.cn/i/hxshop/goods/9.jpg',
+  price: "4",
+  oldprice: "" },
+
+{
+  id: 6,
+  type_id: 4,
+  name: '新疆特色辣子鸡',
+  descripe: "脆糯营养，口感好，健康绿色",
+  img: '//imgs.1op.cn/i/hxshop/goods/8.jpg',
+  price: "4",
+  oldprice: "" },
+
+{
+  id: 106,
+  type_id: 4,
+  name: '新疆特色羊排',
+  descripe: "脆糯营养，口感好，健康绿色",
+  img: '//imgs.1op.cn/i/hxshop/goods/9.jpg',
+  price: "4",
+  oldprice: "" },
+
+{
+  id: 7,
+  type_id: 5,
+  name: '绝味海鲜拼盘',
+  descripe: "脆糯营养，口感好，健康绿色",
+  img: '//imgs.1op.cn/i/hxshop/goods/7.jpg',
+  price: "4",
+  oldprice: "" },
+
+{
+  id: 8,
+  type_id: 5,
+  name: '金色香糯大粽子',
+  descripe: "脆糯营养，口感好，健康绿色",
+  img: '//imgs.1op.cn/i/hxshop/goods/6.jpg',
+  price: "4",
+  oldprice: "" },
+
+{
+  id: 9,
+  type_id: 5,
+  name: '马梓林香香鸡',
+  descripe: "脆糯营养，口感好，健康绿色",
+  img: '//imgs.1op.cn/i/hxshop/goods/5.jpg',
+  price: "4",
+  oldprice: "" },
+
+{
+  id: 10,
+  type_id: 6,
+  name: '草莓味莫普氏蛋糕',
+  descripe: "脆糯营养，口感好，健康绿色",
+  img: '//imgs.1op.cn/i/hxshop/goods/4.jpg',
+  price: "4",
+  oldprice: "" },
+
+{
+  id: 23,
+  type_id: 6,
+  name: '川味毛血旺',
+  descripe: "脆糯营养，口感好，健康绿色",
+  img: '//imgs.1op.cn/i/hxshop/goods/11.jpg',
+  price: "4",
+  oldprice: "" },
+
+
+{
+  id: 24,
+  type_id: 6,
+  name: '吐鲁番烤全羊',
+  descripe: "脆糯营养，口感好，健康绿色",
+  img: '//imgs.1op.cn/i/hxshop/goods/10.jpg',
+  price: "4",
+  oldprice: "" },
+
+{
+  id: 25,
+  type_id: 7,
+  name: '红烧肉',
+  descripe: "脆糯营养，口感好，健康绿色",
+  img: '//imgs.1op.cn/i/hxshop/goods/9.jpg',
+  price: "4",
+  oldprice: "" },
+
+{
+  id: 26,
+  type_id: 7,
+  name: '新疆特色辣子鸡',
+  descripe: "脆糯营养，口感好，健康绿色",
+  img: '//imgs.1op.cn/i/hxshop/goods/8.jpg',
+  price: "4",
+  oldprice: "" },
+
+{
+  id: 27,
+  type_id: 7,
+  name: '绝味海鲜拼盘',
+  descripe: "脆糯营养，口感好，健康绿色",
+  img: '//imgs.1op.cn/i/hxshop/goods/7.jpg',
+  price: "4",
+  oldprice: "" },
+
+{ id: 28, type_id: 8, name: '金色香糯大粽子', descripe: "脆糯营养，口感好，健康绿色", img: '//imgs.1op.cn/i/hxshop/goods/6.jpg', price: "4", oldprice: "" },
+{ id: 29, type_id: 8, name: '马梓林香香鸡', descripe: "脆糯营养，口感好，健康绿色", img: '//imgs.1op.cn/i/hxshop/goods/5.jpg', price: "4", oldprice: "" },
+{ id: 30, type_id: 8, name: '草莓味莫普氏蛋糕', descripe: "脆糯营养，口感好，健康绿色", img: '//imgs.1op.cn/i/hxshop/goods/4.jpg', price: "4", oldprice: "" },
+{ id: 31, type_id: 9, name: '金色香糯大粽子', descripe: "脆糯营养，口感好，健康绿色", img: '//imgs.1op.cn/i/hxshop/goods/16.jpg', price: "4", oldprice: "" },
+{ id: 32, type_id: 9, name: '马梓林香香鸡', descripe: "脆糯营养，口感好，健康绿色", img: '//imgs.1op.cn/i/hxshop/goods/17.jpg', price: "4", oldprice: "" },
+{ id: 33, type_id: 9, name: '草莓味莫普氏蛋糕', descripe: "脆糯营养，口感好，健康绿色", img: '//imgs.1op.cn/i/hxshop/goods/15.jpg', price: "4", oldprice: "" },
+{ id: 46, type_id: 8, name: '金色香糯大粽子', descripe: "脆糯营养，口感好，健康绿色", img: '//imgs.1op.cn/i/hxshop/goods/6.jpg', price: "4", oldprice: "" },
+{ id: 34, type_id: 10, name: '马梓林香香鸡', descripe: "脆糯营养，口感好，健康绿色", img: '//imgs.1op.cn/i/hxshop/goods/14.jpg', price: "4", oldprice: "" },
+{ id: 35, type_id: 10, name: '草莓味莫普氏蛋糕', descripe: "脆糯营养，口感好，健康绿色", img: '//imgs.1op.cn/i/hxshop/goods/13.jpg', price: "4", oldprice: "" },
+{ id: 45, type_id: 8, name: '金色香糯大粽子', descripe: "脆糯营养，口感好，健康绿色", img: '//imgs.1op.cn/i/hxshop/goods/6.jpg', price: "4", oldprice: "" },
+{ id: 36, type_id: 10, name: '马梓林香香鸡', descripe: "脆糯营养，口感好，健康绿色", img: '//imgs.1op.cn/i/hxshop/goods/12.jpg', price: "4", oldprice: "" },
+{ id: 37, type_id: 10, name: '草莓味莫普氏蛋糕', descripe: "脆糯营养，口感好，健康绿色", img: '//imgs.1op.cn/i/hxshop/goods/11.jpg', price: "4", oldprice: "" },
+{ id: 38, type_id: 11, name: '草莓味莫普氏蛋糕', descripe: "脆糯营养，口感好，健康绿色", img: '//imgs.1op.cn/i/hxshop/goods/10.jpg', price: "4", oldprice: "" },
+{ id: 44, type_id: 8, name: '金色香糯大粽子', descripe: "脆糯营养，口感好，健康绿色", img: '//imgs.1op.cn/i/hxshop/goods/6.jpg', price: "4", oldprice: "" },
+{ id: 39, type_id: 12, name: '马梓林香香鸡', descripe: "脆糯营养，口感好，健康绿色", img: '//imgs.1op.cn/i/hxshop/goods/9.jpg', price: "4", oldprice: "" },
+{ id: 40, type_id: 12, name: '草莓味莫普氏蛋糕', descripe: "脆糯营养，口感好，健康绿色", img: '//imgs.1op.cn/i/hxshop/goods/8.jpg', price: "4", oldprice: "" },
+{ id: 13, type_id: 13, name: '金色香糯大粽子', descripe: "脆糯营养，口感好，健康绿色", img: '//imgs.1op.cn/i/hxshop/goods/6.jpg', price: "4", oldprice: "" },
+{ id: 41, type_id: 12, name: '马梓林香香鸡', descripe: "脆糯营养，口感好，健康绿色", img: '//imgs.1op.cn/i/hxshop/goods/7.jpg', price: "4", oldprice: "" },
+{ id: 42, type_id: 13, name: '草莓味莫普氏蛋糕', descripe: "脆糯营养，口感好，健康绿色", img: '//imgs.1op.cn/i/hxshop/goods/1.jpg', price: "4", oldprice: "" }];
+
+
+//商品种类数据
+var categoryData = [
+{ id: 1, name: '烧烤' },
+{ id: 2, name: '生鲜' },
+{ id: 3, name: '绿蔬' },
+{ id: 4, name: '肉类' },
+{ id: 5, name: '川味' },
+{ id: 6, name: '粤菜' },
+{ id: 7, name: '湘菜' },
+{ id: 8, name: '西餐' },
+{ id: 9, name: '饮料' },
+{ id: 10, name: '糕点' },
+{ id: 11, name: '凉菜' },
+{ id: 12, name: '火锅' },
+{ id: 13, name: '干锅' }];
+
+
+//商品详细
+var goodsInfo = {
+  //商品id
+  id: 18,
+  //商品类id
+  type_id: 1,
+  //商品名称
+  name: '新疆特色辣子鸡排饭',
+  //商品描述-就是掌柜描述，
+  descripe: "口味可以自己选，有香辣、蒜香、葱香、孜然、老麻口味",
+  //主图
+  img: '//imgs.1op.cn/i/hxshop/goods/7.jpg',
+  //滚动图片
+  banner_img: ['//imgs.1op.cn/i/hxshop/goods/14.jpg', '//imgs.1op.cn/i/hxshop/goods/7.jpg', '//imgs.1op.cn/i/hxshop/goods/12.jpg'],
+  //现价
+  price: "23",
+  //原价
+  oldprice: "44",
+  //月销售
+  monthly_sales: "566",
+  //商品标签
+  goods_tag: ['约800克', '香辣', '特色菜', '营养美食'],
+  //规格
+  form: { id: 1, name: "尺寸" },
+  form_child: [
+  { id: 81, pid: 1, name: "8寸500g", price: "46", oldprice: "100", select: true },
+  { id: 82, pid: 1, name: "10寸600g", price: "97", oldprice: "100", select: false },
+  { id: 83, pid: 1, name: "12寸800g", price: "135", oldprice: "100", select: false },
+  { id: 84, pid: 1, name: "四川麻辣", price: "12", oldprice: "100", select: false },
+  { id: 85, pid: 1, name: "香辣", price: "20", oldprice: "100", select: false },
+  { id: 86, pid: 1, name: "卤香", price: "90", oldprice: "100", select: false },
+  { id: 87, pid: 1, name: "鲜甜广味", price: "80", oldprice: "100", select: false },
+  { id: 88, pid: 1, name: "镇店茴香味", price: "100", oldprice: "100", select: false }],
+
+  //详情
+  detail: [
+  {
+    tit: '掌柜描述',
+    txt: '口味可以自己选，有香辣、蒜香、葱香、孜然、老麻口味' },
+  {
+    tit: '主料',
+    txt: '鸡胸排，大葱' },
+  {
+    tit: '菜系',
+    txt: '新疆特色菜' },
+  {
+    tit: '口味',
+    txt: '香辣' }
+
+  //......更多
+  ],
+  //图文
+  desc: "\n\t\t<view style=\"width:100%\">\n\t\t\t<image style=\"width:100%;display:block;\" src=\"//imgs.1op.cn/i/hxshop/goods/14.jpg\" />\n\t\t\t<image style=\"width:100%;display:block;\" src=\"//imgs.1op.cn/i/hxshop/goods/7.jpg\" />\n\t\t\t<image style=\"width:100%;display:block;\" src=\"//imgs.1op.cn/i/hxshop/goods/6.jpg\" />\n\t\t\t<image style=\"width:100%;display:block;\" src=\"//imgs.1op.cn/i/hxshop/goods/3.jpg\" />\n\t\t\t<image style=\"width:100%;display:block;\" src=\"//imgs.1op.cn/i/hxshop/goods/1.jpg\" />\n\t\t</view>\n\t" };
+
+
+
+
+
+
+
+
+
+
+//商品评价
+var goodsEva = {
+  //总评价数
+  sum: '386',
+  //好评
+  praise: '306',
+  //差评
+  bad_review: '80',
+  //评价标签
+  eva_tag: {
+    //有图
+    'exist_pic': '62',
+    //赞
+    'appreciate': '96',
+    //踩
+    'oppose': '16',
+    //其他标签
+    'other': ['92%人口味满意', '300人希望再次购买'] },
+
+  eva_list: [
+  {
+    //用户名
+    name: '白色的太阳',
+    //头像
+    avatar: '//imgs.1op.cn/i/hxshop/avatar/4.png',
+    //评论时间
+    time: '2020.03.12',
+    //点赞或踩商品,没有投票【0】、赞【1】、踩【2】
+    point: 1,
+    //评价内容
+    content: "味道好极了，家里人超爱吃，希望下次能多放点辣椒，我们家吃辣",
+    //上传的图片
+    pic: ['//imgs.1op.cn/i/hxshop/goods/12.jpg', '//imgs.1op.cn/i/hxshop/goods/13.jpg', '//imgs.1op.cn/i/hxshop/goods/15.jpg'] },
+
+  {
+    //用户名
+    name: '匿名用户',
+    //头像
+    avatar: '//imgs.1op.cn/i/hxshop/avatar/2.png',
+    //评论时间
+    time: '2020.03.16',
+    //点赞或踩商品,没有投票【0】、赞【1】、踩【2】
+    point: 2,
+    //评价内容
+    content: "",
+    //上传的图片
+    pic: [] },
+
+  {
+    //用户名
+    name: '匿名用户',
+    //头像
+    avatar: '//imgs.1op.cn/i/hxshop/avatar/6.png',
+    //评论时间
+    time: '2020.03.16',
+    //点赞或踩商品,没有投票【0】、赞【1】、踩【2】
+    point: 0,
+    //评价内容
+    content: "一般般",
+    //上传的图片
+    pic: [] }] };
+
+
+
+
+// 订单
+var ordersData = [
+{
+  id: 'MS2020041101',
+  store_id: 168,
+  tag: '../../static/img/index/yd.png',
+  store_name: '肯德基',
+  community: '阿克苏友好店',
+  avatar: 'https://imgs.1op.cn/i/hxshop/avatar/2.png',
+  create_time: '2020-4-11 19:51',
+  total: 122.45,
+  //订单状态 [1已取消，2待支付，3待收货，4待评价，5完成，6退款中，7退款完成]
+  status: 3 },
+
+{
+  id: 'MS2020041102',
+  store_id: 186,
+  tag: '../../static/img/index/sc.png',
+  store_name: '美食大龙虾*烧烤虾尾',
+  goods_name: '小龙虾+鸡翅+可乐+田螺',
+  community: '',
+  avatar: 'https://imgs.1op.cn/i/hxshop/avatar/5.png',
+  create_time: '2020-4-11 19:51',
+  total: 122.45,
+  //订单状态 [1已取消，2待支付，3待收货，4待评价，5完成，6退款中，7退款完成]
+  status: 2 },
+
+{
+  id: 'MS2020041103',
+  store_id: 183,
+  tag: '../../static/img/index/sg.png',
+  store_name: '辣椒小海鲜',
+  community: '',
+  avatar: 'https://imgs.1op.cn/i/hxshop/avatar/9.png',
+  create_time: '2020-4-11 19:51',
+  total: 122.45,
+  //订单状态 [1已取消，2待支付，3待收货，4待评价，5完成，6退款中，7退款完成]
+  status: 1 },
+
+{
+  id: 'MS2020041104',
+  store_id: 182,
+  tag: '../../static/img/index/cs.png',
+  store_name: '特色冒菜-四川爆啦',
+  community: '特卖店',
+  avatar: 'https://imgs.1op.cn/i/hxshop/avatar/9.png',
+  create_time: '2020-4-11 19:51',
+  total: 122.45,
+  //订单状态 [1已取消，2待支付，3待收货，4待评价，5完成，6退款中，7退款完成]
+  status: 4 },
+
+{
+  id: 'MS2020041105',
+  store_id: 181,
+  tag: '../../static/img/index/yd.png',
+  store_name: '绝味黑鸭脖',
+  community: '',
+  avatar: 'https://imgs.1op.cn/i/hxshop/avatar/9.png',
+  create_time: '2020-4-11 19:51',
+  total: 122.45,
+  //订单状态 [1已取消，2待支付，3待收货，4待评价，5完成，6退款中，7退款完成]
+  status: 5 },
+
+{
+  id: 'MS2020041106',
+  store_id: 180,
+  tag: '../../static/img/index/yd.png',
+  store_name: '天天来食府',
+  community: '',
+  avatar: 'https://imgs.1op.cn/i/hxshop/avatar/9.png',
+  create_time: '2020-4-11 19:51',
+  total: 122.45,
+  //订单状态 [1已取消，2待支付，3待收货，4待评价，5完成，6退款中，7退款完成]
+  status: 6 },
+
+{
+  id: 'MS2020041107',
+  store_id: 170,
+  tag: '../../static/img/index/yd.png',
+  store_name: '肯德基',
+  community: '兴隆店',
+  avatar: 'https://imgs.1op.cn/i/hxshop/avatar/10.png',
+  create_time: '2020-4-11 19:51',
+  total: 122.45,
+  //订单状态 [1已取消，2待支付，3待收货，4待评价，5完成，6退款中，7退款完成]
+  status: 7 }];var _default =
+
+
+
+{
+  storeData: storeData,
+  storeList: storeList,
+  commentData: commentData,
+  goodsData: goodsData,
+  categoryData: categoryData,
+  goodsInfo: goodsInfo,
+  goodsEva: goodsEva,
+  ordersData: ordersData };exports.default = _default;
+
+/***/ }),
+/* 264 */,
+/* 265 */,
+/* 266 */,
+/* 267 */,
+/* 268 */,
+/* 269 */,
+/* 270 */,
+/* 271 */,
+/* 272 */,
+/* 273 */,
+/* 274 */,
+/* 275 */,
+/* 276 */,
+/* 277 */,
+/* 278 */,
+/* 279 */,
+/* 280 */
 /*!**********************************************************!*\
   !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
   \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! regenerator-runtime */ 264);
+module.exports = __webpack_require__(/*! regenerator-runtime */ 281);
 
 /***/ }),
-/* 264 */
+/* 281 */
 /*!************************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime-module.js ***!
   \************************************************************/
@@ -42646,7 +43301,7 @@ var oldRuntime = hadRuntime && g.regeneratorRuntime;
 // Force reevalutation of runtime.js.
 g.regeneratorRuntime = undefined;
 
-module.exports = __webpack_require__(/*! ./runtime */ 265);
+module.exports = __webpack_require__(/*! ./runtime */ 282);
 
 if (hadRuntime) {
   // Restore the original runtime.
@@ -42662,7 +43317,7 @@ if (hadRuntime) {
 
 
 /***/ }),
-/* 265 */
+/* 282 */
 /*!*****************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime.js ***!
   \*****************************************************/
@@ -43393,657 +44048,6 @@ if (hadRuntime) {
 
 
 /***/ }),
-/* 266 */
-/*!*******************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/common/testdata.js ***!
-  \*******************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //商家信息
-var storeData = {
-  //商家唯一标识
-  store_id: '168',
-  //商家名称
-  store_name: '小太阳商店',
-  //头像
-  avatar: '//imgs.1op.cn/i/hxshop/avatar/3.png',
-  //横幅图片
-  banner: '//imgs.1op.cn/i/hxshop/banner/banner.jpg',
-  //详情
-  info: '店内用了本市最好的鲜肉，排骨；配料未本店祖传秘方，吃一次将永不忘。',
-  //商家住址
-  address: '新疆阿克苏是他北路2号',
-  //地标或社区
-  community: '天府名城',
-  //配送时间
-  delivery_time: '11:00~20:30',
-  //联系电话
-  telephone: '18299989916',
-  //商家购物车
-  shopping_cart: [],
-  //配送费
-  shipping_dees: 0,
-  //配送起步价
-  starting_price: 30 };
-
-
-//首页门店列表
-var storeList = [
-{
-  //商户标识
-  store_id: '852',
-  //店名
-  name: '田东日式料理',
-  //门头
-  avatar: '//imgs.1op.cn/i/hxshop/goods/14.jpg',
-  //小区
-  community: '秦阳店',
-  //评分
-  mark: '4.8',
-  //月售
-  monthly_sales: 356,
-  //门店距离，按米计算
-  distance: 500,
-  //起送价
-  starting_price: 3,
-  //配送费
-  shipping_dees: 15,
-  //商品列表
-  goods: [{
-    //id
-    id: '235',
-    //商品名称
-    name: '画画酱酱面',
-    //主图
-    main_pic: '//imgs.1op.cn/i/hxshop/goods/10.jpg',
-    //标签 【招牌，爆款，推荐】等等
-    tag: '招牌',
-    //现价
-    price: 45,
-    //原价
-    old_price: 65 },
-
-  { id: '236', name: '白色米', main_pic: '//imgs.1op.cn/i/hxshop/goods/6.jpg', tag: '招牌', price: 45, old_price: 65 },
-  { id: '237', name: '小羊肉', main_pic: '//imgs.1op.cn/i/hxshop/goods/2.jpg', tag: '爆款', price: 45, old_price: 65 },
-  { id: '238', name: '烤鸡翅', main_pic: '//imgs.1op.cn/i/hxshop/goods/3.jpg', tag: '爆款', price: 45, old_price: 65 },
-  { id: '239', name: '爆爆鱼', main_pic: '//imgs.1op.cn/i/hxshop/goods/4.jpg', tag: '推荐', price: 45, old_price: 65 },
-  { id: '240', name: '生吃肉票', main_pic: '//imgs.1op.cn/i/hxshop/goods/5.jpg', tag: '推荐', price: 45, old_price: 65 }] },
-
-
-
-
-{
-  store_id: '853',
-  name: '十里飘香烧烤',
-  avatar: '//imgs.1op.cn/i/hxshop/goods/2.jpg',
-  community: '',
-  mark: '4.8',
-  monthly_sales: 356,
-  distance: 500,
-  starting_price: 3,
-  shipping_dees: 15,
-  goods: [
-  { id: '236', name: '可乐鸡翅buibui爽', main_pic: '//imgs.1op.cn/i/hxshop/goods/7.jpg', tag: '招牌', price: 45, old_price: 65 },
-  { id: '237', name: '百富汉堡', main_pic: '//imgs.1op.cn/i/hxshop/goods/8.jpg', tag: '爆款', price: 45, old_price: 65 },
-  { id: '238', name: '百富汉堡', main_pic: '//imgs.1op.cn/i/hxshop/goods/9.jpg', tag: '爆款', price: 45, old_price: 65 },
-  { id: '239', name: '百富汉堡', main_pic: '//imgs.1op.cn/i/hxshop/goods/10.jpg', tag: '推荐', price: 45, old_price: 65 },
-  { id: '240', name: '百富汉堡', main_pic: '//imgs.1op.cn/i/hxshop/goods/11.jpg', tag: '推荐', price: 45, old_price: 65 }] },
-
-
-
-{
-  store_id: '853',
-  name: '德克士',
-  avatar: '//imgs.1op.cn/i/hxshop/goods/3.jpg',
-  community: '天府名城',
-  mark: '4.8',
-  monthly_sales: 356,
-  distance: 500,
-  starting_price: 3,
-  shipping_dees: 15,
-  goods: [
-  { id: '236', name: '可乐鸡翅buibui爽', main_pic: '//imgs.1op.cn/i/hxshop/goods/12.jpg', tag: '招牌', price: 45, old_price: 65 },
-  { id: '237', name: '百富汉堡', main_pic: '//imgs.1op.cn/i/hxshop/goods/13.jpg', tag: '爆款', price: 45, old_price: 65 },
-  { id: '238', name: '百富汉堡', main_pic: '//imgs.1op.cn/i/hxshop/goods/14.jpg', tag: '爆款', price: 45, old_price: 65 },
-  { id: '239', name: '百富汉堡', main_pic: '//imgs.1op.cn/i/hxshop/goods/15.jpg', tag: '推荐', price: 45, old_price: 65 },
-  { id: '240', name: '百富汉堡', main_pic: '//imgs.1op.cn/i/hxshop/goods/16.jpg', tag: '推荐', price: 45, old_price: 65 }] },
-
-
-
-{
-  store_id: '854',
-  name: '五点快餐',
-  avatar: '//imgs.1op.cn/i/hxshop/goods/4.jpg',
-  community: '天北花园',
-  mark: '4.8',
-  monthly_sales: 356,
-  distance: 500,
-  starting_price: 3,
-  shipping_dees: 15,
-  goods: [
-  { id: '236', name: '可乐鸡翅buibui爽', main_pic: '//imgs.1op.cn/i/hxshop/goods/17.jpg', tag: '招牌', price: 45, old_price: 65 },
-  { id: '237', name: '百富汉堡', main_pic: '//imgs.1op.cn/i/hxshop/goods/1.jpg', tag: '爆款', price: 45, old_price: 65 },
-  { id: '238', name: '百富汉堡', main_pic: '//imgs.1op.cn/i/hxshop/goods/3.jpg', tag: '爆款', price: 45, old_price: 65 },
-  { id: '239', name: '百富汉堡', main_pic: '//imgs.1op.cn/i/hxshop/goods/5.jpg', tag: '推荐', price: 45, old_price: 65 },
-  { id: '240', name: '百富汉堡', main_pic: '//imgs.1op.cn/i/hxshop/goods/7.jpg', tag: '推荐', price: 45, old_price: 65 }] }];
-
-
-
-
-//评论数据
-var commentData = [{
-  header_img: "//imgs.1op.cn/i/hxshop/avatar/3.png",
-  user_name: "测试1",
-  rate: 5,
-  create_time: "2019.04.12",
-  content: "好评",
-  imgs: [
-  '//imgs.1op.cn/i/hxshop/goods/7.jpg',
-  '//imgs.1op.cn/i/hxshop/goods/1.jpg',
-  '//imgs.1op.cn/i/hxshop/goods/9.jpg',
-  '//imgs.1op.cn/i/hxshop/goods/3.jpg'] },
-
-
-{
-  content: "中评",
-  create_time: "2019.04.12",
-  header_img: "//imgs.1op.cn/i/hxshop/avatar/2.png",
-  user_name: "测试2",
-  rate: 4
-  // imgs:[]
-},
-{
-  content: "",
-  create_time: "2019.04.12",
-  header_img: "//imgs.1op.cn/i/hxshop/avatar/2.png",
-  user_name: "测试3",
-  rate: 2
-  // imgs:[]
-}, {
-  content: "好评",
-  create_time: "2019.04.12",
-  header_img: "//imgs.1op.cn/i/hxshop/avatar/3.png",
-  user_name: "小蚂蚁",
-  rate: 5,
-  imgs: [
-  '//imgs.1op.cn/i/hxshop/goods/9.jpg',
-  '//imgs.1op.cn/i/hxshop/goods/12.jpg',
-  '//imgs.1op.cn/i/hxshop/goods/16.jpg',
-  '//imgs.1op.cn/i/hxshop/goods/7.jpg'] },
-
-
-{
-  content: "中评",
-  create_time: "2019.04.12",
-  header_img: "//imgs.1op.cn/i/hxshop/avatar/4.png",
-  user_name: "沙漠骆驼",
-  rate: 3.5
-  // imgs:[]
-},
-{
-  content: "",
-  create_time: "2019.04.12",
-  header_img: "//imgs.1op.cn/i/hxshop/avatar/5.png",
-  user_name: "莫思",
-  rate: 2.3
-  // imgs:[]
-}];
-
-//商品数据
-var goodsData = [{
-  id: 1,
-  type_id: 1,
-  name: '白果王水果沙拉',
-  descripe: "脆糯营养，口感好，健康绿色",
-  img: '//imgs.1op.cn/i/hxshop/goods/14.jpg',
-  price: "",
-  oldprice: "",
-  //规格
-  form: { id: 1, name: "尺寸" },
-  form_child: [
-  { id: 81, pid: 1, name: "8寸500g", price: "46", oldprice: "100", select: true },
-  { id: 82, pid: 1, name: "10寸600g", price: "97", oldprice: "100", select: false },
-  { id: 83, pid: 1, name: "12寸800g", price: "135", oldprice: "100", select: false },
-  { id: 84, pid: 1, name: "四川麻辣", price: "12", oldprice: "100", select: false },
-  { id: 85, pid: 1, name: "香辣", price: "20", oldprice: "100", select: false },
-  { id: 86, pid: 1, name: "卤香", price: "90", oldprice: "100", select: false },
-  { id: 87, pid: 1, name: "鲜甜广味", price: "80", oldprice: "100", select: false },
-  { id: 88, pid: 1, name: "镇店茴香味", price: "100", oldprice: "100", select: false }] },
-
-
-{
-  id: 2,
-  type_id: 2,
-  name: '精品烤山药',
-  descripe: "脆糯营养，口感好，健康绿色",
-  img: '//imgs.1op.cn/i/hxshop/goods/12.jpg',
-  price: "",
-  oldprice: "",
-  //规格
-  form: { id: 1, name: "尺寸" },
-  form_child: [
-  { id: 81, pid: 1, name: "8寸500g", price: "78", oldprice: "100", select: true },
-  { id: 82, pid: 1, name: "10寸600g", price: "97", oldprice: "100", select: false },
-  { id: 83, pid: 1, name: "12寸800g", price: "135", oldprice: "100", select: false },
-  { id: 84, pid: 1, name: "四川麻辣", price: "12", oldprice: "100", select: false },
-  { id: 85, pid: 1, name: "香辣", price: "20", oldprice: "100", select: false },
-  { id: 86, pid: 1, name: "卤香", price: "90", oldprice: "100", select: false },
-  { id: 87, pid: 1, name: "鲜甜广味", price: "80", oldprice: "100", select: false },
-  { id: 88, pid: 1, name: "镇店茴香味", price: "100", oldprice: "100", select: false }] },
-
-
-{
-  id: 3,
-  type_id: 2,
-  name: '川味毛血旺',
-  descripe: "脆糯营养，口感好，健康绿色",
-  img: '//imgs.1op.cn/i/hxshop/goods/11.jpg',
-  price: "4",
-  oldprice: "" },
-
-
-{
-  id: 4,
-  type_id: 3,
-  name: '吐鲁番烤全羊',
-  descripe: "脆糯营养，口感好，健康绿色",
-  img: '//imgs.1op.cn/i/hxshop/goods/10.jpg',
-  price: "4",
-  oldprice: "" },
-
-{
-  id: 5,
-  type_id: 3,
-  name: '红烧肉',
-  descripe: "脆糯营养，口感好，健康绿色",
-  img: '//imgs.1op.cn/i/hxshop/goods/9.jpg',
-  price: "4",
-  oldprice: "" },
-
-{
-  id: 6,
-  type_id: 4,
-  name: '新疆特色辣子鸡',
-  descripe: "脆糯营养，口感好，健康绿色",
-  img: '//imgs.1op.cn/i/hxshop/goods/8.jpg',
-  price: "4",
-  oldprice: "" },
-
-{
-  id: 106,
-  type_id: 4,
-  name: '新疆特色羊排',
-  descripe: "脆糯营养，口感好，健康绿色",
-  img: '//imgs.1op.cn/i/hxshop/goods/9.jpg',
-  price: "4",
-  oldprice: "" },
-
-{
-  id: 7,
-  type_id: 5,
-  name: '绝味海鲜拼盘',
-  descripe: "脆糯营养，口感好，健康绿色",
-  img: '//imgs.1op.cn/i/hxshop/goods/7.jpg',
-  price: "4",
-  oldprice: "" },
-
-{
-  id: 8,
-  type_id: 5,
-  name: '金色香糯大粽子',
-  descripe: "脆糯营养，口感好，健康绿色",
-  img: '//imgs.1op.cn/i/hxshop/goods/6.jpg',
-  price: "4",
-  oldprice: "" },
-
-{
-  id: 9,
-  type_id: 5,
-  name: '马梓林香香鸡',
-  descripe: "脆糯营养，口感好，健康绿色",
-  img: '//imgs.1op.cn/i/hxshop/goods/5.jpg',
-  price: "4",
-  oldprice: "" },
-
-{
-  id: 10,
-  type_id: 6,
-  name: '草莓味莫普氏蛋糕',
-  descripe: "脆糯营养，口感好，健康绿色",
-  img: '//imgs.1op.cn/i/hxshop/goods/4.jpg',
-  price: "4",
-  oldprice: "" },
-
-{
-  id: 23,
-  type_id: 6,
-  name: '川味毛血旺',
-  descripe: "脆糯营养，口感好，健康绿色",
-  img: '//imgs.1op.cn/i/hxshop/goods/11.jpg',
-  price: "4",
-  oldprice: "" },
-
-
-{
-  id: 24,
-  type_id: 6,
-  name: '吐鲁番烤全羊',
-  descripe: "脆糯营养，口感好，健康绿色",
-  img: '//imgs.1op.cn/i/hxshop/goods/10.jpg',
-  price: "4",
-  oldprice: "" },
-
-{
-  id: 25,
-  type_id: 7,
-  name: '红烧肉',
-  descripe: "脆糯营养，口感好，健康绿色",
-  img: '//imgs.1op.cn/i/hxshop/goods/9.jpg',
-  price: "4",
-  oldprice: "" },
-
-{
-  id: 26,
-  type_id: 7,
-  name: '新疆特色辣子鸡',
-  descripe: "脆糯营养，口感好，健康绿色",
-  img: '//imgs.1op.cn/i/hxshop/goods/8.jpg',
-  price: "4",
-  oldprice: "" },
-
-{
-  id: 27,
-  type_id: 7,
-  name: '绝味海鲜拼盘',
-  descripe: "脆糯营养，口感好，健康绿色",
-  img: '//imgs.1op.cn/i/hxshop/goods/7.jpg',
-  price: "4",
-  oldprice: "" },
-
-{ id: 28, type_id: 8, name: '金色香糯大粽子', descripe: "脆糯营养，口感好，健康绿色", img: '//imgs.1op.cn/i/hxshop/goods/6.jpg', price: "4", oldprice: "" },
-{ id: 29, type_id: 8, name: '马梓林香香鸡', descripe: "脆糯营养，口感好，健康绿色", img: '//imgs.1op.cn/i/hxshop/goods/5.jpg', price: "4", oldprice: "" },
-{ id: 30, type_id: 8, name: '草莓味莫普氏蛋糕', descripe: "脆糯营养，口感好，健康绿色", img: '//imgs.1op.cn/i/hxshop/goods/4.jpg', price: "4", oldprice: "" },
-{ id: 31, type_id: 9, name: '金色香糯大粽子', descripe: "脆糯营养，口感好，健康绿色", img: '//imgs.1op.cn/i/hxshop/goods/16.jpg', price: "4", oldprice: "" },
-{ id: 32, type_id: 9, name: '马梓林香香鸡', descripe: "脆糯营养，口感好，健康绿色", img: '//imgs.1op.cn/i/hxshop/goods/17.jpg', price: "4", oldprice: "" },
-{ id: 33, type_id: 9, name: '草莓味莫普氏蛋糕', descripe: "脆糯营养，口感好，健康绿色", img: '//imgs.1op.cn/i/hxshop/goods/15.jpg', price: "4", oldprice: "" },
-{ id: 46, type_id: 8, name: '金色香糯大粽子', descripe: "脆糯营养，口感好，健康绿色", img: '//imgs.1op.cn/i/hxshop/goods/6.jpg', price: "4", oldprice: "" },
-{ id: 34, type_id: 10, name: '马梓林香香鸡', descripe: "脆糯营养，口感好，健康绿色", img: '//imgs.1op.cn/i/hxshop/goods/14.jpg', price: "4", oldprice: "" },
-{ id: 35, type_id: 10, name: '草莓味莫普氏蛋糕', descripe: "脆糯营养，口感好，健康绿色", img: '//imgs.1op.cn/i/hxshop/goods/13.jpg', price: "4", oldprice: "" },
-{ id: 45, type_id: 8, name: '金色香糯大粽子', descripe: "脆糯营养，口感好，健康绿色", img: '//imgs.1op.cn/i/hxshop/goods/6.jpg', price: "4", oldprice: "" },
-{ id: 36, type_id: 10, name: '马梓林香香鸡', descripe: "脆糯营养，口感好，健康绿色", img: '//imgs.1op.cn/i/hxshop/goods/12.jpg', price: "4", oldprice: "" },
-{ id: 37, type_id: 10, name: '草莓味莫普氏蛋糕', descripe: "脆糯营养，口感好，健康绿色", img: '//imgs.1op.cn/i/hxshop/goods/11.jpg', price: "4", oldprice: "" },
-{ id: 38, type_id: 11, name: '草莓味莫普氏蛋糕', descripe: "脆糯营养，口感好，健康绿色", img: '//imgs.1op.cn/i/hxshop/goods/10.jpg', price: "4", oldprice: "" },
-{ id: 44, type_id: 8, name: '金色香糯大粽子', descripe: "脆糯营养，口感好，健康绿色", img: '//imgs.1op.cn/i/hxshop/goods/6.jpg', price: "4", oldprice: "" },
-{ id: 39, type_id: 12, name: '马梓林香香鸡', descripe: "脆糯营养，口感好，健康绿色", img: '//imgs.1op.cn/i/hxshop/goods/9.jpg', price: "4", oldprice: "" },
-{ id: 40, type_id: 12, name: '草莓味莫普氏蛋糕', descripe: "脆糯营养，口感好，健康绿色", img: '//imgs.1op.cn/i/hxshop/goods/8.jpg', price: "4", oldprice: "" },
-{ id: 13, type_id: 13, name: '金色香糯大粽子', descripe: "脆糯营养，口感好，健康绿色", img: '//imgs.1op.cn/i/hxshop/goods/6.jpg', price: "4", oldprice: "" },
-{ id: 41, type_id: 12, name: '马梓林香香鸡', descripe: "脆糯营养，口感好，健康绿色", img: '//imgs.1op.cn/i/hxshop/goods/7.jpg', price: "4", oldprice: "" },
-{ id: 42, type_id: 13, name: '草莓味莫普氏蛋糕', descripe: "脆糯营养，口感好，健康绿色", img: '//imgs.1op.cn/i/hxshop/goods/1.jpg', price: "4", oldprice: "" }];
-
-
-//商品种类数据
-var categoryData = [
-{ id: 1, name: '烧烤' },
-{ id: 2, name: '生鲜' },
-{ id: 3, name: '绿蔬' },
-{ id: 4, name: '肉类' },
-{ id: 5, name: '川味' },
-{ id: 6, name: '粤菜' },
-{ id: 7, name: '湘菜' },
-{ id: 8, name: '西餐' },
-{ id: 9, name: '饮料' },
-{ id: 10, name: '糕点' },
-{ id: 11, name: '凉菜' },
-{ id: 12, name: '火锅' },
-{ id: 13, name: '干锅' }];
-
-
-//商品详细
-var goodsInfo = {
-  //商品id
-  id: 18,
-  //商品类id
-  type_id: 1,
-  //商品名称
-  name: '新疆特色辣子鸡排饭',
-  //商品描述-就是掌柜描述，
-  descripe: "口味可以自己选，有香辣、蒜香、葱香、孜然、老麻口味",
-  //主图
-  img: '//imgs.1op.cn/i/hxshop/goods/7.jpg',
-  //滚动图片
-  banner_img: ['//imgs.1op.cn/i/hxshop/goods/14.jpg', '//imgs.1op.cn/i/hxshop/goods/7.jpg', '//imgs.1op.cn/i/hxshop/goods/12.jpg'],
-  //现价
-  price: "23",
-  //原价
-  oldprice: "44",
-  //月销售
-  monthly_sales: "566",
-  //商品标签
-  goods_tag: ['约800克', '香辣', '特色菜', '营养美食'],
-  //规格
-  form: { id: 1, name: "尺寸" },
-  form_child: [
-  { id: 81, pid: 1, name: "8寸500g", price: "46", oldprice: "100", select: true },
-  { id: 82, pid: 1, name: "10寸600g", price: "97", oldprice: "100", select: false },
-  { id: 83, pid: 1, name: "12寸800g", price: "135", oldprice: "100", select: false },
-  { id: 84, pid: 1, name: "四川麻辣", price: "12", oldprice: "100", select: false },
-  { id: 85, pid: 1, name: "香辣", price: "20", oldprice: "100", select: false },
-  { id: 86, pid: 1, name: "卤香", price: "90", oldprice: "100", select: false },
-  { id: 87, pid: 1, name: "鲜甜广味", price: "80", oldprice: "100", select: false },
-  { id: 88, pid: 1, name: "镇店茴香味", price: "100", oldprice: "100", select: false }],
-
-  //详情
-  detail: [
-  {
-    tit: '掌柜描述',
-    txt: '口味可以自己选，有香辣、蒜香、葱香、孜然、老麻口味' },
-  {
-    tit: '主料',
-    txt: '鸡胸排，大葱' },
-  {
-    tit: '菜系',
-    txt: '新疆特色菜' },
-  {
-    tit: '口味',
-    txt: '香辣' }
-
-  //......更多
-  ],
-  //图文
-  desc: "\n\t\t<view style=\"width:100%\">\n\t\t\t<image style=\"width:100%;display:block;\" src=\"//imgs.1op.cn/i/hxshop/goods/14.jpg\" />\n\t\t\t<image style=\"width:100%;display:block;\" src=\"//imgs.1op.cn/i/hxshop/goods/7.jpg\" />\n\t\t\t<image style=\"width:100%;display:block;\" src=\"//imgs.1op.cn/i/hxshop/goods/6.jpg\" />\n\t\t\t<image style=\"width:100%;display:block;\" src=\"//imgs.1op.cn/i/hxshop/goods/3.jpg\" />\n\t\t\t<image style=\"width:100%;display:block;\" src=\"//imgs.1op.cn/i/hxshop/goods/1.jpg\" />\n\t\t</view>\n\t" };
-
-
-
-
-
-
-
-
-
-
-//商品评价
-var goodsEva = {
-  //总评价数
-  sum: '386',
-  //好评
-  praise: '306',
-  //差评
-  bad_review: '80',
-  //评价标签
-  eva_tag: {
-    //有图
-    'exist_pic': '62',
-    //赞
-    'appreciate': '96',
-    //踩
-    'oppose': '16',
-    //其他标签
-    'other': ['92%人口味满意', '300人希望再次购买'] },
-
-  eva_list: [
-  {
-    //用户名
-    name: '白色的太阳',
-    //头像
-    avatar: '//imgs.1op.cn/i/hxshop/avatar/4.png',
-    //评论时间
-    time: '2020.03.12',
-    //点赞或踩商品,没有投票【0】、赞【1】、踩【2】
-    point: 1,
-    //评价内容
-    content: "味道好极了，家里人超爱吃，希望下次能多放点辣椒，我们家吃辣",
-    //上传的图片
-    pic: ['//imgs.1op.cn/i/hxshop/goods/12.jpg', '//imgs.1op.cn/i/hxshop/goods/13.jpg', '//imgs.1op.cn/i/hxshop/goods/15.jpg'] },
-
-  {
-    //用户名
-    name: '匿名用户',
-    //头像
-    avatar: '//imgs.1op.cn/i/hxshop/avatar/2.png',
-    //评论时间
-    time: '2020.03.16',
-    //点赞或踩商品,没有投票【0】、赞【1】、踩【2】
-    point: 2,
-    //评价内容
-    content: "",
-    //上传的图片
-    pic: [] },
-
-  {
-    //用户名
-    name: '匿名用户',
-    //头像
-    avatar: '//imgs.1op.cn/i/hxshop/avatar/6.png',
-    //评论时间
-    time: '2020.03.16',
-    //点赞或踩商品,没有投票【0】、赞【1】、踩【2】
-    point: 0,
-    //评价内容
-    content: "一般般",
-    //上传的图片
-    pic: [] }] };
-
-
-
-
-// 订单
-var ordersData = [
-{
-  id: 'MS2020041101',
-  store_id: 168,
-  tag: '../../static/img/index/yd.png',
-  store_name: '肯德基',
-  community: '阿克苏友好店',
-  avatar: 'https://imgs.1op.cn/i/hxshop/avatar/2.png',
-  create_time: '2020-4-11 19:51',
-  total: 122.45,
-  //订单状态 [1已取消，2待支付，3待收货，4待评价，5完成，6退款中，7退款完成]
-  status: 3 },
-
-{
-  id: 'MS2020041102',
-  store_id: 186,
-  tag: '../../static/img/index/sc.png',
-  store_name: '美食大龙虾*烧烤虾尾',
-  goods_name: '小龙虾+鸡翅+可乐+田螺',
-  community: '',
-  avatar: 'https://imgs.1op.cn/i/hxshop/avatar/5.png',
-  create_time: '2020-4-11 19:51',
-  total: 122.45,
-  //订单状态 [1已取消，2待支付，3待收货，4待评价，5完成，6退款中，7退款完成]
-  status: 2 },
-
-{
-  id: 'MS2020041103',
-  store_id: 183,
-  tag: '../../static/img/index/sg.png',
-  store_name: '辣椒小海鲜',
-  community: '',
-  avatar: 'https://imgs.1op.cn/i/hxshop/avatar/9.png',
-  create_time: '2020-4-11 19:51',
-  total: 122.45,
-  //订单状态 [1已取消，2待支付，3待收货，4待评价，5完成，6退款中，7退款完成]
-  status: 1 },
-
-{
-  id: 'MS2020041104',
-  store_id: 182,
-  tag: '../../static/img/index/cs.png',
-  store_name: '特色冒菜-四川爆啦',
-  community: '特卖店',
-  avatar: 'https://imgs.1op.cn/i/hxshop/avatar/9.png',
-  create_time: '2020-4-11 19:51',
-  total: 122.45,
-  //订单状态 [1已取消，2待支付，3待收货，4待评价，5完成，6退款中，7退款完成]
-  status: 4 },
-
-{
-  id: 'MS2020041105',
-  store_id: 181,
-  tag: '../../static/img/index/yd.png',
-  store_name: '绝味黑鸭脖',
-  community: '',
-  avatar: 'https://imgs.1op.cn/i/hxshop/avatar/9.png',
-  create_time: '2020-4-11 19:51',
-  total: 122.45,
-  //订单状态 [1已取消，2待支付，3待收货，4待评价，5完成，6退款中，7退款完成]
-  status: 5 },
-
-{
-  id: 'MS2020041106',
-  store_id: 180,
-  tag: '../../static/img/index/yd.png',
-  store_name: '天天来食府',
-  community: '',
-  avatar: 'https://imgs.1op.cn/i/hxshop/avatar/9.png',
-  create_time: '2020-4-11 19:51',
-  total: 122.45,
-  //订单状态 [1已取消，2待支付，3待收货，4待评价，5完成，6退款中，7退款完成]
-  status: 6 },
-
-{
-  id: 'MS2020041107',
-  store_id: 170,
-  tag: '../../static/img/index/yd.png',
-  store_name: '肯德基',
-  community: '兴隆店',
-  avatar: 'https://imgs.1op.cn/i/hxshop/avatar/10.png',
-  create_time: '2020-4-11 19:51',
-  total: 122.45,
-  //订单状态 [1已取消，2待支付，3待收货，4待评价，5完成，6退款中，7退款完成]
-  status: 7 }];var _default =
-
-
-
-{
-  storeData: storeData,
-  storeList: storeList,
-  commentData: commentData,
-  goodsData: goodsData,
-  categoryData: categoryData,
-  goodsInfo: goodsInfo,
-  goodsEva: goodsEva,
-  ordersData: ordersData };exports.default = _default;
-
-/***/ }),
-/* 267 */,
-/* 268 */,
-/* 269 */,
-/* 270 */,
-/* 271 */,
-/* 272 */,
-/* 273 */,
-/* 274 */,
-/* 275 */,
-/* 276 */,
-/* 277 */,
-/* 278 */,
-/* 279 */,
-/* 280 */,
-/* 281 */,
-/* 282 */,
 /* 283 */,
 /* 284 */,
 /* 285 */,
@@ -44060,9 +44064,9 @@ var ordersData = [
 /* 296 */,
 /* 297 */,
 /* 298 */
-/*!***************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/common/util.js ***!
-  \***************************************************************************/
+/*!**************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/common/util.js ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -44080,6 +44084,8 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.getUrlPara
   }
   return params;
 }
+
+// 时间戳转换时间
 
 /***/ }),
 /* 299 */,
@@ -44115,9 +44121,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.getUrlPara
 /* 329 */,
 /* 330 */,
 /* 331 */
-/*!***************************************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/components/u-avatar-cropper/weCropper.js ***!
-  \***************************************************************************************************************************/
+/*!**************************************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/uview-ui/components/u-avatar-cropper/weCropper.js ***!
+  \**************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -45379,7 +45385,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.getUrlPara
   return WeCropper;
 
 });
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"], __webpack_require__(/*! ./../../../../../../前端开发工具/HBuilderX/plugins/uniapp-cli/node_modules/webpack/buildin/global.js */ 3)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"], __webpack_require__(/*! ./../../../../../../qianduan/HBuilderX/plugins/uniapp-cli/node_modules/webpack/buildin/global.js */ 3)))
 
 /***/ }),
 /* 332 */,
@@ -45435,9 +45441,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.getUrlPara
 /* 382 */,
 /* 383 */,
 /* 384 */
-/*!*************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/common/pinyin/pinyin3.js ***!
-  \*************************************************************************************/
+/*!************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/common/pinyin/pinyin3.js ***!
+  \************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -45501,9 +45507,9 @@ var Letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 
 
 /***/ }),
 /* 385 */
-/*!*************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/common/pinyin/pinyin2.js ***!
-  \*************************************************************************************/
+/*!************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/common/pinyin/pinyin2.js ***!
+  \************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -45547,9 +45553,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 386 */
-/*!************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/common/pinyin/pinyin.js ***!
-  \************************************************************************************/
+/*!***********************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/common/pinyin/pinyin.js ***!
+  \***********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -46073,17 +46079,7 @@ var pinyin = {
 /* 498 */,
 /* 499 */,
 /* 500 */,
-/* 501 */
-/*!*****************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/jweixin-module/lib/index.js ***!
-  \*****************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_RESULT__;function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}!function (e, n) { true ? !(__WEBPACK_AMD_DEFINE_RESULT__ = (function () {return n(e);}).call(exports, __webpack_require__, exports, module),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : undefined;}(window, function (o, e) {if (!o.jWeixin) {var _w;var n,c = { config: "preVerifyJSAPI", onMenuShareTimeline: "menu:share:timeline", onMenuShareAppMessage: "menu:share:appmessage", onMenuShareQQ: "menu:share:qq", onMenuShareWeibo: "menu:share:weiboApp", onMenuShareQZone: "menu:share:QZone", previewImage: "imagePreview", getLocation: "geoLocation", openProductSpecificView: "openProductViewWithPid", addCard: "batchAddCard", openCard: "batchViewCard", chooseWXPay: "getBrandWCPayRequest", openEnterpriseRedPacket: "getRecevieBizHongBaoRequest", startSearchBeacons: "startMonitoringBeacons", stopSearchBeacons: "stopMonitoringBeacons", onSearchBeacons: "onBeaconsInRange", consumeAndShareCard: "consumedShareCard", openAddress: "editAddress" },a = function () {var e = {};for (var n in c) {e[c[n]] = n;}return e;}(),i = o.document,t = i.title,r = navigator.userAgent.toLowerCase(),s = navigator.platform.toLowerCase(),d = !(!s.match("mac") && !s.match("win")),u = -1 != r.indexOf("wxdebugger"),l = -1 != r.indexOf("micromessenger"),p = -1 != r.indexOf("android"),f = -1 != r.indexOf("iphone") || -1 != r.indexOf("ipad"),m = (n = r.match(/micromessenger\/(\d+\.\d+\.\d+)/) || r.match(/micromessenger\/(\d+\.\d+)/)) ? n[1] : "",g = { initStartTime: L(), initEndTime: 0, preVerifyStartTime: 0, preVerifyEndTime: 0 },h = { version: 1, appId: "", initTime: 0, preVerifyTime: 0, networkType: "", isPreVerifyOk: 1, systemType: f ? 1 : p ? 2 : -1, clientVersion: m, url: encodeURIComponent(location.href) },v = {},S = { _completes: [] },y = { state: 0, data: {} };O(function () {g.initEndTime = L();});var I = !1,_ = [],w = (_w = { config: function config(e) {B("config", v = e);var t = !1 !== v.check;O(function () {if (t) M(c.config, { verifyJsApiList: C(v.jsApiList), verifyOpenTagList: C(v.openTagList) }, function () {S._complete = function (e) {g.preVerifyEndTime = L(), y.state = 1, y.data = e;}, S.success = function (e) {h.isPreVerifyOk = 0;}, S.fail = function (e) {S._fail ? S._fail(e) : y.state = -1;};var t = S._completes;return t.push(function () {!function () {if (!(d || u || v.debug || m < "6.0.2" || h.systemType < 0)) {var i = new Image();h.appId = v.appId, h.initTime = g.initEndTime - g.initStartTime, h.preVerifyTime = g.preVerifyEndTime - g.preVerifyStartTime, w.getNetworkType({ isInnerInvoke: !0, success: function success(e) {h.networkType = e.networkType;var n = "https://open.weixin.qq.com/sdk/report?v=" + h.version + "&o=" + h.isPreVerifyOk + "&s=" + h.systemType + "&c=" + h.clientVersion + "&a=" + h.appId + "&n=" + h.networkType + "&i=" + h.initTime + "&p=" + h.preVerifyTime + "&u=" + h.url;i.src = n;} });}}();}), S.complete = function (e) {for (var n = 0, i = t.length; n < i; ++n) {t[n]();}S._completes = [];}, S;}()), g.preVerifyStartTime = L();else {y.state = 1;for (var e = S._completes, n = 0, i = e.length; n < i; ++n) {e[n]();}S._completes = [];}}), w.invoke || (w.invoke = function (e, n, i) {o.WeixinJSBridge && WeixinJSBridge.invoke(e, x(n), i);}, w.on = function (e, n) {o.WeixinJSBridge && WeixinJSBridge.on(e, n);});}, ready: function ready(e) {0 != y.state ? e() : (S._completes.push(e), !l && v.debug && e());}, error: function error(e) {m < "6.0.2" || (-1 == y.state ? e(y.data) : S._fail = e);}, checkJsApi: function checkJsApi(e) {M("checkJsApi", { jsApiList: C(e.jsApiList) }, (e._complete = function (e) {if (p) {var n = e.checkResult;n && (e.checkResult = JSON.parse(n));}e = function (e) {var n = e.checkResult;for (var i in n) {var t = a[i];t && (n[t] = n[i], delete n[i]);}return e;}(e);}, e));}, onMenuShareTimeline: function onMenuShareTimeline(e) {P(c.onMenuShareTimeline, { complete: function complete() {M("shareTimeline", { title: e.title || t, desc: e.title || t, img_url: e.imgUrl || "", link: e.link || location.href, type: e.type || "link", data_url: e.dataUrl || "" }, e);} }, e);}, onMenuShareAppMessage: function onMenuShareAppMessage(n) {P(c.onMenuShareAppMessage, { complete: function complete(e) {"favorite" === e.scene ? M("sendAppMessage", { title: n.title || t, desc: n.desc || "", link: n.link || location.href, img_url: n.imgUrl || "", type: n.type || "link", data_url: n.dataUrl || "" }) : M("sendAppMessage", { title: n.title || t, desc: n.desc || "", link: n.link || location.href, img_url: n.imgUrl || "", type: n.type || "link", data_url: n.dataUrl || "" }, n);} }, n);}, onMenuShareQQ: function onMenuShareQQ(e) {P(c.onMenuShareQQ, { complete: function complete() {M("shareQQ", { title: e.title || t, desc: e.desc || "", img_url: e.imgUrl || "", link: e.link || location.href }, e);} }, e);}, onMenuShareWeibo: function onMenuShareWeibo(e) {P(c.onMenuShareWeibo, { complete: function complete() {M("shareWeiboApp", { title: e.title || t, desc: e.desc || "", img_url: e.imgUrl || "", link: e.link || location.href }, e);} }, e);}, onMenuShareQZone: function onMenuShareQZone(e) {P(c.onMenuShareQZone, { complete: function complete() {M("shareQZone", { title: e.title || t, desc: e.desc || "", img_url: e.imgUrl || "", link: e.link || location.href }, e);} }, e);}, updateTimelineShareData: function updateTimelineShareData(e) {M("updateTimelineShareData", { title: e.title, link: e.link, imgUrl: e.imgUrl }, e);}, updateAppMessageShareData: function updateAppMessageShareData(e) {M("updateAppMessageShareData", { title: e.title, desc: e.desc, link: e.link, imgUrl: e.imgUrl }, e);}, startRecord: function startRecord(e) {M("startRecord", {}, e);}, stopRecord: function stopRecord(e) {M("stopRecord", {}, e);}, onVoiceRecordEnd: function onVoiceRecordEnd(e) {P("onVoiceRecordEnd", e);}, playVoice: function playVoice(e) {M("playVoice", { localId: e.localId }, e);}, pauseVoice: function pauseVoice(e) {M("pauseVoice", { localId: e.localId }, e);}, stopVoice: function stopVoice(e) {M("stopVoice", { localId: e.localId }, e);}, onVoicePlayEnd: function onVoicePlayEnd(e) {P("onVoicePlayEnd", e);}, uploadVoice: function uploadVoice(e) {M("uploadVoice", { localId: e.localId, isShowProgressTips: 0 == e.isShowProgressTips ? 0 : 1 }, e);}, downloadVoice: function downloadVoice(e) {M("downloadVoice", { serverId: e.serverId, isShowProgressTips: 0 == e.isShowProgressTips ? 0 : 1 }, e);}, translateVoice: function translateVoice(e) {M("translateVoice", { localId: e.localId, isShowProgressTips: 0 == e.isShowProgressTips ? 0 : 1 }, e);}, chooseImage: function chooseImage(e) {M("chooseImage", { scene: "1|2", count: e.count || 9, sizeType: e.sizeType || ["original", "compressed"], sourceType: e.sourceType || ["album", "camera"] }, (e._complete = function (e) {if (p) {var n = e.localIds;try {n && (e.localIds = JSON.parse(n));} catch (e) {}}}, e));}, getLocation: function getLocation(e) {}, previewImage: function previewImage(e) {M(c.previewImage, { current: e.current, urls: e.urls }, e);}, uploadImage: function uploadImage(e) {M("uploadImage", { localId: e.localId, isShowProgressTips: 0 == e.isShowProgressTips ? 0 : 1 }, e);}, downloadImage: function downloadImage(e) {M("downloadImage", { serverId: e.serverId, isShowProgressTips: 0 == e.isShowProgressTips ? 0 : 1 }, e);}, getLocalImgData: function getLocalImgData(e) {!1 === I ? (I = !0, M("getLocalImgData", { localId: e.localId }, (e._complete = function (e) {if (I = !1, 0 < _.length) {var n = _.shift();wx.getLocalImgData(n);}}, e))) : _.push(e);}, getNetworkType: function getNetworkType(e) {M("getNetworkType", {}, (e._complete = function (e) {e = function (e) {var n = e.errMsg;e.errMsg = "getNetworkType:ok";var i = e.subtype;if (delete e.subtype, i) e.networkType = i;else {var t = n.indexOf(":"),o = n.substring(t + 1);switch (o) {case "wifi":case "edge":case "wwan":e.networkType = o;break;default:e.errMsg = "getNetworkType:fail";}}return e;}(e);}, e));}, openLocation: function openLocation(e) {M("openLocation", { latitude: e.latitude, longitude: e.longitude, name: e.name || "", address: e.address || "", scale: e.scale || 28, infoUrl: e.infoUrl || "" }, e);} }, _defineProperty(_w, "getLocation", function getLocation(e) {M(c.getLocation, { type: (e = e || {}).type || "wgs84" }, (e._complete = function (e) {delete e.type;}, e));}), _defineProperty(_w, "hideOptionMenu", function hideOptionMenu(e) {M("hideOptionMenu", {}, e);}), _defineProperty(_w, "showOptionMenu", function showOptionMenu(e) {M("showOptionMenu", {}, e);}), _defineProperty(_w, "closeWindow", function closeWindow(e) {M("closeWindow", {}, e = e || {});}), _defineProperty(_w, "hideMenuItems", function hideMenuItems(e) {M("hideMenuItems", { menuList: e.menuList }, e);}), _defineProperty(_w, "showMenuItems", function showMenuItems(e) {M("showMenuItems", { menuList: e.menuList }, e);}), _defineProperty(_w, "hideAllNonBaseMenuItem", function hideAllNonBaseMenuItem(e) {M("hideAllNonBaseMenuItem", {}, e);}), _defineProperty(_w, "showAllNonBaseMenuItem", function showAllNonBaseMenuItem(e) {M("showAllNonBaseMenuItem", {}, e);}), _defineProperty(_w, "scanQRCode", function scanQRCode(e) {M("scanQRCode", { needResult: (e = e || {}).needResult || 0, scanType: e.scanType || ["qrCode", "barCode"] }, (e._complete = function (e) {if (f) {var n = e.resultStr;if (n) {var i = JSON.parse(n);e.resultStr = i && i.scan_code && i.scan_code.scan_result;}}}, e));}), _defineProperty(_w, "openAddress", function openAddress(e) {M(c.openAddress, {}, (e._complete = function (e) {e = function (e) {return e.postalCode = e.addressPostalCode, delete e.addressPostalCode, e.provinceName = e.proviceFirstStageName, delete e.proviceFirstStageName, e.cityName = e.addressCitySecondStageName, delete e.addressCitySecondStageName, e.countryName = e.addressCountiesThirdStageName, delete e.addressCountiesThirdStageName, e.detailInfo = e.addressDetailInfo, delete e.addressDetailInfo, e;}(e);}, e));}), _defineProperty(_w, "openProductSpecificView", function openProductSpecificView(e) {M(c.openProductSpecificView, { pid: e.productId, view_type: e.viewType || 0, ext_info: e.extInfo }, e);}), _defineProperty(_w, "addCard", function addCard(e) {for (var n = e.cardList, i = [], t = 0, o = n.length; t < o; ++t) {var r = n[t],a = { card_id: r.cardId, card_ext: r.cardExt };i.push(a);}M(c.addCard, { card_list: i }, (e._complete = function (e) {var n = e.card_list;if (n) {for (var i = 0, t = (n = JSON.parse(n)).length; i < t; ++i) {var o = n[i];o.cardId = o.card_id, o.cardExt = o.card_ext, o.isSuccess = !!o.is_succ, delete o.card_id, delete o.card_ext, delete o.is_succ;}e.cardList = n, delete e.card_list;}}, e));}), _defineProperty(_w, "chooseCard", function chooseCard(e) {M("chooseCard", { app_id: v.appId, location_id: e.shopId || "", sign_type: e.signType || "SHA1", card_id: e.cardId || "", card_type: e.cardType || "", card_sign: e.cardSign, time_stamp: e.timestamp + "", nonce_str: e.nonceStr }, (e._complete = function (e) {e.cardList = e.choose_card_info, delete e.choose_card_info;}, e));}), _defineProperty(_w, "openCard", function openCard(e) {for (var n = e.cardList, i = [], t = 0, o = n.length; t < o; ++t) {var r = n[t],a = { card_id: r.cardId, code: r.code };i.push(a);}M(c.openCard, { card_list: i }, e);}), _defineProperty(_w, "consumeAndShareCard", function consumeAndShareCard(e) {M(c.consumeAndShareCard, { consumedCardId: e.cardId, consumedCode: e.code }, e);}), _defineProperty(_w, "chooseWXPay", function chooseWXPay(e) {M(c.chooseWXPay, V(e), e);}), _defineProperty(_w, "openEnterpriseRedPacket", function openEnterpriseRedPacket(e) {M(c.openEnterpriseRedPacket, V(e), e);}), _defineProperty(_w, "startSearchBeacons", function startSearchBeacons(e) {M(c.startSearchBeacons, { ticket: e.ticket }, e);}), _defineProperty(_w, "stopSearchBeacons", function stopSearchBeacons(e) {M(c.stopSearchBeacons, {}, e);}), _defineProperty(_w, "onSearchBeacons", function onSearchBeacons(e) {P(c.onSearchBeacons, e);}), _defineProperty(_w, "openEnterpriseChat", function openEnterpriseChat(e) {M("openEnterpriseChat", { useridlist: e.userIds, chatname: e.groupName }, e);}), _defineProperty(_w, "launchMiniProgram", function launchMiniProgram(e) {M("launchMiniProgram", { targetAppId: e.targetAppId, path: function (e) {if ("string" == typeof e && 0 < e.length) {var n = e.split("?")[0],i = e.split("?")[1];return n += ".html", void 0 !== i ? n + "?" + i : n;}}(e.path), envVersion: e.envVersion }, e);}), _defineProperty(_w, "openBusinessView", function openBusinessView(e) {M("openBusinessView", { businessType: e.businessType, queryString: e.queryString || "", envVersion: e.envVersion }, (e._complete = function (n) {if (p) {var e = n.extraData;if (e) try {n.extraData = JSON.parse(e);} catch (e) {n.extraData = {};}}}, e));}), _defineProperty(_w, "miniProgram", { navigateBack: function navigateBack(e) {e = e || {}, O(function () {M("invokeMiniProgramAPI", { name: "navigateBack", arg: { delta: e.delta || 1 } }, e);});}, navigateTo: function navigateTo(e) {O(function () {M("invokeMiniProgramAPI", { name: "navigateTo", arg: { url: e.url } }, e);});}, redirectTo: function redirectTo(e) {O(function () {M("invokeMiniProgramAPI", { name: "redirectTo", arg: { url: e.url } }, e);});}, switchTab: function switchTab(e) {O(function () {M("invokeMiniProgramAPI", { name: "switchTab", arg: { url: e.url } }, e);});}, reLaunch: function reLaunch(e) {O(function () {M("invokeMiniProgramAPI", { name: "reLaunch", arg: { url: e.url } }, e);});}, postMessage: function postMessage(e) {O(function () {M("invokeMiniProgramAPI", { name: "postMessage", arg: e.data || {} }, e);});}, getEnv: function getEnv(e) {O(function () {e({ miniprogram: "miniprogram" === o.__wxjs_environment });});} }), _w),T = 1,k = {};return i.addEventListener("error", function (e) {if (!p) {var n = e.target,i = n.tagName,t = n.src;if ("IMG" == i || "VIDEO" == i || "AUDIO" == i || "SOURCE" == i) if (-1 != t.indexOf("wxlocalresource://")) {e.preventDefault(), e.stopPropagation();var o = n["wx-id"];if (o || (o = T++, n["wx-id"] = o), k[o]) return;k[o] = !0, wx.ready(function () {wx.getLocalImgData({ localId: t, success: function success(e) {n.src = e.localData;} });});}}}, !0), i.addEventListener("load", function (e) {if (!p) {var n = e.target,i = n.tagName;n.src;if ("IMG" == i || "VIDEO" == i || "AUDIO" == i || "SOURCE" == i) {var t = n["wx-id"];t && (k[t] = !1);}}}, !0), e && (o.wx = o.jWeixin = w), w;}function M(n, e, i) {o.WeixinJSBridge ? WeixinJSBridge.invoke(n, x(e), function (e) {A(n, e, i);}) : B(n, i);}function P(n, i, t) {o.WeixinJSBridge ? WeixinJSBridge.on(n, function (e) {t && t.trigger && t.trigger(e), A(n, e, i);}) : B(n, t || i);}function x(e) {return (e = e || {}).appId = v.appId, e.verifyAppId = v.appId, e.verifySignType = "sha1", e.verifyTimestamp = v.timestamp + "", e.verifyNonceStr = v.nonceStr, e.verifySignature = v.signature, e;}function V(e) {return { timeStamp: e.timestamp + "", nonceStr: e.nonceStr, package: e.package, paySign: e.paySign, signType: e.signType || "SHA1" };}function A(e, n, i) {"openEnterpriseChat" != e && "openBusinessView" !== e || (n.errCode = n.err_code), delete n.err_code, delete n.err_desc, delete n.err_detail;var t = n.errMsg;t || (t = n.err_msg, delete n.err_msg, t = function (e, n) {var i = e,t = a[i];t && (i = t);var o = "ok";if (n) {var r = n.indexOf(":");"confirm" == (o = n.substring(r + 1)) && (o = "ok"), "failed" == o && (o = "fail"), -1 != o.indexOf("failed_") && (o = o.substring(7)), -1 != o.indexOf("fail_") && (o = o.substring(5)), "access denied" != (o = (o = o.replace(/_/g, " ")).toLowerCase()) && "no permission to execute" != o || (o = "permission denied"), "config" == i && "function not exist" == o && (o = "ok"), "" == o && (o = "fail");}return n = i + ":" + o;}(e, t), n.errMsg = t), (i = i || {})._complete && (i._complete(n), delete i._complete), t = n.errMsg || "", v.debug && !i.isInnerInvoke && alert(JSON.stringify(n));var o = t.indexOf(":");switch (t.substring(o + 1)) {case "ok":i.success && i.success(n);break;case "cancel":i.cancel && i.cancel(n);break;default:i.fail && i.fail(n);}i.complete && i.complete(n);}function C(e) {if (e) {for (var n = 0, i = e.length; n < i; ++n) {var t = e[n],o = c[t];o && (e[n] = o);}return e;}}function B(e, n) {if (!(!v.debug || n && n.isInnerInvoke)) {var i = a[e];i && (e = i), n && n._complete && delete n._complete, console.log('"' + e + '",', n || "");}}function L() {return new Date().getTime();}function O(e) {l && (o.WeixinJSBridge ? e() : i.addEventListener && i.addEventListener("WeixinJSBridgeReady", e, !1));}});
-
-/***/ }),
+/* 501 */,
 /* 502 */,
 /* 503 */,
 /* 504 */,
@@ -46091,7 +46087,17 @@ var __WEBPACK_AMD_DEFINE_RESULT__;function _defineProperty(obj, key, value) {if 
 /* 506 */,
 /* 507 */,
 /* 508 */,
-/* 509 */,
+/* 509 */
+/*!****************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/jweixin-module/lib/index.js ***!
+  \****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_RESULT__;function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}!function (e, n) { true ? !(__WEBPACK_AMD_DEFINE_RESULT__ = (function () {return n(e);}).call(exports, __webpack_require__, exports, module),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : undefined;}(window, function (o, e) {if (!o.jWeixin) {var _w;var n,c = { config: "preVerifyJSAPI", onMenuShareTimeline: "menu:share:timeline", onMenuShareAppMessage: "menu:share:appmessage", onMenuShareQQ: "menu:share:qq", onMenuShareWeibo: "menu:share:weiboApp", onMenuShareQZone: "menu:share:QZone", previewImage: "imagePreview", getLocation: "geoLocation", openProductSpecificView: "openProductViewWithPid", addCard: "batchAddCard", openCard: "batchViewCard", chooseWXPay: "getBrandWCPayRequest", openEnterpriseRedPacket: "getRecevieBizHongBaoRequest", startSearchBeacons: "startMonitoringBeacons", stopSearchBeacons: "stopMonitoringBeacons", onSearchBeacons: "onBeaconsInRange", consumeAndShareCard: "consumedShareCard", openAddress: "editAddress" },a = function () {var e = {};for (var n in c) {e[c[n]] = n;}return e;}(),i = o.document,t = i.title,r = navigator.userAgent.toLowerCase(),s = navigator.platform.toLowerCase(),d = !(!s.match("mac") && !s.match("win")),u = -1 != r.indexOf("wxdebugger"),l = -1 != r.indexOf("micromessenger"),p = -1 != r.indexOf("android"),f = -1 != r.indexOf("iphone") || -1 != r.indexOf("ipad"),m = (n = r.match(/micromessenger\/(\d+\.\d+\.\d+)/) || r.match(/micromessenger\/(\d+\.\d+)/)) ? n[1] : "",g = { initStartTime: L(), initEndTime: 0, preVerifyStartTime: 0, preVerifyEndTime: 0 },h = { version: 1, appId: "", initTime: 0, preVerifyTime: 0, networkType: "", isPreVerifyOk: 1, systemType: f ? 1 : p ? 2 : -1, clientVersion: m, url: encodeURIComponent(location.href) },v = {},S = { _completes: [] },y = { state: 0, data: {} };O(function () {g.initEndTime = L();});var I = !1,_ = [],w = (_w = { config: function config(e) {B("config", v = e);var t = !1 !== v.check;O(function () {if (t) M(c.config, { verifyJsApiList: C(v.jsApiList), verifyOpenTagList: C(v.openTagList) }, function () {S._complete = function (e) {g.preVerifyEndTime = L(), y.state = 1, y.data = e;}, S.success = function (e) {h.isPreVerifyOk = 0;}, S.fail = function (e) {S._fail ? S._fail(e) : y.state = -1;};var t = S._completes;return t.push(function () {!function () {if (!(d || u || v.debug || m < "6.0.2" || h.systemType < 0)) {var i = new Image();h.appId = v.appId, h.initTime = g.initEndTime - g.initStartTime, h.preVerifyTime = g.preVerifyEndTime - g.preVerifyStartTime, w.getNetworkType({ isInnerInvoke: !0, success: function success(e) {h.networkType = e.networkType;var n = "https://open.weixin.qq.com/sdk/report?v=" + h.version + "&o=" + h.isPreVerifyOk + "&s=" + h.systemType + "&c=" + h.clientVersion + "&a=" + h.appId + "&n=" + h.networkType + "&i=" + h.initTime + "&p=" + h.preVerifyTime + "&u=" + h.url;i.src = n;} });}}();}), S.complete = function (e) {for (var n = 0, i = t.length; n < i; ++n) {t[n]();}S._completes = [];}, S;}()), g.preVerifyStartTime = L();else {y.state = 1;for (var e = S._completes, n = 0, i = e.length; n < i; ++n) {e[n]();}S._completes = [];}}), w.invoke || (w.invoke = function (e, n, i) {o.WeixinJSBridge && WeixinJSBridge.invoke(e, x(n), i);}, w.on = function (e, n) {o.WeixinJSBridge && WeixinJSBridge.on(e, n);});}, ready: function ready(e) {0 != y.state ? e() : (S._completes.push(e), !l && v.debug && e());}, error: function error(e) {m < "6.0.2" || (-1 == y.state ? e(y.data) : S._fail = e);}, checkJsApi: function checkJsApi(e) {M("checkJsApi", { jsApiList: C(e.jsApiList) }, (e._complete = function (e) {if (p) {var n = e.checkResult;n && (e.checkResult = JSON.parse(n));}e = function (e) {var n = e.checkResult;for (var i in n) {var t = a[i];t && (n[t] = n[i], delete n[i]);}return e;}(e);}, e));}, onMenuShareTimeline: function onMenuShareTimeline(e) {P(c.onMenuShareTimeline, { complete: function complete() {M("shareTimeline", { title: e.title || t, desc: e.title || t, img_url: e.imgUrl || "", link: e.link || location.href, type: e.type || "link", data_url: e.dataUrl || "" }, e);} }, e);}, onMenuShareAppMessage: function onMenuShareAppMessage(n) {P(c.onMenuShareAppMessage, { complete: function complete(e) {"favorite" === e.scene ? M("sendAppMessage", { title: n.title || t, desc: n.desc || "", link: n.link || location.href, img_url: n.imgUrl || "", type: n.type || "link", data_url: n.dataUrl || "" }) : M("sendAppMessage", { title: n.title || t, desc: n.desc || "", link: n.link || location.href, img_url: n.imgUrl || "", type: n.type || "link", data_url: n.dataUrl || "" }, n);} }, n);}, onMenuShareQQ: function onMenuShareQQ(e) {P(c.onMenuShareQQ, { complete: function complete() {M("shareQQ", { title: e.title || t, desc: e.desc || "", img_url: e.imgUrl || "", link: e.link || location.href }, e);} }, e);}, onMenuShareWeibo: function onMenuShareWeibo(e) {P(c.onMenuShareWeibo, { complete: function complete() {M("shareWeiboApp", { title: e.title || t, desc: e.desc || "", img_url: e.imgUrl || "", link: e.link || location.href }, e);} }, e);}, onMenuShareQZone: function onMenuShareQZone(e) {P(c.onMenuShareQZone, { complete: function complete() {M("shareQZone", { title: e.title || t, desc: e.desc || "", img_url: e.imgUrl || "", link: e.link || location.href }, e);} }, e);}, updateTimelineShareData: function updateTimelineShareData(e) {M("updateTimelineShareData", { title: e.title, link: e.link, imgUrl: e.imgUrl }, e);}, updateAppMessageShareData: function updateAppMessageShareData(e) {M("updateAppMessageShareData", { title: e.title, desc: e.desc, link: e.link, imgUrl: e.imgUrl }, e);}, startRecord: function startRecord(e) {M("startRecord", {}, e);}, stopRecord: function stopRecord(e) {M("stopRecord", {}, e);}, onVoiceRecordEnd: function onVoiceRecordEnd(e) {P("onVoiceRecordEnd", e);}, playVoice: function playVoice(e) {M("playVoice", { localId: e.localId }, e);}, pauseVoice: function pauseVoice(e) {M("pauseVoice", { localId: e.localId }, e);}, stopVoice: function stopVoice(e) {M("stopVoice", { localId: e.localId }, e);}, onVoicePlayEnd: function onVoicePlayEnd(e) {P("onVoicePlayEnd", e);}, uploadVoice: function uploadVoice(e) {M("uploadVoice", { localId: e.localId, isShowProgressTips: 0 == e.isShowProgressTips ? 0 : 1 }, e);}, downloadVoice: function downloadVoice(e) {M("downloadVoice", { serverId: e.serverId, isShowProgressTips: 0 == e.isShowProgressTips ? 0 : 1 }, e);}, translateVoice: function translateVoice(e) {M("translateVoice", { localId: e.localId, isShowProgressTips: 0 == e.isShowProgressTips ? 0 : 1 }, e);}, chooseImage: function chooseImage(e) {M("chooseImage", { scene: "1|2", count: e.count || 9, sizeType: e.sizeType || ["original", "compressed"], sourceType: e.sourceType || ["album", "camera"] }, (e._complete = function (e) {if (p) {var n = e.localIds;try {n && (e.localIds = JSON.parse(n));} catch (e) {}}}, e));}, getLocation: function getLocation(e) {}, previewImage: function previewImage(e) {M(c.previewImage, { current: e.current, urls: e.urls }, e);}, uploadImage: function uploadImage(e) {M("uploadImage", { localId: e.localId, isShowProgressTips: 0 == e.isShowProgressTips ? 0 : 1 }, e);}, downloadImage: function downloadImage(e) {M("downloadImage", { serverId: e.serverId, isShowProgressTips: 0 == e.isShowProgressTips ? 0 : 1 }, e);}, getLocalImgData: function getLocalImgData(e) {!1 === I ? (I = !0, M("getLocalImgData", { localId: e.localId }, (e._complete = function (e) {if (I = !1, 0 < _.length) {var n = _.shift();wx.getLocalImgData(n);}}, e))) : _.push(e);}, getNetworkType: function getNetworkType(e) {M("getNetworkType", {}, (e._complete = function (e) {e = function (e) {var n = e.errMsg;e.errMsg = "getNetworkType:ok";var i = e.subtype;if (delete e.subtype, i) e.networkType = i;else {var t = n.indexOf(":"),o = n.substring(t + 1);switch (o) {case "wifi":case "edge":case "wwan":e.networkType = o;break;default:e.errMsg = "getNetworkType:fail";}}return e;}(e);}, e));}, openLocation: function openLocation(e) {M("openLocation", { latitude: e.latitude, longitude: e.longitude, name: e.name || "", address: e.address || "", scale: e.scale || 28, infoUrl: e.infoUrl || "" }, e);} }, _defineProperty(_w, "getLocation", function getLocation(e) {M(c.getLocation, { type: (e = e || {}).type || "wgs84" }, (e._complete = function (e) {delete e.type;}, e));}), _defineProperty(_w, "hideOptionMenu", function hideOptionMenu(e) {M("hideOptionMenu", {}, e);}), _defineProperty(_w, "showOptionMenu", function showOptionMenu(e) {M("showOptionMenu", {}, e);}), _defineProperty(_w, "closeWindow", function closeWindow(e) {M("closeWindow", {}, e = e || {});}), _defineProperty(_w, "hideMenuItems", function hideMenuItems(e) {M("hideMenuItems", { menuList: e.menuList }, e);}), _defineProperty(_w, "showMenuItems", function showMenuItems(e) {M("showMenuItems", { menuList: e.menuList }, e);}), _defineProperty(_w, "hideAllNonBaseMenuItem", function hideAllNonBaseMenuItem(e) {M("hideAllNonBaseMenuItem", {}, e);}), _defineProperty(_w, "showAllNonBaseMenuItem", function showAllNonBaseMenuItem(e) {M("showAllNonBaseMenuItem", {}, e);}), _defineProperty(_w, "scanQRCode", function scanQRCode(e) {M("scanQRCode", { needResult: (e = e || {}).needResult || 0, scanType: e.scanType || ["qrCode", "barCode"] }, (e._complete = function (e) {if (f) {var n = e.resultStr;if (n) {var i = JSON.parse(n);e.resultStr = i && i.scan_code && i.scan_code.scan_result;}}}, e));}), _defineProperty(_w, "openAddress", function openAddress(e) {M(c.openAddress, {}, (e._complete = function (e) {e = function (e) {return e.postalCode = e.addressPostalCode, delete e.addressPostalCode, e.provinceName = e.proviceFirstStageName, delete e.proviceFirstStageName, e.cityName = e.addressCitySecondStageName, delete e.addressCitySecondStageName, e.countryName = e.addressCountiesThirdStageName, delete e.addressCountiesThirdStageName, e.detailInfo = e.addressDetailInfo, delete e.addressDetailInfo, e;}(e);}, e));}), _defineProperty(_w, "openProductSpecificView", function openProductSpecificView(e) {M(c.openProductSpecificView, { pid: e.productId, view_type: e.viewType || 0, ext_info: e.extInfo }, e);}), _defineProperty(_w, "addCard", function addCard(e) {for (var n = e.cardList, i = [], t = 0, o = n.length; t < o; ++t) {var r = n[t],a = { card_id: r.cardId, card_ext: r.cardExt };i.push(a);}M(c.addCard, { card_list: i }, (e._complete = function (e) {var n = e.card_list;if (n) {for (var i = 0, t = (n = JSON.parse(n)).length; i < t; ++i) {var o = n[i];o.cardId = o.card_id, o.cardExt = o.card_ext, o.isSuccess = !!o.is_succ, delete o.card_id, delete o.card_ext, delete o.is_succ;}e.cardList = n, delete e.card_list;}}, e));}), _defineProperty(_w, "chooseCard", function chooseCard(e) {M("chooseCard", { app_id: v.appId, location_id: e.shopId || "", sign_type: e.signType || "SHA1", card_id: e.cardId || "", card_type: e.cardType || "", card_sign: e.cardSign, time_stamp: e.timestamp + "", nonce_str: e.nonceStr }, (e._complete = function (e) {e.cardList = e.choose_card_info, delete e.choose_card_info;}, e));}), _defineProperty(_w, "openCard", function openCard(e) {for (var n = e.cardList, i = [], t = 0, o = n.length; t < o; ++t) {var r = n[t],a = { card_id: r.cardId, code: r.code };i.push(a);}M(c.openCard, { card_list: i }, e);}), _defineProperty(_w, "consumeAndShareCard", function consumeAndShareCard(e) {M(c.consumeAndShareCard, { consumedCardId: e.cardId, consumedCode: e.code }, e);}), _defineProperty(_w, "chooseWXPay", function chooseWXPay(e) {M(c.chooseWXPay, V(e), e);}), _defineProperty(_w, "openEnterpriseRedPacket", function openEnterpriseRedPacket(e) {M(c.openEnterpriseRedPacket, V(e), e);}), _defineProperty(_w, "startSearchBeacons", function startSearchBeacons(e) {M(c.startSearchBeacons, { ticket: e.ticket }, e);}), _defineProperty(_w, "stopSearchBeacons", function stopSearchBeacons(e) {M(c.stopSearchBeacons, {}, e);}), _defineProperty(_w, "onSearchBeacons", function onSearchBeacons(e) {P(c.onSearchBeacons, e);}), _defineProperty(_w, "openEnterpriseChat", function openEnterpriseChat(e) {M("openEnterpriseChat", { useridlist: e.userIds, chatname: e.groupName }, e);}), _defineProperty(_w, "launchMiniProgram", function launchMiniProgram(e) {M("launchMiniProgram", { targetAppId: e.targetAppId, path: function (e) {if ("string" == typeof e && 0 < e.length) {var n = e.split("?")[0],i = e.split("?")[1];return n += ".html", void 0 !== i ? n + "?" + i : n;}}(e.path), envVersion: e.envVersion }, e);}), _defineProperty(_w, "openBusinessView", function openBusinessView(e) {M("openBusinessView", { businessType: e.businessType, queryString: e.queryString || "", envVersion: e.envVersion }, (e._complete = function (n) {if (p) {var e = n.extraData;if (e) try {n.extraData = JSON.parse(e);} catch (e) {n.extraData = {};}}}, e));}), _defineProperty(_w, "miniProgram", { navigateBack: function navigateBack(e) {e = e || {}, O(function () {M("invokeMiniProgramAPI", { name: "navigateBack", arg: { delta: e.delta || 1 } }, e);});}, navigateTo: function navigateTo(e) {O(function () {M("invokeMiniProgramAPI", { name: "navigateTo", arg: { url: e.url } }, e);});}, redirectTo: function redirectTo(e) {O(function () {M("invokeMiniProgramAPI", { name: "redirectTo", arg: { url: e.url } }, e);});}, switchTab: function switchTab(e) {O(function () {M("invokeMiniProgramAPI", { name: "switchTab", arg: { url: e.url } }, e);});}, reLaunch: function reLaunch(e) {O(function () {M("invokeMiniProgramAPI", { name: "reLaunch", arg: { url: e.url } }, e);});}, postMessage: function postMessage(e) {O(function () {M("invokeMiniProgramAPI", { name: "postMessage", arg: e.data || {} }, e);});}, getEnv: function getEnv(e) {O(function () {e({ miniprogram: "miniprogram" === o.__wxjs_environment });});} }), _w),T = 1,k = {};return i.addEventListener("error", function (e) {if (!p) {var n = e.target,i = n.tagName,t = n.src;if ("IMG" == i || "VIDEO" == i || "AUDIO" == i || "SOURCE" == i) if (-1 != t.indexOf("wxlocalresource://")) {e.preventDefault(), e.stopPropagation();var o = n["wx-id"];if (o || (o = T++, n["wx-id"] = o), k[o]) return;k[o] = !0, wx.ready(function () {wx.getLocalImgData({ localId: t, success: function success(e) {n.src = e.localData;} });});}}}, !0), i.addEventListener("load", function (e) {if (!p) {var n = e.target,i = n.tagName;n.src;if ("IMG" == i || "VIDEO" == i || "AUDIO" == i || "SOURCE" == i) {var t = n["wx-id"];t && (k[t] = !1);}}}, !0), e && (o.wx = o.jWeixin = w), w;}function M(n, e, i) {o.WeixinJSBridge ? WeixinJSBridge.invoke(n, x(e), function (e) {A(n, e, i);}) : B(n, i);}function P(n, i, t) {o.WeixinJSBridge ? WeixinJSBridge.on(n, function (e) {t && t.trigger && t.trigger(e), A(n, e, i);}) : B(n, t || i);}function x(e) {return (e = e || {}).appId = v.appId, e.verifyAppId = v.appId, e.verifySignType = "sha1", e.verifyTimestamp = v.timestamp + "", e.verifyNonceStr = v.nonceStr, e.verifySignature = v.signature, e;}function V(e) {return { timeStamp: e.timestamp + "", nonceStr: e.nonceStr, package: e.package, paySign: e.paySign, signType: e.signType || "SHA1" };}function A(e, n, i) {"openEnterpriseChat" != e && "openBusinessView" !== e || (n.errCode = n.err_code), delete n.err_code, delete n.err_desc, delete n.err_detail;var t = n.errMsg;t || (t = n.err_msg, delete n.err_msg, t = function (e, n) {var i = e,t = a[i];t && (i = t);var o = "ok";if (n) {var r = n.indexOf(":");"confirm" == (o = n.substring(r + 1)) && (o = "ok"), "failed" == o && (o = "fail"), -1 != o.indexOf("failed_") && (o = o.substring(7)), -1 != o.indexOf("fail_") && (o = o.substring(5)), "access denied" != (o = (o = o.replace(/_/g, " ")).toLowerCase()) && "no permission to execute" != o || (o = "permission denied"), "config" == i && "function not exist" == o && (o = "ok"), "" == o && (o = "fail");}return n = i + ":" + o;}(e, t), n.errMsg = t), (i = i || {})._complete && (i._complete(n), delete i._complete), t = n.errMsg || "", v.debug && !i.isInnerInvoke && alert(JSON.stringify(n));var o = t.indexOf(":");switch (t.substring(o + 1)) {case "ok":i.success && i.success(n);break;case "cancel":i.cancel && i.cancel(n);break;default:i.fail && i.fail(n);}i.complete && i.complete(n);}function C(e) {if (e) {for (var n = 0, i = e.length; n < i; ++n) {var t = e[n],o = c[t];o && (e[n] = o);}return e;}}function B(e, n) {if (!(!v.debug || n && n.isInnerInvoke)) {var i = a[e];i && (e = i), n && n._complete && delete n._complete, console.log('"' + e + '",', n || "");}}function L() {return new Date().getTime();}function O(e) {l && (o.WeixinJSBridge ? e() : i.addEventListener && i.addEventListener("WeixinJSBridgeReady", e, !1));}});
+
+/***/ }),
 /* 510 */,
 /* 511 */,
 /* 512 */,
@@ -46117,10 +46123,66 @@ var __WEBPACK_AMD_DEFINE_RESULT__;function _defineProperty(obj, key, value) {if 
 /* 532 */,
 /* 533 */,
 /* 534 */,
-/* 535 */
-/*!******************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/components/uni-icons/icons.js ***!
-  \******************************************************************************************/
+/* 535 */,
+/* 536 */,
+/* 537 */,
+/* 538 */,
+/* 539 */,
+/* 540 */,
+/* 541 */,
+/* 542 */,
+/* 543 */,
+/* 544 */,
+/* 545 */,
+/* 546 */,
+/* 547 */,
+/* 548 */,
+/* 549 */,
+/* 550 */,
+/* 551 */,
+/* 552 */,
+/* 553 */,
+/* 554 */,
+/* 555 */,
+/* 556 */,
+/* 557 */,
+/* 558 */,
+/* 559 */,
+/* 560 */,
+/* 561 */,
+/* 562 */,
+/* 563 */,
+/* 564 */,
+/* 565 */,
+/* 566 */,
+/* 567 */,
+/* 568 */,
+/* 569 */,
+/* 570 */,
+/* 571 */,
+/* 572 */,
+/* 573 */,
+/* 574 */,
+/* 575 */,
+/* 576 */,
+/* 577 */,
+/* 578 */,
+/* 579 */,
+/* 580 */,
+/* 581 */,
+/* 582 */,
+/* 583 */,
+/* 584 */,
+/* 585 */,
+/* 586 */,
+/* 587 */,
+/* 588 */,
+/* 589 */,
+/* 590 */,
+/* 591 */
+/*!*****************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/components/uni-icons/icons.js ***!
+  \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -46222,62 +46284,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   'scan': "\uE612" };exports.default = _default;
 
 /***/ }),
-/* 536 */,
-/* 537 */,
-/* 538 */,
-/* 539 */,
-/* 540 */,
-/* 541 */,
-/* 542 */,
-/* 543 */,
-/* 544 */,
-/* 545 */,
-/* 546 */,
-/* 547 */,
-/* 548 */,
-/* 549 */,
-/* 550 */,
-/* 551 */,
-/* 552 */,
-/* 553 */,
-/* 554 */,
-/* 555 */,
-/* 556 */,
-/* 557 */,
-/* 558 */,
-/* 559 */,
-/* 560 */,
-/* 561 */,
-/* 562 */,
-/* 563 */,
-/* 564 */,
-/* 565 */,
-/* 566 */,
-/* 567 */,
-/* 568 */,
-/* 569 */,
-/* 570 */,
-/* 571 */,
-/* 572 */,
-/* 573 */,
-/* 574 */,
-/* 575 */,
-/* 576 */,
-/* 577 */,
-/* 578 */,
-/* 579 */,
-/* 580 */,
-/* 581 */,
-/* 582 */,
-/* 583 */,
-/* 584 */,
-/* 585 */,
-/* 586 */,
-/* 587 */,
-/* 588 */,
-/* 589 */,
-/* 590 */,
-/* 591 */,
 /* 592 */,
 /* 593 */,
 /* 594 */,
@@ -46313,10 +46319,66 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /* 624 */,
 /* 625 */,
 /* 626 */,
-/* 627 */
-/*!*******************************************************************************************************!*\
-  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantong_user/node_modules/uview-ui/libs/util/emitter.js ***!
-  \*******************************************************************************************************/
+/* 627 */,
+/* 628 */,
+/* 629 */,
+/* 630 */,
+/* 631 */,
+/* 632 */,
+/* 633 */,
+/* 634 */,
+/* 635 */,
+/* 636 */,
+/* 637 */,
+/* 638 */,
+/* 639 */,
+/* 640 */,
+/* 641 */,
+/* 642 */,
+/* 643 */,
+/* 644 */,
+/* 645 */,
+/* 646 */,
+/* 647 */,
+/* 648 */,
+/* 649 */,
+/* 650 */,
+/* 651 */,
+/* 652 */,
+/* 653 */,
+/* 654 */,
+/* 655 */,
+/* 656 */,
+/* 657 */,
+/* 658 */,
+/* 659 */,
+/* 660 */,
+/* 661 */,
+/* 662 */,
+/* 663 */,
+/* 664 */,
+/* 665 */,
+/* 666 */,
+/* 667 */,
+/* 668 */,
+/* 669 */,
+/* 670 */,
+/* 671 */,
+/* 672 */,
+/* 673 */,
+/* 674 */,
+/* 675 */,
+/* 676 */,
+/* 677 */,
+/* 678 */,
+/* 679 */,
+/* 680 */,
+/* 681 */,
+/* 682 */,
+/* 683 */
+/*!******************************************************************************************************!*\
+  !*** C:/Users/86158/Desktop/xiaocantong1/xiaocantonguser/node_modules/uview-ui/libs/util/emitter.js ***!
+  \******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

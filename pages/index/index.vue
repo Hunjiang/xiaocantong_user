@@ -33,11 +33,11 @@
 				</view>
 			</view>
 		</view>
-		<view class="container">
+		<!-- <view class="container">
 			<view class="hot-box">
 				<text class="item" v-for="(item,i) in hos_list" :key="i">{{item}}</text>
 			</view>
-		</view>
+		</view> -->
 		<!-- 搜索 结束 -->
 		
 

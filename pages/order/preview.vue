@@ -197,7 +197,7 @@
 
 
 		<view class="b-r m-t container p12 other-box">
-			<view class="flex-rl row">
+			<view class="flex-rl row remarkBox">
 				<view class="left">
 					<text>备注</text>
 				</view>
@@ -228,7 +228,29 @@
 				<text>提交订单</text>
 			</view>
 		</view>
-		<u-select v-model="show" mode="mutil-column-auto" :list="timeList" @confirm="confirm"></u-select>
+		<!-- <u-select v-model="show" mode="mutil-column-auto" :list="timeList" @confirm="confirm"></u-select> -->
+		<view class="mask" v-if="show">
+			<view class="selectTimeBox">
+				<view class="selectTimeTitle">
+					<text class="titleText">选择预计送达时间</text>
+					<image src="../../static/img/cancle.png" mode="" @click="show=false"></image>
+				</view>
+				<view class="selectTimeContent">
+					<view class="timeContentLeft">
+						<view :class="{selectDate:isSelectIndex==0}" @click="isToday=true,isSelectIndex=0">今天（{{workList[0]}})</view>
+						<view :class="{selectDate:isSelectIndex==1}" @click="isToday=false,isSelectIndex=1">明天（{{workList[1]}})</view>
+						<view :class="{selectDate:isSelectIndex==2}" @click="isToday=false,isSelectIndex=2">后天（{{workList[2]}})</view>
+					</view>
+					<view class="timeContentRight">
+						<view class="selectTime" v-if="isToday" @click="checkTime(minList[1])">立即送出 <image src="../../static/img/selectTime.png" mode=""></image>
+						</view>
+						<view v-if="index>1  && isToday" @click="checkTime(val)" v-for="(val , index) in minList" :key='index'>{{val}}</view>
+						<view v-if="!isToday"  @click="checkTime(val)" v-for="(val , index) in minListAllDay" :key='index'>{{val}}</view>
+					</view>
+				</view>
+			</view>
+		</view>
+
 	</view>
 </template>
 
@@ -236,6 +258,7 @@
 	export default {
 		data() {
 			return {
+				isSelectIndex:0,
 				show: false,
 				isUpstairs: 2, //是否上楼
 				goFloorShow: false, //是否显示送餐上楼
@@ -268,8 +291,12 @@
 				timeList: [],
 				time: null,
 				// goFloor: false,
-				t1: null
-
+				t1: null,
+				workList: [],
+				minList:[],
+minListAllDay:[],
+				isToday:true,
+				submitTime:'',//确认时间
 			}
 		},
 		onLoad(option) {
@@ -292,7 +319,27 @@
 					}
 				})
 			}
+			this.getWeeks();
+			this.getMinList();
+			let addMin=20;
+			for(var i=0;i<this.minList.length+1;i++){
+				this.$set(this.minList,i,this.getMinutesTest(addMin,i));
+				let newStr=this.minList[i]
+				// newStr=newStr.Substring(0,2)
+				console.log(newStr)
+				console.log(newStr>'22:00')
+				if(newStr>'22:00'){
+					break;
+				}
+				addMin+=20;
+			}
+			console.log(this.minList)
+			// this.getMinutesTest(40);
+			// this.getMinutesTest(60);
+			// this.getMinutesTest(80);
 			let now = new Date()
+			var day = now.getDay();
+			
 			// console.log(now.getHours())
 			for (let i = 0; i < 24 - now.getHours(); i++) {
 				this.timeList.push({
@@ -310,7 +357,7 @@
 				}
 			})
 			// 一天中某段时间段内显示
-			this.dayShow()
+			// this.dayShow()
 
 		},
 		onPageScroll(e) {
@@ -318,62 +365,145 @@
 		},
 		onShow() {
 			let pages = getCurrentPages()
-			// console.log(pages)
-			if (pages[pages.length - 1].$vm.item) {
-				this.addressData = JSON.parse(pages[pages.length - 1].$vm.item)
-			}
+			console.log(this.addressData)
+			// if (pages[pages.length - 1].$vm.item) {
+			// 	this.addressData = JSON.parse(pages[pages.length - 1].$vm.item)
+			// }
 		},
 		onUnload() {
-			  if(this.t1) {  
-			        clearInterval(this.t1);  
-			        this.t1 = null;  
-			    }  
+			if (this.t1) {
+				clearInterval(this.t1);
+				this.t1 = null;
+			}
 		},
 		methods: {
+			// 确定时间
+			checkTime(timeVal){
+				if(this.isSelectIndex==0){
+					this.time='今天（'+this.workList[0]+'）'+timeVal
+					this.submitTime=this.getNData(0)+' ' + timeVal
+					
+				}else if(this.isSelectIndex==1){
+					this.time='明天（'+this.workList[1]+'）'+timeVal
+					this.submitTime=this.getNData(1)+' ' + timeVal
+				}else if(this.isSelectIndex==2){
+					this.time='后天（'+this.workList[2]+'）'+timeVal
+					this.submitTime=this.getNData(2)+' ' + timeVal
+				}
+				this.show=false;
+				console.log(("11:00"<timeVal &&  timeVal<"14:00") || ("15:15"<timeVal && timeVal<"20:30"))
+				if(("11:00"<timeVal &&  timeVal<"14:00") || ("15:15"<timeVal && timeVal<"20:30")){
+					this.goFloorShow=true;
+				}
+				else{
+					this.goFloorShow = false
+				}
+				// this.dayShow()
+			},
+			// 获取9点到22点区间
+			getMinList(){
+				for(let i=9;i<22;i++){
+					for(let j=0;j<4;j++){
+						if(j==0){
+							this.minListAllDay.push(i+':00')
+						}else if(j==1){
+							this.minListAllDay.push(i+':20')
+						}else if(j==2){
+							this.minListAllDay.push(i+':40')
+						}else if(j==3 && i==21){
+							this.minListAllDay.push('22:00')
+						}
+		
+					}
+				}
+				console.log(this.minListAllDay)
+			},
+			// 获取当前时间后n分钟
+			getMinutesTest(nMin,i){
+				var date=new Date();     //1. js获取当前时间
+				var min=date.getMinutes();  //2. 获取当前分钟
+				date.setMinutes(min+nMin);  //3. 设置当前时间+10分钟：把当前分钟数+10后的值重新设置为date对象的分钟数
+				var h = date.getHours() < 10 ? ('0' + date.getHours()) : date.getHours()
+				var f = date.getMinutes() < 10 ? ('0' + date.getMinutes()) : date.getMinutes()
+				var formatdate =  h + ":" + f ;
+				return formatdate
+				console.log(formatdate) // 获取10分钟后的时间，格式为yyyy-mm-dd h:f:s
+    
+},
+			// 获取当前周几
+			getWeeks(){
+				let now = new Date()
+				var day = now.getDay();
+				var weeks = new Array("星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六");
+				this.workList.push(weeks[day])
+				if (day == 5) {
+					this.workList.push(weeks[6])
+					this.workList.push(weeks[0])
+				} else if (day == 6) {
+					this.workList.push(weeks[0])
+					this.workList.push(weeks[1])
+				} else {
+					this.workList.push(weeks[day + 1])
+					this.workList.push(weeks[day + 2])
+				}
+				console.log(this.workList);
+			},
+			// 获取n天后日期
+			getNData(AddDayCount) {
+				var dd = new Date();
+				dd.setDate(dd.getDate() + AddDayCount); //获取AddDayCount天后的日期
+				var y = dd.getFullYear();
+				var m = (dd.getMonth() + 1) < 10 ? "0" + (dd.getMonth() + 1) : (dd.getMonth() + 1); //获取当前月份的日期，不足10补0
+				var d = dd.getDate() < 10 ? "0" + dd.getDate() : dd.getDate(); //获取当前几号，不足10补0
+				console.log(y + "-" + m + "-" + d)
+				return y + "-" + m + "-" + d;
+			},
 			// 一天中某段时间段内显示
 			checkAuditTime(beginTime, endTime) {
 				// setInterval(() => {
-					var nowDate = new Date();
-					var beginDate = new Date(nowDate);
-					var endDate = new Date(nowDate);
+				var nowDate = new Date();
+				var beginDate = new Date(nowDate);
+				var endDate = new Date(nowDate);
 
-					var beginIndex = beginTime.lastIndexOf("\:");
-					var beginHour = beginTime.substring(0, beginIndex);
-					var beginMinue = beginTime.substring(beginIndex + 1, beginTime.length);
-					beginDate.setHours(beginHour, beginMinue, 0, 0);
+				var beginIndex = beginTime.lastIndexOf("\:");
+				var beginHour = beginTime.substring(0, beginIndex);
+				var beginMinue = beginTime.substring(beginIndex + 1, beginTime.length);
+				beginDate.setHours(beginHour, beginMinue, 0, 0);
 
-					var endIndex = endTime.lastIndexOf("\:");
-					var endHour = endTime.substring(0, endIndex);
-					var endMinue = endTime.substring(endIndex + 1, endTime.length);
-					endDate.setHours(endHour, endMinue, 0, 0);
-					if (nowDate.getTime() - beginDate.getTime() >= 0 && nowDate.getTime() - endDate.getTime() <= 0) {						
-						return true
-						// this.goFloorShow = true
-					} else {	
-						return false
+				var endIndex = endTime.lastIndexOf("\:");
+				var endHour = endTime.substring(0, endIndex);
+				var endMinue = endTime.substring(endIndex + 1, endTime.length);
+				endDate.setHours(endHour, endMinue, 0, 0);
+				if (nowDate.getTime() - beginDate.getTime() >= 0 && nowDate.getTime() - endDate.getTime() <= 0) {
+					return true
+					// this.goFloorShow = true
+				} else {
+					return false
 					// this.goFloorShow = false
-					}
+				}
 				// }, 1000)
 			},
 			dayShow() {
+				let _this=this;
 				setInterval(() => {
-					if(this.checkAuditTime("11:00", "14:00")) {
-						this.goFloorShow = true					
-					}else if(this.checkAuditTime("15:15", "20:30")){
-						this.goFloorShow = true
-					}else {
-						this.goFloorShow = false
+					if (_this.checkAuditTime("11:00", "14:00")) {
+						_this.goFloorShow = true
+					} else if (_this.checkAuditTime("15:15", "20:30")) {
+						_this.goFloorShow = true
+					} else {
+						_this.goFloorShow = false
 					}
-				},1000)
+				}, 1000)
+				console.log(this.goFloorShow)
 			},
-			
+
 			// 是否上楼
 			goFloorStatusChange(e) {
 				console.log(e);
 				if (e.target.value) {
 					this.isUpstairs = 1
 				} else {
-					this.isUpstairs = 2		
+					this.isUpstairs = 2
 				}
 			},
 
@@ -409,7 +539,7 @@
 					})
 					return
 				}
-				if (!this.time) {
+				if (!this.submitTime) {
 					uni.showToast({
 						title: '请选择时间',
 						icon: 'none'
@@ -430,7 +560,7 @@
 					is_upstairs: this.isUpstairs,
 					shop_id: this.goodsList[0].shop_id,
 					address_id: this.addressData.id,
-					user_delivery_time: this.time,
+					user_delivery_time: this.submitTime,
 					buyer_remark: this.remark
 				}).then(res => {
 
@@ -1074,6 +1204,103 @@
 
 		.right:active {
 			background: linear-gradient(45deg, #e0ce31, #e4ad06);
+		}
+	}
+
+	.mask {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 22;
+		background: rgba($color: #000000, $alpha: 0.8);
+	}
+
+	.selectTimeBox {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		// height: 600upx;
+		background: #fff;
+		padding: 20upx;
+		padding-left: 0;
+		border-top-left-radius: 15upx;
+		border-top-right-radius: 15upx;
+
+		.selectTimeTitle {
+			text-align: center;
+			padding-bottom: 20upx;
+			position: relative;
+			font-size: 26upx;
+
+			image {
+				position: absolute;
+				right: 20upx;
+				top: 0upx;
+				width: 22upx;
+				height: 22upx;
+			}
+		}
+
+		.selectTimeContent {
+			display: flex;
+			justify-content: space-between;
+
+			.timeContentLeft {
+				width: 250upx;
+				height: 500upx;
+				background: #F5F5F5;
+
+				view {
+					height: 80upx;
+					line-height: 80upx;
+					text-align: center;
+				}
+
+				.selectDate {
+					background: #fff;
+				}
+			}
+
+			.timeContentRight {
+				width: 500upx;
+				height: 500upx;
+				padding: 0 31upx;
+				overflow-y: scroll;
+
+				view {
+					box-sizing: border-box;
+					height: 80upx;
+					line-height: 80upx;
+					border-bottom: 2upx dashed #333;
+					color: #333333;
+					font-size: 24upx;
+				}
+
+				.selectTime {
+					color: #FFDF68;
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+
+					image {
+						width: 28upx;
+						height: 18upx;
+					}
+				}
+			}
+		}
+	}
+	.remarkBox{
+		display: flex;
+		align-items: center;
+		
+		.right{
+			input{
+				width: 330upx;
+			}
 		}
 	}
 </style>

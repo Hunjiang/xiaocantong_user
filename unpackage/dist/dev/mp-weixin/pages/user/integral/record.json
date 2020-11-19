@@ -1,0 +1,8 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "hx-navbar": "/components/hx-navbar/hx-navbar",
+    "u-image": "/node-modules/uview-ui/components/u-image/u-image",
+    "mescroll-body": "/components/mescroll-uni/mescroll-body"
+  }
+}

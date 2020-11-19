@@ -103,8 +103,8 @@
 			    success: res => {
 					
 			        if (res.confirm) {
-						console.log(this.addressData.id)
-			            console.log('用户点击确定');
+						// console.log(this.addressData.id)
+			   //          console.log('用户点击确定');
 						
 						
 						

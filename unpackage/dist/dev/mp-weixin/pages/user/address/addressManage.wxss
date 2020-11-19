@@ -60,7 +60,7 @@
 .row .tit {
   -webkit-flex-shrink: 0;
           flex-shrink: 0;
-  width: 120rpx;
+  width: 150rpx;
   font-size: 30rpx;
   color: #303133;
 }
@@ -70,6 +70,9 @@
           flex: 1;
   font-size: 30rpx;
   color: #303133;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .row .icon-locationfill {
   font-size: 36rpx;

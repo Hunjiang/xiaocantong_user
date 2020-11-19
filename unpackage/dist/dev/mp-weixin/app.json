@@ -29,11 +29,18 @@
     "pages/user/address/address",
     "pages/user/address/addressManage",
     "pages/order/order",
+    "pages/order/status",
     "pages/order/preview",
     "pages/order/pay",
     "pages/search/search",
     "pages/user/coupon/coupon",
-    "pages/map/location"
+    "pages/map/location",
+    "pages/user/integral/myIntegral",
+    "pages/user/integral/record",
+    "pages/user/integral/integralShop",
+    "pages/user/integral/details",
+    "pages/user/integral/successful",
+    "pages/user/rider/riderRes"
   ],
   "subPackages": [],
   "window": {
@@ -71,5 +78,6 @@
       }
     ]
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap74.json"
 }

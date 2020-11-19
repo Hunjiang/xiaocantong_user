@@ -10,7 +10,7 @@
 			transparent="auto"
 			:background-color="[255,255,255]"
 			@click-left="navTo(userSettingUrl)">
-			<view  slot="left" >
+			<!-- <view  slot="left" >
 				<view style="margin-left: 26upx;font-size: 22px;">
 						<i class="hxicon-settings"></i>
 				</view>
@@ -19,7 +19,7 @@
 				<view style="margin-right: 16upx;font-size: 22px;">
 						<i class="hxicon-mark"></i>
 				</view>
-			</view>
+			</view> -->
 		</hx-navbar>
 
 		<view class="user-section ">
@@ -83,6 +83,7 @@
 			<view class="history-section icon">
 				<list-cell icon="hxicon-locationfill" iconColor="#5fcda2" title="积分商城" @eventClick="navTo('/pages/user/integral/myIntegral')"></list-cell>
 				<list-cell icon="hxicon-locationfill" iconColor="#5fcda2" title="地址管理" @eventClick="navTo('/pages/user/address/address')"></list-cell>
+				<list-cell icon="hxicon-locationfill" iconColor="#5fcda2" title="骑手注册" @eventClick="navTo('/pages/user/rider/riderRes')"></list-cell>
 				<list-cell icon="hxicon-round_favor_fill" iconColor="#54b4ef" title="我的收藏" @eventClick="navTo('/pages/store/starList')"></list-cell>
 				<list-cell icon="hxicon-settings" iconColor="#e07472" title="设置" border="" @eventClick="navTo('/pages/user/setting/setting')"></list-cell>
 			</view>
@@ -128,9 +129,12 @@
 			
 		},
 		onShow(){
-			this.$u.get('/api/user/getUserinfo').then(res=>{
-				this.memberInfo = res.data
-			})
+			// if(this.$store.state.hasLogin){
+				this.$u.get('/api/user/getUserinfo').then(res=>{
+					this.memberInfo = res.data
+				})
+			// }
+			
 			
 		},
 		// #ifndef MP
@@ -159,33 +163,41 @@
         methods: {
 			//个人信息
 			userBash(){
+				
 					if(uni.getStorageSync('token')){
-						uni.showModal({
-							title:'提示',
-							content:'退出登陆？',
-							success: (res) => {
-								if(res.confirm){
-									this.$u.get('/api/user/logout').then(res=>{
-										if(res.code==1){
-											uni.showToast({
-												title:res.msg,
-												icon:'none',
-												mask:true,
-												success: () => {
-													uni.clearStorageSync()
-													setTimeout(()=>{
-														uni.navigateTo({
-														    url: '/pages/user/login/login'
-														});
-													},1500)
-												}
-											})
-											
-										}
-									})
-								}
-							}
+						uni.navigateTo({
+							url:'/pages/user/setting/setting'
 						})
+						// uni.showModal({
+						// 	title:'提示',
+						// 	content:'退出登陆？',
+						// 	success: (res) => {
+						// 		if(res.confirm){
+						// 			this.$u.get('/api/user/logout').then(res=>{
+						// 				if(res.code==1){
+						// 					uni.showToast({
+						// 						title:res.msg,
+						// 						icon:'none',
+						// 						mask:true,
+						// 						success: () => {
+						// 							uni.clearStorageSync()
+						// 							setTimeout(()=>{
+						// 								uni.navigateTo({
+						// 								    url: '/pages/user/login/login'
+						// 								});
+						// 							},1500)
+						// 						}
+						// 					})
+											
+						// 				}
+						// 			})
+						// 		}
+						// 	}
+						// })
+					}else{
+						uni.navigateTo({
+						    url: '/pages/user/login/login'
+						});
 					}
 					
 			},

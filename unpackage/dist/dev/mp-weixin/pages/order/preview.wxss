@@ -702,4 +702,91 @@
   background: -webkit-linear-gradient(45deg, #e0ce31, #e4ad06);
   background: linear-gradient(45deg, #e0ce31, #e4ad06);
 }
+.mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 22;
+  background: rgba(0, 0, 0, 0.8);
+}
+.selectTimeBox {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  padding: 20rpx;
+  padding-left: 0;
+  -webkit-border-top-left-radius: 15rpx;
+          border-top-left-radius: 15rpx;
+  -webkit-border-top-right-radius: 15rpx;
+          border-top-right-radius: 15rpx;
+}
+.selectTimeBox .selectTimeTitle {
+  text-align: center;
+  padding-bottom: 20rpx;
+  position: relative;
+  font-size: 26rpx;
+}
+.selectTimeBox .selectTimeTitle image {
+  position: absolute;
+  right: 20rpx;
+  top: 0rpx;
+  width: 22rpx;
+  height: 22rpx;
+}
+.selectTimeBox .selectTimeContent {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+}
+.selectTimeBox .selectTimeContent .timeContentLeft {
+  width: 250rpx;
+  height: 500rpx;
+  background: #F5F5F5;
+}
+.selectTimeBox .selectTimeContent .timeContentLeft view {
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+}
+.selectTimeBox .selectTimeContent .timeContentLeft .selectDate {
+  background: #fff;
+}
+.selectTimeBox .selectTimeContent .timeContentRight {
+  width: 500rpx;
+  height: 500rpx;
+  padding: 0 31rpx;
+  overflow-y: scroll;
+}
+.selectTimeBox .selectTimeContent .timeContentRight view {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-bottom: 2rpx dashed #333;
+  color: #333333;
+  font-size: 24rpx;
+}
+.selectTimeBox .selectTimeContent .timeContentRight .selectTime {
+  color: #FFDF68;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.selectTimeBox .selectTimeContent .timeContentRight .selectTime image {
+  width: 28rpx;
+  height: 18rpx;
+}
 

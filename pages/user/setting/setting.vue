@@ -1,33 +1,37 @@
 <template>
 	<view>
-		<view class="u-flex user-box u-p-l-30 u-p-r-20 u-p-b-30" @tap="chooseAvatar">
-			<view class="u-m-r-10">
-				<u-avatar :src="base+userInfo.avatar" size="140"></u-avatar>
+		<view class="userImg" @click="chooseAvatar">
+			<view>
+				头像
 			</view>
-			<view class="u-flex-1">
-				<view class="u-font-18 u-p-b-20">{{userInfo.nickname}}</view>
-				<view class="u-font-14 u-tips-color">手机号:{{userInfo.mobile}}</view>
-			</view>
-			<view class="u-m-l-10 u-p-10">
-				<u-icon name="photo" color="#969799" size="28"></u-icon>
-			</view>
-			<view class="u-m-l-10 u-p-10">
-				<u-icon name="arrow-right" color="#969799" size="28"></u-icon>
+			<view class="imgBox">
+				<image :src="base+userInfo.avatar" mode=""></image>
+				<image src="../../../static/img/right.png" mode=""></image>
 			</view>
 		</view>
-		
-		<view class="u-m-t-20">
+		<view class="userImg"  @click="showForm=true">
+			<view>
+				昵称
+			</view>
+			<view class="imgBox">
+				<text>{{userInfo.nickname}}</text>
+				<image src="../../../static/img/right.png" mode=""></image>
+			</view>
+		</view>
+		<!-- <view class="u-m-t-20">
 			<u-cell-group>
 				<u-cell-item icon="info" title="用户昵称" @click="showForm=true"></u-cell-item>
-<!-- 				<u-cell-item icon="man" title="性别"></u-cell-item>
-				<u-cell-item icon="phone" title="手机"></u-cell-item> -->
+				<u-cell-item icon="man" title="性别"></u-cell-item>
+				<u-cell-item icon="phone" title="手机"></u-cell-item>
 			</u-cell-group>
-		</view>
+		</view> -->
 		
 		<u-modal show-cancel-button v-model="showForm"  :async-close="true" @confirm="confirm">
 			<u-field v-model="nickname" label="昵称" placeholder="请填写用户昵称">
 			</u-field>
 		</u-modal>
+		
+		<view class="loginOut" @click="loginOut">退出登录</view>
 	</view>
 </template>
 
@@ -45,6 +49,32 @@
 			
 		},
 		methods: {
+			loginOut(){
+				uni.showModal({
+					title:'提示',
+					content:'退出登陆？',
+					success: (res) => {
+						if(res.confirm){
+							this.$u.get('/api/user/logout').then(res=>{
+								if(res.code==1){
+									uni.showToast({
+										title:res.msg,
+										icon:'none',
+										mask:true,
+										success: () => {
+											uni.clearStorageSync()
+											setTimeout(()=>{
+												uni.navigateBack();
+											},1500)
+										}
+									})
+									
+								}
+							})
+						}
+					}
+				})
+			},
 			chooseAvatar() {
 				this.$u.route({
 					url: 'pages/avatar-cropper/u-avatar-cropper',
@@ -64,6 +94,14 @@
 				})
 			},
 			confirm(){
+				if(this.nickname.length<1){
+					uni.showToast({
+						title:'昵称不能为空',
+						icon:'none'
+					})
+					this.showForm = false;
+					return;
+				}
 				this.$u.get('/api/user/profile',{
 					avatar:this.userInfo.avatar,
 					nickname:this.nickname
@@ -129,4 +167,47 @@ page{
 .user-box{
 	background-color: #fff;
 }
+.loginOut{
+	text-align: center;
+	background-color: #fff;
+	height: 100upx;
+	line-height: 100upx;
+	margin-top: 12upx;
+	color: #555555;
+	font-size: 30upx;
+}
+.userImg{
+	background: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 25upx 45upx;
+	margin-bottom: 10upx;
+	.imgBox{
+		display: flex;
+		align-items: center;
+		text{
+			margin-right: 45upx;
+		}
+		image:first-child{
+			border-radius: 50%;
+			width: 100upx;
+			height: 100upx;
+			margin-right: 45upx;
+		}
+		image:last-child{
+			width: 16upx;
+			height: 28upx;
+		}
+	}
+}
+// <view class="userImg">
+// 			<view>
+// 				头像
+// 			</view>
+// 			<view class="imgBox">
+// 				<image :src="base+userInfo.avatar" mode=""></image>
+// 				<image src="../../../static/img/right.png" mode=""></image>
+// 			</view>
+// 		</view>
 </style>

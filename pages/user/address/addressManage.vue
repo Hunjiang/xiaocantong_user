@@ -25,6 +25,10 @@
 				<input class="input" type="text" disabled @click="show=true" v-model="campus_name" placeholder="校区" placeholder-class="placeholder" />
 			</view>
 			<view class="row b-b">
+				<text class="tit">宿舍楼号</text>
+				<input class="input" type="text" disabled @click="show2=true" v-model="dormitory_name" placeholder="宿舍楼" placeholder-class="placeholder" />
+			</view>
+			<view class="row b-b">
 				<text class="tit">详细地址</text>
 				<input class="input" type="text" v-model="detail" placeholder="楼号、门牌" placeholder-class="placeholder" />
 			</view>
@@ -38,6 +42,7 @@
 			<text>提交</text>
 		</view>
 		<u-select v-model="show" :list="locList" @confirm="changeLoc"></u-select>
+		<u-select v-model="show2" :list="dormitoryList" @confirm="changeLocNum"></u-select>
 	</view>
 </template>
 
@@ -50,10 +55,14 @@
 				detail:null,
 				campus_id:null,
 				campus_name:null,
+				dormitory_name:null,
+				dormitory_id:'',
 				isdefault:2,
 				locList:[],
 				show:false,
-				address_id:null
+				show2:false,
+				address_id:null,
+				dormitoryList:[],
 			}
 		},
 		onLoad(option){
@@ -70,6 +79,10 @@
 				this.campus_name = data.campus_name
 				this.isdefault = data.default_status
 				this.address_id = data.id
+				this.dormitory_name=data.dormitory_name
+				this.dormitory_id=data.dormitory_id
+				console.log(this.dormitory_name)
+				this.getDormitoryList(this.campus_id);
 			}
 			this.manageType = option.type;
 			this.$u.get('/api/address/selectCampus').then(res=>{
@@ -83,9 +96,29 @@
 			})
 		},
 		methods: {
+			// 获取宿舍楼号
+			getDormitoryList(id){
+				
+				this.$u.get('/api/Address/selectDormitory',{
+					campus_id:id
+				}).then(res=>{
+					
+					this.dormitoryList=[];
+								res.data.forEach((item,index)=>{
+									this.dormitoryList.push({value:item.id,label:item.name})
+								})
+							})
+			},
 			changeLoc(e){
 				this.campus_id = e[0].value
 				this.campus_name = e[0].label
+				this.getDormitoryList(this.campus_id);
+				this.dormitory_name='';
+				this.dormitory_id='';
+			},
+			changeLocNum(e){
+				this.dormitory_name=e[0].label;
+				this.dormitory_id=e[0].value;
 			},
 			switchChange(e){
 				console.log(e)
@@ -107,13 +140,6 @@
 					})
 					return;
 				}
-				if(!this.detail){
-					uni.showToast({
-						title:'请填写详细地址',
-						icon:'none'
-					})
-					return;
-				}
 				if(!this.campus_id){
 					uni.showToast({
 						title:'请选择所在校区',
@@ -121,6 +147,21 @@
 					})
 					return;
 				}
+				if(!this.dormitory_id){
+					uni.showToast({
+						title:'请选择宿舍楼号',
+						icon:'none'
+					})
+					return;
+				}
+				if(!this.detail){
+					uni.showToast({
+						title:'请填写详细地址',
+						icon:'none'
+					})
+					return;
+				}
+				
 				
 				//this.$api.prePage()获取上一页实例，可直接调用上页所有数据和方法，在App.vue定义
 				// this.$api.prePage().refreshList(data, this.manageType);
@@ -130,7 +171,8 @@
 						name:this.name,
 						phone:this.phone,
 						detail:this.detail,
-						default_status:this.isdefault
+						default_status:this.isdefault,
+						dormitory_id:this.dormitory_id
 					}).then(res=>{
 						uni.showToast({
 							title:res.msg,
@@ -151,7 +193,8 @@
 						detail:this.detail,
 						default_status:this.isdefault,
 						address_id:this.address_id,
-						status:2
+						status:2,
+						dormitory_id:this.dormitory_id
 					}).then(res=>{
 						uni.showToast({
 							title:res.msg,
@@ -197,7 +240,7 @@
 		
 		.tit{
 			flex-shrink: 0;
-			width: 120upx;
+			width: 150upx;
 			font-size: 30upx;
 			color: $font-color-dark;
 		}
@@ -205,6 +248,9 @@
 			flex: 1;
 			font-size: 30upx;
 			color: $font-color-dark;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow: hidden;
 		}
 		.icon-locationfill{
 			font-size: 36upx;

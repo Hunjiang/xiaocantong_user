@@ -224,7 +224,14 @@
 			"style": {
 				"navigationStyle": "custom"	
 			}
-		}
+		},
+		{
+			"path": "pages/user/rider/riderRes",
+			"style": {
+				"navigationStyle": "custom"	
+			}
+		}				
+		
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

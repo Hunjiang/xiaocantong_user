@@ -380,6 +380,7 @@
 		},
 		data() {
 			return {
+				goods_spec_id:'',
 				totalGrade: null,
 				base: this.$base,
 				pageScroll: {},
@@ -791,12 +792,14 @@
 					}
 				})
 				if (spec) {
+					console.log('this.goods_spec_id',this.goods_spec_id)
 					this.$u.get('/api/goods/cartOperation', {
 						shop_id: this.shopList.id,
 						goods_id: this.currentGoodsData.id,
 						goods_spec_name: spec,
 						status: '',
-						operate: 1
+						operate: 1,
+						goods_spec_id:this.goods_spec_id
 					}).then(res => {
 						that.touchOnAddGoods('#ggAddBtn', that.currentGoodsData)
 						this.getCartlist()
@@ -813,8 +816,8 @@
 			},
 			//选择规格
 			selectGoodsForm(formChild, indexKey) {
-
-
+			console.log(formChild.id)
+				this.goods_spec_id=formChild.id;
 				this.currentGoodsData.goods_spec.forEach((item, index) => {
 					if (indexKey == index) {
 						this.currentGoodsData.goods_spec[index].select = true

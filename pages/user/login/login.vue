@@ -165,7 +165,7 @@
 				this.$u.get('/api/user/login',{
 					account:this.username,
 					password:this.passData,
-					code:uni.getStorageSync('code')
+					// code:uni.getStorageSync('code')
 				}).then(res=>{
 					console.log(res)
 					uni.showToast({
