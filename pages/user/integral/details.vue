@@ -1,6 +1,6 @@
 <template>
 	<view class="container">
-		<image :src="list.img" mode="aspectFill"></image>
+		<image :src="base+list.img" mode="aspectFill"></image>
 		<u-icon class="contain_icon" @click="backTop" name="arrow-left" color="#FFFFFF" size="44"></u-icon>
 		<view class="contain_box">
 			<view class="contain_top">
@@ -49,7 +49,8 @@
 				list: [],
 				//收获地址
 				addressData: null,
-				remark: ''
+				remark: '',
+				base: this.$base,
 			}
 		},
 		onLoad(operation) {

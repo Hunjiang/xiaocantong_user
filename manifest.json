@@ -81,7 +81,7 @@
         "title" : "校餐通外卖",
         "router" : {
             "base" : "/h5",
-            "mode" : "hash"
+            "mode" : "history"
         },
         "devServer" : {
             "port" : 80, //端口号

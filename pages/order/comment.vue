@@ -71,6 +71,12 @@
 						console.log(e);
 					},
 					submit() {
+						// if(this.content==''){
+						// 	uni.showModal({
+						// 		title:'评价不能为空'
+						// 	})
+						// 	return;
+						// }
 									let files = [];
 									// 通过filter，筛选出上传进度为100的文件(因为某些上传失败的文件，进度值不为100，这个是可选的操作)
 									files = this.$refs.uUpload.lists.filter(val => {

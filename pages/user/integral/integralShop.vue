@@ -5,7 +5,7 @@
 			<view class="contain_box">
 				<view v-for="(item, id) in list" :key="id" class="contain">
 					<navigator :url="'/pages/user/integral/details?id='+item.id">
-						<image mode="aspectFill" :src="item.img"></image>
+						<image mode="aspectFill" :src="base+item.img"></image>
 						<view class="contain_bottom">
 							<text>{{item.name}}</text>
 							<text class="integral">{{item.price}}积分</text>
@@ -37,7 +37,8 @@
 	export default {
 		data() {
 			return {
-				list: []
+				list: [],
+				base: this.$base,
 			};
 		},
 		onLoad() {

@@ -103,6 +103,15 @@
 						<text>配送费</text>
 					</view>
 					<view class="left">
+						<text class="fh">￥</text><text>{{shop.shipping_free}}</text>
+					</view>
+				</view>
+				<view class="p-bb b-b" v-if="goFloorShow && isUpstairs==1"></view>
+				<view class="flex-rl peisong" v-if="goFloorShow">
+					<view class="right">
+						<text>送餐上楼</text>
+					</view>
+					<view class="left">
 						<text class="fh">￥</text><text>{{shop.upstairs}}</text>
 					</view>
 				</view>
@@ -500,10 +509,14 @@ minListAllDay:[],
 			// 是否上楼
 			goFloorStatusChange(e) {
 				console.log(e);
+				console.log(typeof this.shop.total_prices)
+				// isUpstairs 1上楼
 				if (e.target.value) {
 					this.isUpstairs = 1
+					this.shop.total_prices=(this.shop.total_prices-0)+(this.shop.upstairs-0)
 				} else {
 					this.isUpstairs = 2
+					this.shop.total_prices=this.shop.total_prices-this.shop.upstairs
 				}
 			},
 

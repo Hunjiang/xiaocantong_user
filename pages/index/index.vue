@@ -60,7 +60,12 @@
 				</view>
 			</view>
 		</view>
-		
+		<view class="emptyBox" v-if="storeList.length==0">
+						<image src="../../static/img/jqqd.png" mode=""></image>
+						<view>
+							敬请期待~
+						</view>
+					</view>
 		<!-- 商家信息 开始 -->
 		<view class=" store-box" v-if="storeList">
 			<view class=" item-box" v-for="(store,i) in storeList" :key="i">
@@ -732,5 +737,18 @@ page{
 	height: 50px;
 	/* #endif */
 }
-
+.emptyBox{
+		margin-top: 80upx;
+		text-align: center;
+		color: #888888;
+		font-size: 30upx;
+		view{
+			text-align: center;
+		}
+		image{
+			width: 376upx;
+			height: 290upx;
+			margin-bottom: 41upx;
+		}
+	}
 </style>

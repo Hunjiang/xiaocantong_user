@@ -42,7 +42,12 @@
 			<view class="bd">
 
 			</view>
-
+			<view class="emptyBox" v-if="integralList.length==0">
+				<image src="../../../static/img/jf.png" mode=""></image>
+				<view>
+					暂无兑换记录呦~
+				</view>
+			</view>
 			<view class="record_after">
 				
 				
@@ -105,7 +110,8 @@
 		},
 		filters: {
 					timeStamp: function(value) {    //具体到时分秒
-						var date = new Date(value); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+						var date = new Date(value*1000); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+						console.log(date)
 						var year = date.getFullYear();
 						var month = ("0" + (date.getMonth() + 1)).slice(-2);
 						var sdate = ("0" + date.getDate()).slice(-2);
@@ -332,4 +338,18 @@
 
 		}
 	}
+	.emptyBox{
+			margin-top: 150upx;
+			text-align: center;
+			color: #888888;
+			font-size: 30upx;
+			view{
+				text-align: center;
+			}
+			image{
+				width: 260upx;
+				height: 170upx;
+				margin-bottom: 41upx;
+			}
+		}
 </style>

@@ -123,7 +123,9 @@
 			getUserState(){
 				this.$u.post('/api/User/getRiderinfo').then(res=>{
 					console.log(res)
-					this.audit_status=res.data.audit_status
+					if(res.data.audit_status){
+						this.audit_status=res.data.audit_status
+					}
 					
 				})
 			},

@@ -24,7 +24,7 @@
 			style="height: 100%;"
 			:current="swiperCurrent" 
 			:duration="transtionTime"
-			@animationfinish="animationfinish">
+			@change="animationfinish">
 				
 				<swiper-item class="swiper-item"  v-for="data,x in tabs">
 					<view class="scroll-items">
@@ -39,8 +39,8 @@
 							@refresherrefresh="onRefresh" 
 							@refresherrestore="onRestore" >
 								<view class="nullOrder" v-if="data.data && data.data.length == 0">
-									<image src="../../static/img/order_icon.png" mode=""></image>
-									<text class="tit">暂无订单</text>
+									<image src="../../static/img/zwdd.png" mode=""></image>
+									<text class="tit">暂无订单呦~</text>
 								</view>
 								<block v-for="(order,j) in data.data" :key="j" v-else>
 									
@@ -100,7 +100,7 @@
 											</view>
 											
 											<view class="row">
-												<text>总价：￥{{order.goods_price}}</text>
+												<text>总价：￥{{order.pay_price}}</text>
 											</view>
 										</view>
 									</view>
@@ -115,7 +115,7 @@
 										<!-- 去评价：未评论、订单已收货 -->
 										<view class="btn bg-yellow" v-if="order.is_comment == 1 && order.order_status == 3" @click="goComment(order.id)">去评价</view>
 										<!-- 退款进度：退款进行中和已完成 -->
-										<view class="btn" v-if="order.refund_status != 1 " @click="goRefund(order.id)">退款进度</view>
+										<view class="btn bg-yellow" style="margin-right: 10upx;" v-if="order.refund_status != 1 " @click.stop="goRefund(order.id)">退款进度</view>
 										<!-- 再来一单： -->
 										<view class="btn bg-yellow" @click="goStore(order.shop_id, order.id)">再来一单</view>
 									</view>
@@ -206,7 +206,7 @@
 			
 				if(res.code == 1) {
 					uni.redirectTo({
-					    url: '/pages/store/index?sid=' + storeId
+					    url: '/pages/store/index?sid=' + storeId+'&isAgain=true'
 					});
 				}
 			})
@@ -299,6 +299,7 @@
 				 return item.goods_image.split(',')
 			},
 			animationfinish({detail: { current }}) {
+				console.log('--------------')
 				/* this.$refs.tabs.setFinishCurrent(current); */
 				this.swiperCurrent = current;
 				this.current = current;
@@ -389,15 +390,21 @@
 				}).then(res=>{
 					if(res.data.is_agree==1){
 						uni.showToast({
-							title:'退款申请待处理'
+							title:'退款申请待处理',
+							icon :'none',
+							success() {
+								console.log('sucess')
+							}
 						})
 					}else if(res.data.is_agree==2){
 						uni.showToast({
-							title:'退款申请已通过'
+							title:'退款申请已通过',
+							icon :'none',
 						})
 					}else if(res.data.is_agree==3){
 						uni.showToast({
-							title:'退款申请已驳回'
+							title:'退款申请已驳回',
+							icon :'none',
 						})
 					}
 				})
@@ -527,14 +534,15 @@
 			align-items: center;
 			margin: 40px auto;
 			image{
-				width: 283px;
-				height: 200px;
+				margin-top: 200upx;
+				width: 226upx;
+				height: 265upx;
 			}
 			.tit{
 				display: flex;
 				flex-direction: column;
 				font-size: 16px;
-				font-weight: bold;
+				// font-weight: bold;
 				color: #555;
 				margin-top: 6px;
 				

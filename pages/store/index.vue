@@ -165,6 +165,12 @@
 				<!-- 评价 -->
 				<swiper-item class="swiper-item">
 					<scroll-view scroll-y style="height: 100%;width: 100%;background-color: #ffffff;" @scroll="asideScroll" :scroll-y="goodsBoxScroll">
+						<view class="emptyBox" v-if="commentList.length==0">
+										<image src="../../static/img/zwpl.png" mode=""></image>
+										<view>
+											暂无评论
+										</view>
+									</view>
 						<view class="scroll-items evaluate-box">
 							<view class="evaluate-box-header">
 
@@ -237,7 +243,7 @@
 						去结算
 					</view>
 					<view class="pscj hx-txt-10 hx-color-gray" v-else>
-						<text v-if="startingPrice>0">差￥{{-(goodsTotalPrice-startingPrice)}}起送</text>
+						<text v-if="startingPrice>0">差￥{{-(shoppCart.total_prices-startingPrice)}}起送</text>
 					</view>
 
 				</view>
@@ -332,7 +338,7 @@
 						<view class="price_box">
 							<text>￥</text>
 							<block>
-								<text class="price">{{currentGoodsData.price}}</text>
+								<text class="price">{{currentGoodsData.goods_spec[specIndex].spec_price}}</text>
 							</block>
 						</view>
 						<view class="form-btn-box">
@@ -380,6 +386,7 @@
 		},
 		data() {
 			return {
+				specIndex:0,// 选中规格下标
 				goods_spec_id:'',
 				totalGrade: null,
 				base: this.$base,
@@ -487,7 +494,7 @@
 		onLoad(options) {
 			// 初始化数据
 			this.requestInfo(options);
-
+			
 
 
 		},
@@ -508,9 +515,9 @@
 		// 显示
 		onShow() {
 			setTimeout(() => {
-				this.clearShoppingCart()
+				// this.clearShoppingCart()
 				// console.log('77777', this.categoryList);
-				this.again()
+				// this.again()
 			}, 1500)
 			// // 加入购物车
 			// formFirstAddGoods() {
@@ -592,6 +599,8 @@
 		methods: {
 
 			again() {
+				console.log(uni.getStorageSync('orderA'))
+				this.clearShoppingCart()
 				// 再来一单传过来的订单								
 				const orderA = JSON.parse(uni.getStorageSync('orderA'));
 				console.log('这是', orderA);
@@ -607,6 +616,7 @@
 					var totalNum = orderA[i].total_num //购买商品数量
 					var catGoodsId = orderA[i].goods_id //购买商品Id
 					var goodsSpecId = orderA[i].goods_spec_id // 购买商品规格Id
+					this.goods_spec_id=goodsSpecId
 					var catId = orderA[i].goods_cat_id //购买的系列	
 					var batId = this.categoryList.filter(item => item.id == catId) //对比后的系列
 					console.log(batId);
@@ -629,7 +639,7 @@
 									} = batCatGoodsSpecId[0]
 									console.log(name);
 									// 调用添加购物车
-									this.cartAddgoods(catGoodsId, name)
+									this.cartAddgoods(catGoodsId, name,totalNum)
 
 								}
 							} else {
@@ -664,7 +674,8 @@
 				this.$u.get('/api/shop/shopList', {
 					shop_id: this.sid
 				}).then(res => {
-					this.shopList = res.data
+					this.shopList = res.data;
+					this.startingPrice=this.shopList.min_price
 					// console.log(this.shopList);
 					uni.hideLoading();
 				})
@@ -673,6 +684,10 @@
 				}).then(res => {
 					console.log(res);
 					that.categoryList = res.data;
+					if(options.isAgain){
+						console.log('===============================')
+						this.again();
+					}
 					// console.log('555555',that.categoryList);
 
 				})
@@ -732,12 +747,14 @@
 				})
 			},
 			// 购物车增加商品
-			cartAddgoods(id, spec) {
+			cartAddgoods(id, spec,num=1) {
 				this.$u.get('/api/goods/cartOperation', {
 					shop_id: this.shopList.id,
 					goods_id: id,
 					goods_spec_name: spec,
-					operate: 1
+					operate: 1,
+					goods_spec_id:this.goods_spec_id,
+					num:num
 				}).then(res => {
 					console.log('加入购物车')
 					this.getCartlist()
@@ -818,6 +835,7 @@
 			selectGoodsForm(formChild, indexKey) {
 			console.log(formChild.id)
 				this.goods_spec_id=formChild.id;
+				this.specIndex=indexKey;
 				this.currentGoodsData.goods_spec.forEach((item, index) => {
 					if (indexKey == index) {
 						this.currentGoodsData.goods_spec[index].select = true
@@ -991,7 +1009,8 @@
 					shop_id: this.sid,
 					status: 1
 				}).then(res => {
-					this.getCartlist()
+					this.getCartlist();
+					this.hideShoppingCar();
 				})
 			},
 			hrefGoodsInfo(item) {
@@ -2039,4 +2058,18 @@
 			}
 		}
 	}
+	.emptyBox{
+			margin-top: 150upx;
+			text-align: center;
+			color: #888888;
+			font-size: 30upx;
+			view{
+				text-align: center;
+			}
+			image{
+				width: 183upx;
+				height: 208upx;
+				margin-bottom: 41upx;
+			}
+		}
 </style>

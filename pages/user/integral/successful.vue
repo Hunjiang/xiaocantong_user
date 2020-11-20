@@ -23,7 +23,8 @@ export default {
   // 组件方法
   methods: {
 	backLast(){
-		uni.navigateBack({
+		uni.redirectTo({
+			url:'/pages/user/integral/myIntegral'
 		})
 	},
 	  

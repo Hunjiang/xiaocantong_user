@@ -8,7 +8,12 @@
 				<!-- 去掉的小箭头 -->
 				<!-- <u-icon class="u-icon" @click="transformationIcon" name="arrow-down-fill" color="#FFC50B" size="16"></u-icon> -->
 			</view>
-
+			<view class="emptyBox" v-if="storeList.length==0">
+				<image src="../../../static/img/duihuan.png" mode=""></image>
+				<view>
+					暂无兑换记录呦~
+				</view>
+			</view>
         <mescroll-body ref="mescrollRef" :down="downOption" @down="downCallback" @up="upCallback" class="list_box">
 			
 			<view v-for="(item,i) in storeList" :key="i" class="convert_box">
@@ -242,6 +247,21 @@
 					}
 				}
 			}
+		}
+	}
+	
+	.emptyBox{
+		margin-top: 300upx;
+		text-align: center;
+		color: #888888;
+		font-size: 30upx;
+		view{
+			text-align: center;
+		}
+		image{
+			width: 221upx;
+			height: 199upx;
+			margin-bottom: 41upx;
 		}
 	}
 </style>

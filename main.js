@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App'
 
 //全局域名
-Vue.prototype.$base = "https://h5.xiaocantong.net/"
+Vue.prototype.$base = "http://test.xiaocantong.net/"
 import uView from "uview-ui";
 Vue.use(uView);
 import store from './store/index';

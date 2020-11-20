@@ -80,12 +80,42 @@
 				</navigator >
 			</view>
 			<!-- 浏览历史 -->
-			<view class="history-section icon">
-				<list-cell icon="hxicon-locationfill" iconColor="#5fcda2" title="积分商城" @eventClick="navTo('/pages/user/integral/myIntegral')"></list-cell>
+			<view class="history-section">
+				<view class="list" @click="navTo('/pages/user/integral/myIntegral')">
+					<image src="../../../static/img/user/shop.png" mode="widthFix"></image>
+					<view class="listText">
+						积分商城
+					</view>
+				</view>
+				<view class="list" @click="navTo('/pages/user/address/address')">
+					<image src="../../../static/img/user/address.png" mode="widthFix"></image>
+					<view class="listText">
+						地址管理
+					</view>
+				</view>
+				<view class="list" @click="navTo('/pages/user/rider/riderRes')">
+					<image src="../../../static/img/user/rider.png" mode="widthFix"></image>
+					<view class="listText">
+						骑手注册
+					</view>
+				</view>
+				<view class="list" @click="navTo('/pages/store/starList')">
+					<image src="../../../static/img/user/sc.png" mode="widthFix"></image>
+					<view class="listText">
+						我的收藏
+					</view>
+				</view>
+				<view class="list" @click="navTo('/pages/user/setting/setting')">
+					<image src="../../../static/img/user/set.png" mode="widthFix"></image>
+					<view class="listText">
+						设置
+					</view>
+				</view>
+				<!-- <list-cell icon="hxicon-locationfill" iconColor="#5fcda2" title="积分商城" @eventClick="navTo('/pages/user/integral/myIntegral')"></list-cell>
 				<list-cell icon="hxicon-locationfill" iconColor="#5fcda2" title="地址管理" @eventClick="navTo('/pages/user/address/address')"></list-cell>
 				<list-cell icon="hxicon-locationfill" iconColor="#5fcda2" title="骑手注册" @eventClick="navTo('/pages/user/rider/riderRes')"></list-cell>
 				<list-cell icon="hxicon-round_favor_fill" iconColor="#54b4ef" title="我的收藏" @eventClick="navTo('/pages/store/starList')"></list-cell>
-				<list-cell icon="hxicon-settings" iconColor="#e07472" title="设置" border="" @eventClick="navTo('/pages/user/setting/setting')"></list-cell>
+				<list-cell icon="hxicon-settings" iconColor="#e07472" title="设置" border="" @eventClick="navTo('/pages/user/setting/setting')"></list-cell> -->
 			</view>
 		</view>
 			
@@ -402,7 +432,7 @@
 		}
 	}
 	.history-section{
-		padding: 30upx 0 0;
+		/* padding: 10upx 0 ; */
 		margin-top: 20upx;
 		background: #fff;
 		border-radius:10upx;
@@ -432,5 +462,25 @@
 			}
 		}
 	}
-	
+	.list{
+		display: flex;
+		align-items: center;
+		padding: 0upx 28upx;
+		image{
+			margin-right: 30upx;
+			width: 30upx;
+			/* height: 30upx; */
+		}
+		.listText{
+			padding: 20upx 0;
+			width: 600upx;
+			border-bottom: 1upx solid rgb(241, 241, 241);
+		}
+	}
+/* 	<view class="list" @click="navTo('/pages/user/setting/setting')">
+		<image src="../../../static/img/user/set.png" mode=""></image>
+		<view class="listText">
+			设置
+		</view>
+	</view> */
 </style>
