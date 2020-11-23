@@ -50,7 +50,7 @@
 					<view class="codeBox">
 						<input placeholder-class="placeholderStyle" type="text" v-model="riderCode" placeholder="请输入验证码" @blur='isCanRes'/>
 						<view @click="getVerCode()" v-if="!sendcode">获取验证码</view>
-						<view v-else style="color: #ccc;">已发送</view>
+						<view v-else style="color: #ccc;">已发送{{timer}}s</view>
 					</view>
 				</view>
 			</view>
@@ -107,6 +107,7 @@
 				show:false,
 				riderSchoolId:'',
 				audit_status:0,//审核状态（1.已审核，2.待审核）
+				timer:30,
 			}
 		},
 		components: {
@@ -169,6 +170,16 @@
 					event: 'register'
 				}).then(res => {
 					this.sendcode=true;
+					var _this=this;
+								var countdown=setInterval(function(){
+									_this.timer-=1;
+									// _this.msg='获取验证码'+timer+'s';
+									if(_this.timer<=0){
+										clearInterval(countdown);
+										_this.timer=30;
+										_this.sendcode=false;
+									}
+								},1000)
 					// this.$refs.runCode.$emit('runCode'); //触发倒计时（一般用于请求成功验证码后调用）
 					// uni.showToast({
 					// 	icon: 'none',
@@ -356,7 +367,7 @@
 
 		.infoList {
 			padding: 20upx 0;
-			border-bottom: 2upx #000000 dashed;
+			border-bottom: 2upx #EBEBEB solid;
 
 			view {
 				color: #333;

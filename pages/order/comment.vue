@@ -11,12 +11,12 @@
 				</u-radio>
 			</u-radio-group>
 		</view>
-		<view>请为该店铺打分</view>
-		<view>
+		<view>请为该店铺打分			<u-rate :count="5" v-model="score" active-color="#ffdb27"></u-rate></view>
+		<!-- <view>
 			<u-rate :count="5" v-model="score" active-color="#ffdb27"></u-rate>
-		</view>
+		</view> -->
 		<view>
-			<u-field style="border-radius: 2rpx solid #ccc;" v-model="content" label="评价" placeholder="请填写评价" type="textarea"></u-field>
+			<u-field style="border-radius: 2rpx solid #ccc;" :border-bottom='false'  v-model="content" label="评价" placeholder="请填写评价" type="textarea"></u-field>
 		</view>
 		<view style="display: flex;align-items: center;justify-content: space-between;">
 			<view>匿名评价</view>
@@ -26,7 +26,7 @@
 		
 		
 		<view style="display: flex;
-		align-items: center;">
+		align-items: center;border: none;margin-top: 10upx;">
 			<u-button type="primary" size="default" @click="submit" ripple>确认提交</u-button>
 		</view>
 
@@ -47,9 +47,9 @@
 						disabled: false
 					}
 				],
-				score:5,
+				score:0,
 				content:'',
-				score_type:'好评',
+				score_type:'',
 				id:null,
 				anonymity_status:false
 			}
@@ -71,6 +71,20 @@
 						console.log(e);
 					},
 					submit() {
+						if(this.score_type==''){
+							uni.showModal({
+								title:'请选择评论分类',
+								icon:'none'
+							})
+							return;
+						}
+						if(this.score==''){
+							uni.showModal({
+								title:'请点亮星星',
+								icon:'none'
+							})
+							return;
+						}
 						// if(this.content==''){
 						// 	uni.showModal({
 						// 		title:'评价不能为空'

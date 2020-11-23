@@ -1,13 +1,14 @@
 <template>
 	<view>
-		<view v-for="item,index of list" class="card" @click="toStore(item.id)" @longtap="Star(item.id,index)">
-			<u-image :src="base+item.logo" width="190rpx" height="120rpx" mode="aspectFill" border-radius="10rpx"></u-image>
+		<view v-for="(item,index) of list" class="card" :key='index'>
+			<u-image  @click="toStore(item.id)" :src="base+item.logo" width="190rpx" height="120rpx" mode="aspectFill" border-radius="10rpx"></u-image>
 			<view>
-				<view>{{item.name}}</view>
-				<view>
-					<u-rate :count="5" v-model="item.total_grade" active-color="#f4bd00"  size="26"  :disabled="true"></u-rate>
+				<view  @click="toStore(item.id)">{{item.name}}</view>
+				<view class="center">
+					<u-rate  @click="toStore(item.id)" :count="5" v-model="item.total_grade" active-color="#f4bd00"  size="26"  :disabled="true"></u-rate>
+					<view @click="Star(item.id,index)">删除</view>
 				</view>
-				<view>
+				<view @click="toStore(item.id)">
 					<view>起送 ￥{{item.min_price}}</view>
 					<view>配送 ￥{{item.shipping_free}}</view>
 				</view>
@@ -30,6 +31,9 @@
 			this.getList()
 		},
 		methods:{
+			delItem(){
+				
+			},
 			Star(id,index){
 				uni.showModal({
 					title:'提示',
@@ -98,5 +102,13 @@
 			}
 		}
 	}
-	
+	.center{
+		width: 480upx;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		view{
+			color: red;
+		}
+	}
 </style>

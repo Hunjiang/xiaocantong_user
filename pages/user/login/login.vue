@@ -84,7 +84,7 @@
 		onLoad(){
 			that = this
 						let link = window.location.href;
-						// console.log('link',link)
+						console.log('link',link)
 						let params = getUrlParams (link);
 						console.log('params',params)
 						uni.removeStorageSync('code')
@@ -105,7 +105,9 @@
 							 uni.setStorageSync('code',params.code)
 							 // window.location.href = that.$base + '/h5/#/pages/user/login/login'
 						}else{
-							跳转微信授权链接获取
+							// 跳转微信授权链接获取
+							console.log('11111')
+							return;
 							    let appid = 'wxad7c57f6263f6bd3';
 							    let uri = encodeURIComponent(link);
 								// console.log('uri',uri)

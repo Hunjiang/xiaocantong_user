@@ -230,7 +230,7 @@ export default {
 </script>
 
 <style scoped>
-@import '@/node_modules/uview-ui/libs/css/style.components.scss';
+/* @import '@/node_modules/uview-ui/libs/css/style.components.scss'; */
 
 .content {
 	background: rgba(255, 255, 255, 1);

@@ -23,7 +23,7 @@
 				</view>
 				<view class="convert_contain">
 					<view class="contain_left">
-						<u-image width="82rpx" height="83rpx" :src="item.goods_image"></u-image>
+						<u-image width="82rpx" height="83rpx" src="../../../static/img/jfStar.png"></u-image>
 						<text>{{item.goods_name}}</text>
 					</view>
 					<view class="contain_right">
@@ -92,7 +92,7 @@
 	},
 	filters: {
 				timeStamp: function(value) {    //具体到时分秒
-					var date = new Date(value); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+					var date = new Date(value*1000); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
 					var year = date.getFullYear();
 					var month = ("0" + (date.getMonth() + 1)).slice(-2);
 					var sdate = ("0" + date.getDate()).slice(-2);
@@ -184,9 +184,10 @@
 		.container_main {
 			width: 100%;
 			height: 100%;
-			padding: 39rpx 25rpx;
+			padding: 39rpx 0;
 
 			.shop_convert {
+				padding: 0 25upx;
 				font-size: 34rpx;
 				margin-bottom: 50rpx;
 				.u-icon{
@@ -202,10 +203,12 @@
 			}
 
 			.convert_box {
+				width: 700upx;
+				margin: 0 auto;
 				margin-bottom: 50rpx;
 				border-radius: 25rpx;
-				box-shadow: 0 0 50rpx #cfcfcf;
-
+				box-shadow:0  0 6rpx 8upx rgba(112, 128, 144, 0.07);
+				// box-shadow: 6upx 6upx 12upx rgba(112, 128, 144, 0.7);
 				.convert_date {
 					margin: 15rpx 10rpx;
 					padding: 15rpx 10rpx 30rpx 10rpx;
@@ -241,9 +244,9 @@
 					}
 
 					.contain_right {
-						color: #FCC148;
-						font-size: 30rpx;
-						font-weight: 700;
+						color: rgba(252, 193, 72, 1);
+						font-size: 32upx;
+						// font-weight: 700;
 					}
 				}
 			}

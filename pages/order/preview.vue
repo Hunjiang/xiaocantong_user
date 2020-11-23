@@ -107,7 +107,7 @@
 					</view>
 				</view>
 				<view class="p-bb b-b" v-if="goFloorShow && isUpstairs==1"></view>
-				<view class="flex-rl peisong" v-if="goFloorShow">
+				<view class="flex-rl peisong" v-if="goFloorShow && isUpstairs==1">
 					<view class="right">
 						<text>送餐上楼</text>
 					</view>
@@ -405,6 +405,9 @@ minListAllDay:[],
 					this.goFloorShow=true;
 				}
 				else{
+					if(this.goFloorShow){
+						this.shop.total_prices=this.shop.total_prices-this.shop.upstairs
+					}
 					this.goFloorShow = false
 				}
 				// this.dayShow()
@@ -500,7 +503,12 @@ minListAllDay:[],
 					} else if (_this.checkAuditTime("15:15", "20:30")) {
 						_this.goFloorShow = true
 					} else {
+						console.log(_this.goFloorShow)
+						// if(_this.goFloorShow){
+						// 	_this.shop.total_prices=_this.shop.total_prices-_this.shop.upstairs
+						// }
 						_this.goFloorShow = false
+						
 					}
 				}, 1000)
 				console.log(this.goFloorShow)
